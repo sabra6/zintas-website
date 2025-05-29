@@ -1,12 +1,16 @@
 const express=require('express');
+const cors=require('cors');
+
+console.log("Setting up app.js")
 
 const app=express();
 
+app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res)=>{
-  res.send("welcome from server");
+  console.log('Recieved GET /');
+  res.send("Hi. Welcome to our website");
 });
-
 
 module.exports=app;

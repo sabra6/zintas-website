@@ -1,12 +1,10 @@
+console.log("Starting index.js");
+
 const app=require('./app');
 
-app.listen(process.env.PORT || 5000, () => console.log(`Server is listening on port 5000`));
 
-process.on('exit', (code)=>{
-  console.log(`Process existing with code ${code}`);
-});
+const server=app.listen(process.env.PORT || 3000, () => console.log(`Server is listening on port 3000`));
 
-process.on('SIGINT', ()=>{
-  console.log('Server Interrupted');
-  process.exit();
+server.on('error', (err)=>{
+  console.error('Server error:', err);
 });
