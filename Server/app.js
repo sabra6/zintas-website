@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.get('/', (req, res)=>{
   console.log('Recieved GET /');
-  res.send("Hi. Welcome to our website");
+  res.send("Hi. Welcome to our Zintas website");
 });
 
 module.exports=app;
