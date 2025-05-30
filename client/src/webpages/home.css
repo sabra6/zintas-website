@@ -1,14 +1,43 @@
-.background{
+.background{ /*Background of the website*/
   background-color:white;
 }
 
-.container{
+.topcontainer{ /*top box for the logo and the manager login button*/
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: flex-start;
+  height:30vh;
 }
 
-.companylogo{
+.companylogo{ /*the company logo*/
   width:30vh;
   height:30vh;
-  position: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom:auto;
+}
+
+.managerbutton{ /*the manager login button*/
+  background-color: darkgreen;
+  color: white;
+  margin-left:auto;
+  margin-bottom: auto;
+}
+
+.picturecontainer{ /*The area where the pictures will be*/
+  display:flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: gray;
+  height:40vh;
+}
+
+.informationbox{ /* box which contains the information about the business*/
+  display:flex;
+  justify-content: center;
+  align-items: flex-start;
+  height:40vh;
+  color:black;
+  font-weight:bold;
 }
