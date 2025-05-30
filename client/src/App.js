@@ -1,18 +1,19 @@
-import logo from './logo.svg';
+import React from "react";
 import './App.css';
-import {useEffect, useState} from 'react';
+import Home from './webpages/home';
+
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+
 
 function App() {
-  const [message, setMessage]=useState('');
-
-  useEffect(()=>{
-    fetch('/api/message')
-      .then(response=>response.json())
-      .then(data=>setMessage(data.message))
-      .catch(err => console.error("Error getting message", err));
-  }, []);
-
-  return <h1>{message}</h1>
+  return (
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home/>}/>
+        </Routes>
+      </Router>
+  );
+  
 }
 
 export default App;
