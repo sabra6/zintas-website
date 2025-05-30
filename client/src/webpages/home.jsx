@@ -6,8 +6,9 @@ import logo from "../Zintaslogo.png";
 function home(){
   return(
     <div className="background">
+      <dix className="container">
       <img src={logo} className="companylogo"></img>
-      <h1>Welcome to Zintas Website</h1>
+      </dix>
     </div>
   )
 }
