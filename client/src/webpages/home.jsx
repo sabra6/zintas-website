@@ -3,6 +3,7 @@ import './home.css';
 import {useNavigate} from "react-router-dom";
 import logo from "../Zintaslogo.png";
 import picture from "../Eventslist.png";
+import slogo from "../facebooklogo.png";
 
 function home(){
   return(
@@ -21,6 +22,12 @@ function home(){
         <p> We are professional event organizers, serving the Dallas Area, committed to helping you create a great and extraordinary event decor! <br /> <br /> <br />Sign up and book your event now! <br /> <br /> <br /> Contact Brayen Mathai and Sintu Brayen if you have any questions!
         </p>
         <img src={picture} className="imagestyle"></img>
+      </div>
+
+      <div className="firstrow">
+        <img src={slogo} className="otherlogos"></img>
+        <p>Zintas Events and Rentals</p>
+        
       </div>
 
     </div>
