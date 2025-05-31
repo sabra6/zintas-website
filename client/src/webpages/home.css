@@ -55,16 +55,35 @@
   max-width: 50vh;
 }
 
-.firstrow{
+.firstrow{ /* first row of social media*/
   display:flex;
   flex-direction: row;
+  gap: 20px;
 }
 
-.otherlogos{
+.secondrow{ /* second row of social media*/
+  display:flex;
+  flex-direction: row;
+  gap: 70px;
+}
+
+.otherlogos{ /* for each social media logo */
   height:5vh;
   width:5vh;
 }
 
-.socialinfo{
+.socialinfotext{ /* for each username or name for each social media*/
   color:black;
+}
+
+.buttonbox{
+  display:flex;
+  flex-direction: row;
+  background-color: #C5FAA8;
+  gap: 50px;
+}
+
+.button{
+  background-color: #AFF6B6;
+  color:darkgreen;
 }

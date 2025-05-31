@@ -4,6 +4,9 @@ import {useNavigate} from "react-router-dom";
 import logo from "../Zintaslogo.png";
 import picture from "../Eventslist.png";
 import slogo from "../facebooklogo.png";
+import inlogo from "../instagramlogo.png";
+import elogo from "../emaillogo.jpg";
+import plogo from "../phoneicon.png";
 
 function home(){
   return(
@@ -22,12 +25,26 @@ function home(){
         <p> We are professional event organizers, serving the Dallas Area, committed to helping you create a great and extraordinary event decor! <br /> <br /> <br />Sign up and book your event now! <br /> <br /> <br /> Contact Brayen Mathai and Sintu Brayen if you have any questions!
         </p>
         <img src={picture} className="imagestyle"></img>
-      </div>
 
-      <div className="firstrow">
+        <div className="firstrow">
         <img src={slogo} className="otherlogos"></img>
-        <p>Zintas Events and Rentals</p>
-        
+        <p className="socialinfotext">Zintas Events and Rentals</p>
+        <img src={elogo} className="otherlogos"></img>
+        <p className="socialinfotext">Zintasevents@gmail.com</p>
+        </div>
+
+        <div className="secondrow">
+        <img src={inlogo} className="otherlogos"></img>
+        <p className="socialinfotext">zintasevents</p>
+        <img src={plogo} className="otherlogos"></img>
+        <p className="socialinfotext">214-940-0358</p>
+        </div>
+
+        <div className="buttonbox">
+            <button className="button">Sign up</button>
+            <button className="button">Log in</button>
+        </div>
+
       </div>
 
     </div>
