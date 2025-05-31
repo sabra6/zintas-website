@@ -1,11 +1,14 @@
-.background{ /*Background of the website*/
+.background{ /*Background of the website and overall flexbox*/
   background-color:white;
+  display:flex;
+  flex-direction: column;
 }
 
 .topcontainer{ /*top box for the logo and the manager login button*/
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
+  gap:20px;
   height:30vh;
 }
 
@@ -36,9 +39,15 @@
 .informationbox{ /* box which contains the information about the business*/
   display:flex;
   justify-content: center;
-  align-items: flex-start;
-  height:40vh;
+  flex-direction: column;
+  height:auto;
   color:black;
   font-weight:bold;
   margin-left: 20px;
+  gap:20px;
+}
+
+.imagestyle{
+  max-height: 50vh;
+  max-width: 50vh;
 }

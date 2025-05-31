@@ -2,6 +2,7 @@ import React from "react";
 import './home.css';
 import {useNavigate} from "react-router-dom";
 import logo from "../Zintaslogo.png";
+import picture from "../Eventslist.png";
 
 function home(){
   return(
@@ -19,7 +20,7 @@ function home(){
       <div className="informationbox">
         <p> We are professional event organizers, serving the Dallas Area, committed to helping you create a great and extraordinary event decor! <br /> <br /> <br />Sign up and book your event now! <br /> <br /> <br /> Contact Brayen Mathai and Sintu Brayen if you have any questions!
         </p>
-
+        <img src={picture} className="imagestyle"></img>
       </div>
 
     </div>
