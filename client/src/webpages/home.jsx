@@ -8,7 +8,8 @@ import inlogo from "../instagramlogo.png";
 import elogo from "../emaillogo.jpg";
 import plogo from "../phoneicon.png";
 
-function home(){
+function Home(){
+  const navigate=useNavigate();
   return(
     <div className="background">
 
@@ -27,28 +28,34 @@ function home(){
         <img src={picture} className="imagestyle"></img>
 
         <div className="firstrow">
+        <div className="socialmedia">
         <img src={slogo} className="otherlogos"></img>
         <p className="socialinfotext">Zintas Events and Rentals</p>
+        </div>
+        <div className="socialmedia">
         <img src={elogo} className="otherlogos"></img>
         <p className="socialinfotext">Zintasevents@gmail.com</p>
         </div>
-
+        </div>
         <div className="secondrow">
+        <div className="socialmedia">
         <img src={inlogo} className="otherlogos"></img>
         <p className="socialinfotext">zintasevents</p>
+        </div>
+        <div className="socialmedia">
         <img src={plogo} className="otherlogos"></img>
         <p className="socialinfotext">214-940-0358</p>
         </div>
-
-        <div className="buttonbox">
-            <button className="button">Sign up</button>
-            <button className="button">Log in</button>
         </div>
 
       </div>
+      <div className="buttonbox">
+            <button onClick={() => navigate('/signup')} className="button">Sign up</button>
+            <button className="button">Log in</button>
+        </div>
 
     </div>
   )
 }
 
-export default home;
+export default Home;

@@ -1,8 +1,8 @@
 .background{ /*Background of the website and overall flexbox*/
-  background-color:white;
   display:flex;
   flex-direction: column;
   height:auto;
+  background-color:white;
 }
 
 .topcontainer{ /*top box for the logo and the manager login button*/
@@ -46,25 +46,38 @@
   width:auto;
   color:black;
   font-weight:bold;
-  margin-left: 20px;
   gap:20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .imagestyle{ /* image in the info section*/
   max-height: 50vh;
   max-width: 50vh;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .firstrow{ /* first row of social media*/
   display:flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 30px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .secondrow{ /* second row of social media*/
   display:flex;
   flex-direction: row;
-  gap: 70px;
+  gap: 90px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.socialmedia{ /* for each social media logo and label */
+  display:flex;
+  flex-direction: row;
+  gap:10px;
 }
 
 .otherlogos{ /* for each social media logo */
@@ -80,10 +93,16 @@
   display:flex;
   flex-direction: row;
   background-color: #C5FAA8;
-  gap: 50px;
+  height: 5vh;
+  width: auto;
+  gap: 100px;
 }
 
 .button{
   background-color: #AFF6B6;
   color:darkgreen;
+  height: 5vh;
+  width: 30vh;
+  margin-left: auto;
+  margin-right: auto;
 }
