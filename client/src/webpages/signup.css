@@ -1,3 +1,14 @@
 .signupbackground{
-  height:100vh;
+  display:flex;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.button{
+  background-color: #C5FAA8;
+  color: #02542D;
+  height: 5vh;
+  width: 20vh;
+  align-self: flex-start;
+  margin: 20px;
 }
