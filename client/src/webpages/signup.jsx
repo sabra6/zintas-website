@@ -16,7 +16,15 @@ function Signup(){
     <div style={background}>
     <div className="signupbackground">
       <button onClick={()=>navigate('/')}className="button"> Back </button>
+      <h1 className="title">Create your Account</h1>
+      <input className="question" type="text" placeholder="First name"/>
+      <input className="question" type="text" placeholder="Last name"/>
+      <input className="question" type="text" placeholder="Email"/>
+      <input className="question" type="text" placeholder="Password"/>
+      <input className="question" type="text" placeholder="Phone Number"/>
+      <button className="button"> Sign Up </button>
     </div>
+
     </div>
   )
 }

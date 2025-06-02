@@ -2,6 +2,7 @@
   display:flex;
   height: 100vh;
   flex-direction: column;
+  margin: 40px;
 }
 
 .button{
@@ -11,4 +12,15 @@
   width: 20vh;
   align-self: flex-start;
   margin: 20px;
+}
+
+.title{
+  margin:20px;
+}
+
+.question{
+  height: 3vh;
+  width: 20vh;
+  margin:20px;
+  border-color: black;
 }

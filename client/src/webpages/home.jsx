@@ -51,7 +51,7 @@ function Home(){
       </div>
       <div className="buttonbox">
             <button onClick={() => navigate('/signup')} className="button">Sign up</button>
-            <button className="button">Log in</button>
+            <button onClick={()=>navigate('/login')} className="button">Log in</button>
         </div>
 
     </div>
