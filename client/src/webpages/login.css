@@ -1,0 +1,26 @@
+.loginbackground{
+  display:flex;
+  height: 100vh;
+  flex-direction: column;
+  margin: 40px;
+}
+
+.button{
+  background-color: #C5FAA8;
+  color: #02542D;
+  height: 5vh;
+  width: 20vh;
+  align-self: flex-start;
+  margin: 20px;
+}
+
+.loginsection{
+  display:flex;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.textbox{
+  height: 5vh;
+  width: 30vh;
+}
