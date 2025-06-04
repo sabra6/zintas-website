@@ -23,7 +23,7 @@ function Login(){
         <input className="textbox" type="text"/>
         <p>Password</p>
         <input className="textbox" type="text"/>
-        <button className="button"> Login </button>
+        <button onClick={()=>navigate('/dashboard')} className="button"> Login </button>
        </div>
     </div>
   </div>

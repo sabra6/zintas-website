@@ -22,7 +22,7 @@ function Signup(){
       <input className="question" type="text" placeholder="Email"/>
       <input className="question" type="text" placeholder="Password"/>
       <input className="question" type="text" placeholder="Phone Number"/>
-      <button className="button"> Sign Up </button>
+      <button onClick={()=>navigate('/dashboard')} className="button"> Sign Up </button>
     </div>
 
     </div>
