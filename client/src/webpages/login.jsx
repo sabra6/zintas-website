@@ -19,12 +19,12 @@ function Login(){
        <button onClick={()=>navigate('/')}className="button">Back</button>
        <h1>Login</h1>
        <div className="loginsection">
-        <p>Username</p>
+        <p>Email</p>
         <input className="textbox" type="text"/>
         <p>Password</p>
         <input className="textbox" type="text"/>
+        <button className="button"> Login </button>
        </div>
-       <button className="button"> Login </button>
     </div>
   </div>
  )

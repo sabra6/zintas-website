@@ -3,6 +3,7 @@
   height: 100vh;
   flex-direction: column;
   margin: 40px;
+  justify-content: center;
 }
 
 .button{
@@ -23,4 +24,5 @@
 .textbox{
   height: 5vh;
   width: 30vh;
+  border-color: black;
 }
