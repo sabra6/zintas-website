@@ -11,9 +11,9 @@ app.use(express.json());
 
 app.post('/signup', async (req, res) => {
   const{firstname, lastname, email, password, phonenumber}=req.body;
-  const query='INSERT INTO users(user_id,first_name, last_name, email, password, phone_number) VALUES ($1,$2,$3,$4,$5,$6)'
+  const query='INSERT INTO users(first_name, last_name, email, password, phone_number) VALUES ($1,$2,$3,$4,$5)'
   try{
-    const result=await data.query(query, [1,firstname, lastname, email, password, phonenumber])
+    const result=await data.query(query, [firstname, lastname, email, password, phonenumber])
     res.json({message: 'User Added'})
   } catch (err){
     console.error('Database Error', err);
