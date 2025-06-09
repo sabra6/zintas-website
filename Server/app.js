@@ -9,13 +9,15 @@ const app=express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/test', async (req, res) => {
-  try {
-    const result = await data.query('SELECT NOW()');
-    res.json(result.rows);
-  } catch (err) {
-    console.error('Database connection error:', err);
-    res.status(500).send('Database error');
+app.post('/signup', async (req, res) => {
+  const{firstname, lastname, email, password, phonenumber}=req.body;
+  const query='INSERT INTO users(user_id,first_name, last_name, email, password, phone_number) VALUES ($1,$2,$3,$4,$5,$6)'
+  try{
+    const result=await data.query(query, [1,firstname, lastname, email, password, phonenumber])
+    res.json({message: 'User Added'})
+  } catch (err){
+    console.error('Database Error', err);
+    res.json({error: "Entry failed"})
   }
 });
 
