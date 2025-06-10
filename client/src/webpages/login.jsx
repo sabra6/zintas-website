@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import './login.css';
 import logo from '../Zintaslogo.png';
 import {useNavigate} from "react-router-dom";
@@ -12,6 +12,15 @@ const background={
 
 function Login(){
  const navigate=useNavigate();
+ const [email, setemail]=useState('');
+ const [password, setpassword]=useState('');
+ 
+ async function sendinfo(){
+   const info={
+   email:email, 
+   password:password,
+   };
+ };
 
  return (
   <div style={background}>
