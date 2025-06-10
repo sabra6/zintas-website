@@ -16,21 +16,10 @@ function Login(){
  const [password, setpassword]=useState('');
  
  async function ismatch(){
-   const info={
-      email:email,
-   };
-
-   const response=await fetch('/login', {
-    method: 'GET',
-    headers: {
-      'Content-Type':'application/json'
-    },
-    body: JSON.stringify(info)
-   });
-
-   const result=await response.json();
-   console.log(result);
-   //navigate('/dashboard');
+    fetch(`/login?email=${email}`)
+      .then (res=>res.json())
+      .then(result=>{console.log(result)})
+      .catch(err=>console.error("there is an error"))
  };
 
  return (
