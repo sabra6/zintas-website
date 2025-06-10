@@ -1,3 +1,18 @@
 .dashboardpage{
   height:100vh;
 }
+
+.topbuttonbox{
+  display: flex;
+  height:40vh;
+  width:100vh;
+  flex-direction: row;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.button{
+  background-color: #C5FAA8;
+  color: darkgreen;
+}
