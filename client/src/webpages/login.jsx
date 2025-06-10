@@ -15,11 +15,22 @@ function Login(){
  const [email, setemail]=useState('');
  const [password, setpassword]=useState('');
  
- async function sendinfo(){
+ async function ismatch(){
    const info={
-   email:email, 
-   password:password,
+      email:email,
    };
+
+   const response=await fetch('/login', {
+    method: 'GET',
+    headers: {
+      'Content-Type':'application/json'
+    },
+    body: JSON.stringify(info)
+   });
+
+   const result=await response.json();
+   console.log(result);
+   //navigate('/dashboard');
  };
 
  return (
@@ -29,10 +40,10 @@ function Login(){
        <h1>Login</h1>
        <div className="loginsection">
         <p>Email</p>
-        <input className="textbox" type="text"/>
+        <input className="textbox" type="text" onChange={(e)=>setemail(e.target.value)}/>
         <p>Password</p>
-        <input className="textbox" type="text"/>
-        <button onClick={()=>navigate('/dashboard')} className="button"> Login </button>
+        <input className="textbox" type="text" onChange={(e)=>setpassword(e.target.value)}/>
+        <button onClick={ismatch} className="button"> Login </button>
        </div>
     </div>
   </div>

@@ -21,6 +21,18 @@ app.post('/signup', async (req, res) => {
   }
 });
 
+app.get('/login', async (req, res)=>{
+  const{email}=req.body;
+  const query='SELECT password FROM users WHERE email=?'
+  try{
+    const result=await data.query(query, [email]);
+    console.log(result.rows);
+  } catch(err){
+    console.error('Database Error', err);
+    res.json({error: "Entry failed"})
+  }
+})
+
 app.get('/', (req, res)=>{
   console.log('Recieved GET /');
   res.send("Hi. Welcome to our Zintas website");
