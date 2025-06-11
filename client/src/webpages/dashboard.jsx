@@ -1,7 +1,7 @@
 import React from "react";
 import './dashboard.css';
 import logo from '../Zintaslogo.png';
-import {useNavigate} from "react-router-dom";
+import {useActionData, useNavigate} from "react-router-dom";
 
 const background={
   backgroundImage:`url(${logo})`,
@@ -12,13 +12,14 @@ const background={
 
 
 function Dashboard(){
+  const navigate=useNavigate();
   return(
     <div style={background}>
       <div className="dashboardpage">
         <div className="topbuttonbox">
           <button className="button"> Log Out </button>
           <h1> Dashboard </h1>
-          <button className="button"> Book an Event </button>
+          <button onClick={()=> navigate('/eventform')} className="button"> Book an Event </button>
         </div>
       </div>
     </div>
