@@ -23,14 +23,13 @@ app.post('/signup', async (req, res) => {
 
 app.get('/login', async (req, res)=>{
   const email=req.query.email;
-  console.log("Email Recieved:", email)
   try{
     const result=await data.query('SELECT password FROM users WHERE email=$1', [email]);
-    //console.log(result.rows)
     res.json(result.rows);
+    console.log("Sent to Frontend:", result.rows);
   } catch(err){
     res.json({error:"Database Error"});
-    console.log("Database Error", err);
+    console.error("Database Error", err);
   }
 });
 

@@ -16,11 +16,27 @@ function Login(){
  const [password, setpassword]=useState('');
  
  async function ismatch(){
-    fetch(`/login?email=${email}`)
-      .then (res=>res.json())
-      .then(result=>{console.log(result)})
-      .catch(err=>console.error("there is an error"))
- };
+    const result= await fetch(`/login?email=${email}`,{
+      method:'GET',
+      headers:{
+        'Content-Type':'application/json',
+      },
+    });
+      const data=await result.json()
+      console.log("Response from Server", data)
+
+      if(data.length>0){
+        const actualpassword=data[0].password;
+        if(actualpassword==password){
+          navigate('/dashboard');
+        } else{
+          alert('Login failed');
+        }
+      } else{
+        alert('Login Failed. Your account does not exist.')
+      }
+
+  }
 
  return (
   <div style={background}>
