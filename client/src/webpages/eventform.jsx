@@ -11,12 +11,25 @@ const background={
 };
 
 function Eventform(){
+  const navigate=useNavigate();
   return(
     <div style={background}>
       <div className="eventformpage">
-        <p>Event form</p>
+        <div className="inputbox">
+       <button className="button" onClick={()=>navigate('/dashboard')}>Back</button>
+        <h1>Fill in the following information</h1>
+        <input className="textbox" type="text" placeholder="Event Name"></input>
+        <input className="textbox" type="text" placeholder="Kind of Event"></input>
+        <input className="textbox" type="text" placeholder="Date of Event"></input>
+        <input className="textbox" type="text" placeholder="Date and Time of Event"></input>
+        <input className="textbox" type="text" placeholder="Venue Address"></input>
+        <input className="textbox" type="text" placeholder="Number of Attendees"></input>
+        <input className="textbox" type="text" placeholder="Color Theme"></input>
+        <input className="textbox" type="text" placeholder="List of Items Needed"></input>
+        <input className="textbox" type="text" placeholder="Kind of Event"></input>
+        <button className="button">Book Event</button>
+        </div>
       </div>
-  
     </div>
   )
 

@@ -2,3 +2,21 @@
   width: auto;
   height: 100vh;
 }
+
+.inputbox{
+  display: flex;
+  flex-direction: column;
+  gap:20px;
+}
+
+.button{
+  background-color: #C5FAA8;
+  color: #02542D;
+  height: 5vh;
+  width: 20vh;
+}
+
+.textbox{
+  width: 20vh;
+  height: 10vh;
+}
