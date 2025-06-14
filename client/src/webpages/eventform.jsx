@@ -19,19 +19,36 @@ function Eventform(){
   const [numattendees, setnumattendees]=useState('');
   const [colortheme, setcolortheme]=useState('');
   const [itemslist, setitemslist]=useState('');
+
+  async function sendinfo(){
+
+    const info={
+      eventname:eventname,
+      eventkind:eventkind,
+      eventdatetime:eventdatetime,
+      venueaddress:venueaddress,
+      numattendees:numattendees,
+      colortheme:colortheme,
+      itemslist:itemslist
+    };
+
+
+  }
+
+
   return(
     <div style={background}>
       <div className="eventformpage">
         <div className="inputbox">
        <button className="button" onClick={()=>navigate('/dashboard')}>Back</button>
         <h1>Fill in the following information</h1>
-        <input className="textbox" type="text" placeholder="Event Name"></input>
-        <input className="textbox" type="text" placeholder="Kind of Event"></input>
-        <input className="textbox" type="text" placeholder="Date and Time of Event"></input>
-        <input className="textbox" type="text" placeholder="Venue Address"></input>
-        <input className="textbox" type="text" placeholder="Number of Attendees"></input>
-        <input className="textbox" type="text" placeholder="Color Theme"></input>
-        <input className="textbox" type="text" placeholder="List of Items Needed"></input>
+        <input className="textbox" type="text" placeholder="Event Name" onChange={(e)=>seteventdatetime(e.target.value)}></input>
+        <input className="textbox" type="text" placeholder="Kind of Event" onChange={(e)=>seteventkind(e.target.value)}></input>
+        <input className="textbox" type="text" placeholder="Date and Time of Event" onChange={(e)=>seteventdatetime(e.target.value)}></input>
+        <input className="textbox" type="text" placeholder="Venue Address" onChange={(e)=>setvenueaddress(e.target.value)}></input>
+        <input className="textbox" type="text" placeholder="Number of Attendees" onChange={(e)=>setnumattendees(e.target.value)}></input>
+        <input className="textbox" type="text" placeholder="Color Theme" onChange={(e)=>setcolortheme(e.target.value)}></input>
+        <input className="textbox" type="text" placeholder="List of Items Needed" onChange={(e)=>setitemslist(e.target.value)}></input>
         <label>
           <input type="checkbox"></input>
           DJ
