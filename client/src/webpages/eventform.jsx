@@ -27,6 +27,30 @@ function Eventform(){
         <input className="textbox" type="text" placeholder="Color Theme"></input>
         <input className="textbox" type="text" placeholder="List of Items Needed"></input>
         <input className="textbox" type="text" placeholder="Kind of Event"></input>
+        <label>
+          <input type="checkbox"></input>
+          DJ
+        </label>
+        <label>
+          <input type="checkbox"></input>
+          Live Food Stall
+        </label>
+        <label>
+          <input type="checkbox"></input>
+          Professional Photography
+        </label>
+        <label>
+          <input type="checkbox"></input>
+          Chenda Melam
+        </label>
+        <label>
+          <input type="checkbox"></input>
+          Table Rentals
+        </label>
+        <label>
+          <input type="checkbox"></input>
+          Chair Rentals
+        </label>
         <button className="button">Book Event</button>
         </div>
       </div>
