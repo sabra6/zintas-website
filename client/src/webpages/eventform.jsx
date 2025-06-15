@@ -29,9 +29,10 @@ function Eventform(){
       venueaddress:venueaddress,
       numattendees:numattendees,
       colortheme:colortheme,
-      itemslist:itemslist
+      itemslist:itemslist,
     };
 
+    
 
   }
 

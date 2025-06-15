@@ -33,6 +33,17 @@ app.get('/login', async (req, res)=>{
   }
 });
 
+app.get('/eventform', async(req, res)=>{
+  const eventname=req.query.eventname;
+  const eventkind=req.query.eventkind;
+  const eventdatetime=req.query.eventdatetime;
+  const venueaddress=req.query.venueaddress;
+  const numattendees=req.query.numattendees;
+  const colortheme=req.query.colortheme;
+  const itemslist=req.query.itemslist;
+
+});
+
 app.get('/', (req, res)=>{
   console.log('Recieved GET /');
   res.send("Hi. Welcome to our Zintas website");
