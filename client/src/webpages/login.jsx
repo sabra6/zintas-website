@@ -16,28 +16,34 @@ function Login(){
  const [password, setpassword]=useState('');
  
  async function ismatch(){
-    const result= await fetch(`/login?email=${email}`,{
-      method:'GET',
+
+    const info={
+      email:email,
+      password:password,
+    }
+    const result= await fetch(`/login?email?password=${email}${password}`,{
+      method:'POST',
       headers:{
         'Content-Type':'application/json',
       },
-      credentials:'include'
+      credentials:'include',
+      body: JSON.stringify(info)
     });
 
       const data=await result.json()
       
       console.log("Response from Server", data)
 
-      if(data.length>0){
-        const actualpassword=data[0].password;
-        if(actualpassword==password){
-          navigate('/dashboard');
-        } else{
-          alert('Login failed');
-        }
-      } else{
-        alert('Login Failed. Your account does not exist.')
-      }
+      // if(data.length>0){
+      //   const actualpassword=data[0].password;
+      //   if(actualpassword==password){
+      //     navigate('/dashboard');
+      //   } else{
+      //     alert('Login failed');
+      //   }
+      // } else{
+      //   alert('Login Failed. Your account does not exist.')
+      // }
 
   }
 

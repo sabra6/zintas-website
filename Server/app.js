@@ -21,12 +21,17 @@ app.post('/signup', async (req, res) => {
   }
 });
 
-app.get('/login', async (req, res)=>{
+app.post('/login', async (req, res)=>{
   const email=req.query.email;
+  const inputpassword=req.query.password;
   try{
     const result=await data.query('SELECT password FROM users WHERE email=$1', [email]);
     res.json(result.rows);
-    console.log("Sent to Frontend:", result.rows);
+    const password=result.rows[0];
+    if(password!==inputpassword){
+      return res.status(401).json({error:'Login failed'})
+    }
+    // console.log("Sent to Frontend:", result.rows);
   } catch(err){
     res.json({error:"Database Error"});
     console.error("Database Error", err);
