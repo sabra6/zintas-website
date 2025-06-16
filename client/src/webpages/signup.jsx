@@ -33,8 +33,8 @@ function Signup(){
       headers:{
         'Content-Type':'application/json'
       },
-      body:JSON.stringify(info),
-      credentials:'include'
+      credentials:'include',
+      body:JSON.stringify(info)
     });
 
     const result=await response.json();

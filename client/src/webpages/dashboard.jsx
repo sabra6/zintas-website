@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import './dashboard.css';
 import logo from '../Zintaslogo.png';
-import {useActionData, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const background={
   backgroundImage:`url(${logo})`,
@@ -12,13 +12,34 @@ const background={
 
 
 function Dashboard(){
+
+  const [data, setdata]=useState('');
+
+  async function getinfo(){
+    const response= await fetch('/dashboard',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+    },
+    credentials:'include',
+    })
+    //const data=await response.json();
+    setdata(await response.json())
+  }
+
+  function logout(){
+    navigate('/')
+  }
+
   const navigate=useNavigate();
+  getinfo();
   return(
     <div style={background}>
       <div className="dashboardpage">
         <div className="topbuttonbox">
           <button className="button"> Log Out </button>
           <h1> Dashboard </h1>
+          <p>Welcome {data.user_id}</p>
           <button onClick={()=> navigate('/eventform')} className="button"> Book an Event </button>
         </div>
       </div>
