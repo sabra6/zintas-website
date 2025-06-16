@@ -21,18 +21,25 @@ function Login(){
       email:email,
       password:password,
     }
-    const result= await fetch(`/login?email?password=${email}${password}`,{
+    const result= await fetch(`/login`,{
       method:'POST',
       headers:{
         'Content-Type':'application/json',
       },
-      credentials:'include',
+      // credentials:'include',
       body: JSON.stringify(info)
     });
 
       const data=await result.json()
       
       console.log("Response from Server", data)
+
+      if(data.message==="success"){
+        navigate('/dashboard');
+      } else{
+        alert(data.message)
+      }
+      
 
       // if(data.length>0){
       //   const actualpassword=data[0].password;

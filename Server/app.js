@@ -22,16 +22,27 @@ app.post('/signup', async (req, res) => {
 });
 
 app.post('/login', async (req, res)=>{
-  const email=req.query.email;
-  const inputpassword=req.query.password;
+  const {email, password:inputpassword}=req.body;
   try{
-    const result=await data.query('SELECT password FROM users WHERE email=$1', [email]);
-    res.json(result.rows);
-    const password=result.rows[0];
-    if(password!==inputpassword){
-      return res.status(401).json({error:'Login failed'})
+    const result=await data.query('SELECT user_id, password FROM users WHERE email=$1', [email]);
+    //res.json(result.rows);
+    if(result.rows.length==0){
+      return res.status(401).json({message:"Your account doesn't exist"})
     }
-    // console.log("Sent to Frontend:", result.rows);
+    //const password=result.rows[0].password;
+
+    const{user_id, password}=result.rows[0];
+
+    if(password!==inputpassword){
+      return res.status(401).json({message:'Login failed'})
+    } else{
+      res.cookie('user_id', user_id,{
+        httpOnly:true,
+        secure:false,
+      });
+      return res.json({message: 'success'})
+    }
+
   } catch(err){
     res.json({error:"Database Error"});
     console.error("Database Error", err);
