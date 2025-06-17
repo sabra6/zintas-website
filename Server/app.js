@@ -57,8 +57,22 @@ app.post('/login', async (req, res)=>{
 
 app.post('/dashboard', async(req, res)=>{
   const user_id=req.cookies.user_id;
-  res.json({user_id:user_id})
+  try{
+    const result=await data.query('SELECT first_name FROM users WHERE user_id=$1', [user_id]);
+    const {first_name}=result.rows[0];  
+    res.json({name:first_name})
+  } catch(err){
+      res.json({error:"Database Error"});
+  }
 });
+
+app.post('/logout', async(req, res)=>{
+  res.clearCookie('user_id', {
+    httpOnly:true,
+    secure:false,
+  }) 
+  res.json({message:'You are logged out'})
+})
 
 app.post('/eventform', async(req, res)=>{
   

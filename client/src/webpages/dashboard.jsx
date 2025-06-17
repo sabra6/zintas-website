@@ -27,8 +27,17 @@ function Dashboard(){
     setdata(await response.json())
   }
 
-  function logout(){
-    navigate('/')
+  async function logout(){
+    const response=await fetch('/logout', {
+      method:'POST', 
+      headers:{
+        'Content-Type':'application/json', 
+      },
+      credentials:'include',
+    })
+    const result=await response.json();
+    alert(result.message);
+    navigate('/');
   }
 
   const navigate=useNavigate();
@@ -37,11 +46,11 @@ function Dashboard(){
     <div style={background}>
       <div className="dashboardpage">
         <div className="topbuttonbox">
-          <button className="button"> Log Out </button>
+          <button onClick={logout} className="button"> Log Out </button>
           <h1> Dashboard </h1>
-          <p>Welcome {data.user_id}</p>
           <button onClick={()=> navigate('/eventform')} className="button"> Book an Event </button>
         </div>
+        <p>Welcome {data.name}</p>
       </div>
     </div>
   )

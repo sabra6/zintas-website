@@ -1,5 +1,8 @@
 .dashboardpage{
+  display:flex;
   height:100vh;
+  width:auto;
+  flex-direction: column;
 }
 
 .topbuttonbox{
