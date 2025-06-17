@@ -50,7 +50,9 @@ function Dashboard(){
           <h1> Dashboard </h1>
           <button onClick={()=> navigate('/eventform')} className="button"> Book an Event </button>
         </div>
-        <p>Welcome {data.name}</p>
+        <div className="letterbox">
+          <p>Welcome {data.name}</p>
+        </div>
       </div>
     </div>
   )

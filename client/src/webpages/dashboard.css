@@ -15,6 +15,14 @@
   margin-right: auto;
 }
 
+.letterbox{
+  display:flex;
+  height:30vh;
+  flex-direction:column;
+  margin-left:auto;
+  margin-right:auto;
+}
+
 .button{
   background-color: #C5FAA8;
   color: darkgreen;
