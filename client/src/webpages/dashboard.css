@@ -27,3 +27,9 @@
   background-color: #C5FAA8;
   color: darkgreen;
 }
+
+.event{
+  background-color:#C5FAA8;
+  height:30vh;
+  width:100vh;
+}
