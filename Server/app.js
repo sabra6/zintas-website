@@ -58,9 +58,9 @@ app.post('/login', async (req, res)=>{
 app.post('/dashboard', async(req, res)=>{
   const user_id=req.cookies.user_id;
   try{
-    const result=await data.query('SELECT first_name FROM users WHERE user_id=$1', [user_id]);
-    const {first_name}=result.rows[0];  
-    res.json({name:first_name})
+    const result=await data.query('SELECT name FROM events WHERE user_id=$1', [user_id]);
+    const {name}=result.rows[0];  
+    res.json({name:name})
   } catch(err){
       res.json({error:"Database Error"});
   }
@@ -75,7 +75,15 @@ app.post('/logout', async(req, res)=>{
 })
 
 app.post('/eventform', async(req, res)=>{
-  
+  const user_id=req.cookies.user_id;
+  const{eventname, eventkind, eventdatetime, venueaddress, numattendees, colortheme, itemslist}=req.body;
+  const query='INSERT INTO events(user_id, name, kind, event_datetime, address, number_of_attendees, color_theme, items_list) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)'
+  try{
+    const result=await data.query(query, [user_id, eventname, eventkind, eventdatetime,venueaddress, numattendees, colortheme, itemslist]);
+    res.json({message:'Event Added'})
+  } catch(err){
+    res.json({message:'Error'})
+  }
 });
 
 app.get('/', (req, res)=>{

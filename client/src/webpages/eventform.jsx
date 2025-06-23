@@ -32,8 +32,17 @@ function Eventform(){
       itemslist:itemslist,
     };
 
+    const response=await fetch('/eventform',{
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify(info)
+    });
     
-
+    const data=await response.json();
+    alert(data.message);
+    navigate('/dashboard');
   }
 
 
@@ -74,7 +83,7 @@ function Eventform(){
           <input type="checkbox"></input>
           Chair Rentals
         </label>
-        <button className="button">Book Event</button>
+        <button className="button" onClick={sendinfo}>Book Event</button>
         </div>
       </div>
     </div>
