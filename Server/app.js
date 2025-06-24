@@ -59,8 +59,7 @@ app.post('/dashboard', async(req, res)=>{
   const user_id=req.cookies.user_id;
   try{
     const result=await data.query('SELECT name FROM events WHERE user_id=$1', [user_id]);
-    const {name}=result.rows[0];  
-    res.json({name:name})
+    res.json({names: result.rows});
   } catch(err){
       res.json({error:"Database Error"});
   }

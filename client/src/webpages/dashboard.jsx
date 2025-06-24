@@ -13,7 +13,7 @@ const background={
 
 function Dashboard(){
 
-  const [data, setdata]=useState('');
+  const [data, setdata]=useState([]);
 
   async function getinfo(){
     const response= await fetch('/dashboard',{
@@ -23,8 +23,8 @@ function Dashboard(){
     },
     credentials:'include',
     })
-    //const data=await response.json();
-    setdata(await response.json())
+    const result=await response.json();
+    setdata(result.names)
   }
 
   async function logout(){
@@ -50,11 +50,16 @@ function Dashboard(){
           <h1> Dashboard </h1>
           <button onClick={()=> navigate('/eventform')} className="button"> Book an Event </button>
         </div>
-        <div className="letterbox">
-          <div className="event">
-            <h1>{data.name}</h1>
-          </div>
-        </div>
+        <ul className="letterbox">
+          {data.map((event, index)=>(
+            <li className="event" key={index}>{event.name}
+              <div>
+                <button> Delete </button>
+                <button> Edit </button>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   )

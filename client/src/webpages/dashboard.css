@@ -21,6 +21,7 @@
   flex-direction:column;
   margin-left:auto;
   margin-right:auto;
+  gap:20px;
 }
 
 .button{
@@ -29,7 +30,9 @@
 }
 
 .event{
+  display:flex;
   background-color:#C5FAA8;
-  height:30vh;
+  height:10vh;
   width:100vh;
+  flex-direction: row;
 }
