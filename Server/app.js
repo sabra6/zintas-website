@@ -65,6 +65,17 @@ app.post('/dashboard', async(req, res)=>{
   }
 });
 
+app.post('/deleteevent', async(req, res)=>{
+  const user_id=req.cookies.user_id;
+  const {eventname}=req.body;
+  try{
+    const result=await data.query('DELETE FROM events WHERE user_id=$1 AND name=$2', [user_id, eventname]);
+    res.json({message:'Event Deleted'})
+  } catch(err){
+    res.json({error:"Database Error"});
+  }
+})
+
 app.post('/logout', async(req, res)=>{
   res.clearCookie('user_id', {
     httpOnly:true,
@@ -84,6 +95,19 @@ app.post('/eventform', async(req, res)=>{
     res.json({message:'Error'})
   }
 });
+
+app.post('/eventid', async(req, res)=>{
+  const user_id=req.cookies.user_id;
+  const {eventname}= req.body;
+  const query='SELECT event_id FROM events WHERE user_id=? AND name=?'
+  try{
+    const result=await data.query(query, [user_id, eventname]);
+    const {event_id}=result.rows[0]
+    res.json({id:event_id})
+  } catch(err){
+    res.json({message:'Error'})
+  }
+})
 
 app.get('/', (req, res)=>{
   console.log('Recieved GET /');

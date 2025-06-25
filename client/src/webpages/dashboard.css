@@ -36,3 +36,14 @@
   width:100vh;
   flex-direction: row;
 }
+
+.dbuttonbox{
+  display:flex;
+  flex-direction:row;
+  gap:20px;
+}
+
+.button{
+  background-color: #C5FAA8;
+  color: darkgreen;
+}

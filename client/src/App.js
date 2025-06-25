@@ -5,6 +5,7 @@ import Signup from './webpages/signup';
 import Login from './webpages/login';
 import Dashboard from "./webpages/dashboard";
 import Eventform from "./webpages/eventform";
+import Editform from "./webpages/editform";
 
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/eventform" element={<Eventform/>}/>
+          <Route path="/editform" element={<Editform/>}/>
         </Routes>
       </Router>
   );

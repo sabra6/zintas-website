@@ -14,6 +14,7 @@ const background={
 function Dashboard(){
 
   const [data, setdata]=useState([]);
+  const [name, setname]=useState('');
 
   async function getinfo(){
     const response= await fetch('/dashboard',{
@@ -25,6 +26,23 @@ function Dashboard(){
     })
     const result=await response.json();
     setdata(result.names)
+  }
+
+  async function deleteevent(name){
+    setname(name);
+    const info={
+      eventname:name
+    }
+    const response=await fetch('/deleteevent', {
+      method: 'POST',
+      headers:{
+        'Content-Type':'application/json',
+      },
+      credentials:'include',
+      body:JSON.stringify(info)
+    });
+
+    const result=await response.json();
   }
 
   async function logout(){
@@ -54,8 +72,8 @@ function Dashboard(){
           {data.map((event, index)=>(
             <li className="event" key={index}>{event.name}
               <div>
-                <button> Delete </button>
-                <button> Edit </button>
+                <button onClick={()=>deleteevent(event.name)}> Delete </button>
+                <button onClick={()=>navigate('/editform')}> Edit </button>
               </div>
             </li>
           ))}
