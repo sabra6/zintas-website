@@ -71,9 +71,9 @@ function Dashboard(){
         <ul className="letterbox">
           {data.map((event, index)=>(
             <li className="event" key={index}>{event.name}
-              <div>
-                <button onClick={()=>deleteevent(event.name)}> Delete </button>
-                <button onClick={()=>navigate('/editform')}> Edit </button>
+              <div className="dbuttonbox">
+                <button className="button"onClick={()=>deleteevent(event.name)}> Delete </button>
+                <button className="button" onClick={()=>navigate('/editform')}> Edit </button>
               </div>
             </li>
           ))}
