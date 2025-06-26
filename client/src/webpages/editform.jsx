@@ -34,7 +34,7 @@ function Editform(){
       colortheme:colortheme,
       itemslist:itemslist
     }
-    alert('Editing event id', event_id);
+    alert(`Editing event id: ${event_id}`);
     const response=await fetch('/editform', {
       method:'POST',
       headers: {
@@ -85,7 +85,7 @@ function Editform(){
           <input type="checkbox"></input>
           Chair Rentals
         </label>
-        <button onClick={()=>editevents} className="button"> Make Edits </button>
+        <button onClick={editevents} className="button"> Make Edits </button>
         </div>
       </div>
     </div>

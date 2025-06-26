@@ -19,7 +19,7 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/eventform" element={<Eventform/>}/>
-          <Route path="/editform/:id" element={<Editform/>}/>
+          <Route path="/editform/:event_id" element={<Editform/>}/>
         </Routes>
       </Router>
   );
