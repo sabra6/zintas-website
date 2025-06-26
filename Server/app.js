@@ -58,8 +58,8 @@ app.post('/login', async (req, res)=>{
 app.post('/dashboard', async(req, res)=>{
   const user_id=req.cookies.user_id;
   try{
-    const result=await data.query('SELECT name FROM events WHERE user_id=$1', [user_id]);
-    res.json({names: result.rows});
+    const result=await data.query('SELECT event_id, name FROM events WHERE user_id=$1', [user_id]);
+    res.json({eventinfo: result.rows});
   } catch(err){
       res.json({error:"Database Error"});
   }
@@ -67,9 +67,9 @@ app.post('/dashboard', async(req, res)=>{
 
 app.post('/deleteevent', async(req, res)=>{
   const user_id=req.cookies.user_id;
-  const {eventname}=req.body;
+  const {event_id}=req.body;
   try{
-    const result=await data.query('DELETE FROM events WHERE user_id=$1 AND name=$2', [user_id, eventname]);
+    const result=await data.query('DELETE FROM events WHERE user_id=$1 AND event_id=$2', [user_id, event_id]);
     res.json({message:'Event Deleted'})
   } catch(err){
     res.json({error:"Database Error"});
@@ -96,16 +96,15 @@ app.post('/eventform', async(req, res)=>{
   }
 });
 
-app.post('/eventid', async(req, res)=>{
+app.post('/editform', async(req, res)=>{
   const user_id=req.cookies.user_id;
-  const {eventname}= req.body;
-  const query='SELECT event_id FROM events WHERE user_id=? AND name=?'
+  const {event_id, eventname, eventkind, eventdatetime, venueaddress, numattendees, colortheme, itemslist}=req.body;
+  const query='UPDATE events SET name=$1, kind=$2, event_datetime=$3, address=$4, number_of_attendees=$5, color_theme=$6, items_list=$7 WHERE event_id=$8'
   try{
-    const result=await data.query(query, [user_id, eventname]);
-    const {event_id}=result.rows[0]
-    res.json({id:event_id})
+    const result=await data.query(query, [eventname, eventkind, eventdatetime, venueaddress, numattendees,colortheme,itemslist,event_id])
+    res.json({message:'Event Edited'})
   } catch(err){
-    res.json({message:'Error'})
+    res.json({error:'Database Error'})
   }
 })
 

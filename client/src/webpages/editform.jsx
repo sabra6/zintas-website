@@ -2,11 +2,11 @@ import React, {useState} from "react";
 import './editform.css';
 import logo from '../Zintaslogo.png';
 import { useNavigate } from "react-router-dom";
-
+import {useParams} from 'react-router-dom';
 
 function Editform(){
+  const {event_id}=useParams();
   const navigate=useNavigate();
-  const [eventid, seteventid]=useState('');
   const [eventname, seteventname]=useState('');
   const [eventkind, seteventkind]=useState('');
   const [eventdatetime, seteventdatetime]=useState('');
@@ -22,15 +22,30 @@ function Editform(){
     backgroundPosition:'center'
   };
 
-  async function geteventid(){
+  async function editevents(){
 
-    const response=await fetch('/eventid', {
-      method: 'POST',
+    const info={
+      event_id:event_id, 
+      eventname:eventname,
+      eventkind:eventkind,
+      eventdatetime:eventdatetime,
+      venueaddress:venueaddress,
+      numattendees:numattendees,
+      colortheme:colortheme,
+      itemslist:itemslist
+    }
+    alert('Editing event id', event_id);
+    const response=await fetch('/editform', {
+      method:'POST',
       headers: {
-        'Content-Type':'application/json'
+        'Content-Type': 'application/json'
       },
-      
-    })
+      credentials:'include',
+      body: JSON.stringify(info)
+    });
+    const result= await response.json();
+    alert(result.message)
+    navigate('/dashboard')
   }
 
   return(
@@ -70,7 +85,7 @@ function Editform(){
           <input type="checkbox"></input>
           Chair Rentals
         </label>
-        <button className="button"> Make Edits </button>
+        <button onClick={()=>editevents} className="button"> Make Edits </button>
         </div>
       </div>
     </div>

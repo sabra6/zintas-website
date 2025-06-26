@@ -14,7 +14,6 @@ const background={
 function Dashboard(){
 
   const [data, setdata]=useState([]);
-  const [name, setname]=useState('');
 
   async function getinfo(){
     const response= await fetch('/dashboard',{
@@ -25,13 +24,12 @@ function Dashboard(){
     credentials:'include',
     })
     const result=await response.json();
-    setdata(result.names)
+    setdata(result.eventinfo)
   }
 
-  async function deleteevent(name){
-    setname(name);
+  async function deleteevent(event_id){
     const info={
-      eventname:name
+      event_id:event_id
     }
     const response=await fetch('/deleteevent', {
       method: 'POST',
@@ -72,8 +70,8 @@ function Dashboard(){
           {data.map((event, index)=>(
             <li className="event" key={index}>{event.name}
               <div className="dbuttonbox">
-                <button className="button"onClick={()=>deleteevent(event.name)}> Delete </button>
-                <button className="button" onClick={()=>navigate('/editform')}> Edit </button>
+                <button className="button"onClick={()=>deleteevent(event.event_id)}> Delete </button>
+                <button className="button" onClick={()=>navigate(`/editform/${event.event_id}`)}> Edit </button>
               </div>
             </li>
           ))}
