@@ -19,6 +19,14 @@ function Eventform(){
   const [numattendees, setnumattendees]=useState('');
   const [colortheme, setcolortheme]=useState('');
   const [itemslist, setitemslist]=useState('');
+  const [additional, setadditional]=useState({
+    DJ: false,
+    LiveFoodStall:false,
+    PPhotography:false,
+    Cmelam:false,
+    Trentals:false,
+    Crentals:false,
+  });
 
   async function sendinfo(){
 
@@ -60,27 +68,27 @@ function Eventform(){
         <input className="textbox" type="text" placeholder="Color Theme" onChange={(e)=>setcolortheme(e.target.value)}></input>
         <input className="textbox" type="text" placeholder="List of Items Needed" onChange={(e)=>setitemslist(e.target.value)}></input>
         <label>
-          <input type="checkbox"></input>
+          <input type="checkbox" name="DJ" checked={additional.DJ} onChange={(e)=>setadditional(change=>({...change, [e.target.name]:e.target.checked}))}></input>
           DJ
         </label>
         <label>
-          <input type="checkbox"></input>
+          <input type="checkbox" name="LiveFoodStall" checked={additional.LiveFoodStall} onChange={(e)=>setadditional(change=>({...change, [e.target.name]:e.target.checked}))}></input>
           Live Food Stall
         </label>
         <label>
-          <input type="checkbox"></input>
+          <input type="checkbox" name="PPhotography" checked={additional.PPhotography} onChange={(e)=>setadditional(change=>({...change, [e.target.name]:e.target.checked}))}></input>
           Professional Photography
         </label>
         <label>
-          <input type="checkbox"></input>
+          <input type="checkbox" name="Cmelam" checked={additional.Cmelam} onChange={(e)=>setadditional(change=>({...change, [e.target.name]:e.target.checked}))}></input>
           Chenda Melam
         </label>
         <label>
-          <input type="checkbox"></input>
+          <input type="checkbox" name="Trentals" checked={additional.Trentals} onChange={(e)=>setadditional(change=>({...change, [e.target.name]:e.target.checked}))}></input>
           Table Rentals
         </label>
         <label>
-          <input type="checkbox"></input>
+          <input type="checkbox" name="Crentals" checked={additional.Crentals} onChange={(e)=>setadditional(change=>({...change, [e.target.name]:e.target.checked}))}></input>
           Chair Rentals
         </label>
         <button className="button" onClick={sendinfo}>Book Event</button>

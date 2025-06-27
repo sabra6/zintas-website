@@ -34,7 +34,6 @@ function Editform(){
       colortheme:colortheme,
       itemslist:itemslist
     }
-    alert(`Editing event id: ${event_id}`);
     const response=await fetch('/editform', {
       method:'POST',
       headers: {
