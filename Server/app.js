@@ -96,6 +96,17 @@ app.post('/eventform', async(req, res)=>{
   }
 });
 
+app.get('/getadditional', async(req,res)=>{
+  const user_id=req.cookies.user_id;
+  const query="SELECT service_name FROM services";
+  try{
+    const result=await data.query(query);
+    res.json(result.rows);
+  } catch(err){
+    res.json({message: 'Failed to get services'})
+  }
+})
+
 app.post('/editform', async(req, res)=>{
   const user_id=req.cookies.user_id;
   const {event_id, eventname, eventkind, eventdatetime, venueaddress, numattendees, colortheme, itemslist}=req.body;
