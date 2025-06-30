@@ -86,10 +86,15 @@ app.post('/logout', async(req, res)=>{
 
 app.post('/eventform', async(req, res)=>{
   const user_id=req.cookies.user_id;
-  const{eventname, eventkind, eventdatetime, venueaddress, numattendees, colortheme, itemslist}=req.body;
-  const query='INSERT INTO events(user_id, name, kind, event_datetime, address, number_of_attendees, color_theme, items_list) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)'
+  const{eventname, eventkind, eventdatetime, venueaddress, numattendees, colortheme, itemslist, services}=req.body;
+  const query='INSERT INTO events(user_id, name, kind, event_datetime, address, number_of_attendees, color_theme, items_list) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING event_id'
+  const query1='INSERT INTO eventservice(event_id, service_id) VALUES ($1,$2)'
   try{
     const result=await data.query(query, [user_id, eventname, eventkind, eventdatetime,venueaddress, numattendees, colortheme, itemslist]);
+    const event_id=result.rows[0].event_id;
+    for(const service in services){
+      const result1=await data.query(query1, [event_id, service])
+    }
     res.json({message:'Event Added'})
   } catch(err){
     res.json({message:'Error'})
@@ -98,7 +103,7 @@ app.post('/eventform', async(req, res)=>{
 
 app.get('/getadditional', async(req,res)=>{
   const user_id=req.cookies.user_id;
-  const query="SELECT service_name FROM services";
+  const query="SELECT * FROM services";
   try{
     const result=await data.query(query);
     res.json(result.rows);

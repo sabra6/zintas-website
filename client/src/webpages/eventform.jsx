@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './eventform.css';
 import logo from '../Zintaslogo.png';
 import { useNavigate } from "react-router-dom";
@@ -22,6 +22,7 @@ function Eventform(){
   const [sservices, setsservices]=useState({});
   const [services, setservices]=useState([]);
 
+  useEffect(()=>
   async function getservices(){
     const response=await fetch('/getadditional',{
       method:'GET',
@@ -34,14 +35,17 @@ function Eventform(){
     const data=await response.json();
     setservices(data);
     const selected={};
-
     data.forEach(service=>{
-      selected[service.service_name]=false;
+      selected[service.service_id]=false;
     });
     setsservices(selected);
-  }
+  }, [])
 
   async function sendinfo(){
+
+    const selectedservices=Object.entries(sservices)
+      .filter(([sid, checked]) => checked)
+      .map(([sid])=> parseInt(sid));
 
     const info={
       eventname:eventname,
@@ -51,6 +55,7 @@ function Eventform(){
       numattendees:numattendees,
       colortheme:colortheme,
       itemslist:itemslist,
+      services:selectedservices,
     };
 
     const response=await fetch('/eventform',{
@@ -66,7 +71,6 @@ function Eventform(){
     navigate('/dashboard');
   }
 
-  getservices();
   return(
     <div style={background}>
       <div className="eventformpage">
@@ -82,9 +86,9 @@ function Eventform(){
         <input className="textbox" type="text" placeholder="List of Items Needed" onChange={(e)=>setitemslist(e.target.value)}></input>
         <ul>
           {services.map(service=>(
-          <div key={service.service_name}>
+          <div key={service.service_id}>
           <label>
-            <input type="checkbox" name={service.service_name} checked={sservices[service.service_name] || false} onChange={(e)=>setsservices(prev=>({...prev, [e.target.name]:e.target.checked,}))}>
+            <input type="checkbox" name={service.service_id} checked={sservices[service.service_id] || false} onChange={(e)=>setsservices(prev=>({...prev, [e.target.name]:e.target.checked,}))}>
             </input>
              {service.service_name}
           </label>
