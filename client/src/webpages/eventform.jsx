@@ -22,7 +22,7 @@ function Eventform(){
   const [sservices, setsservices]=useState({});
   const [services, setservices]=useState([]);
 
-  useEffect(()=>
+  useEffect(()=>{
   async function getservices(){
     const response=await fetch('/getadditional',{
       method:'GET',
@@ -36,16 +36,18 @@ function Eventform(){
     setservices(data);
     const selected={};
     data.forEach(service=>{
-      selected[service.service_id]=false;
+      selected[service.service_id.toString()]=false;
     });
     setsservices(selected);
-  }, [])
+  }
+  getservices();
+  }, []);
 
   async function sendinfo(){
 
     const selectedservices=Object.entries(sservices)
       .filter(([sid, checked]) => checked)
-      .map(([sid])=> parseInt(sid));
+      .map(([sid])=> Number(sid));
 
     const info={
       eventname:eventname,

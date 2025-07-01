@@ -70,6 +70,7 @@ app.post('/deleteevent', async(req, res)=>{
   const {event_id}=req.body;
   try{
     const result=await data.query('DELETE FROM events WHERE user_id=$1 AND event_id=$2', [user_id, event_id]);
+    const result1=await data.query('DELETE FROM eventservice WHERE event_id=$1', [event_id]);
     res.json({message:'Event Deleted'})
   } catch(err){
     res.json({error:"Database Error"});
