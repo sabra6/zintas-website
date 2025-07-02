@@ -113,6 +113,35 @@ app.get('/getadditional', async(req,res)=>{
   }
 })
 
+
+app.post('/geteventdata', async(req, res)=>{
+  const user_id=req.cookies.user_id;
+  const {event_id}=req.body;
+  const query="SELECT name, kind, event_datetime, address, number_of_attendees, color_theme, items_list FROM events WHERE event_id=$1;"
+  try{
+    const result=await data.query(query, [event_id]);
+    console.log(result.rows[0])
+    res.json(result.rows[0]);
+  } catch(err){
+    res.json({message:"Failed to get user data"});
+  }
+})
+
+app.post('/getservicedata', async(req,res)=>{
+  const user_id=req.cookies.user_id;
+  const {event_id}=req.body;
+  const query="SELECT service_id FROM eventservice WHERE event_id=$1";
+  try{
+    const result=await data.query(query, [event_id]);
+    console.log(result.rows);
+    res.json(result.rows);
+  } catch(err){
+    res.json({message: 'Failed to get service data'})
+  }
+})
+
+
+
 app.post('/editform', async(req, res)=>{
   const user_id=req.cookies.user_id;
   const {event_id, eventname, eventkind, eventdatetime, venueaddress, numattendees, colortheme, itemslist}=req.body;
