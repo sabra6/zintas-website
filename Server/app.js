@@ -93,7 +93,7 @@ app.post('/eventform', async(req, res)=>{
   try{
     const result=await data.query(query, [user_id, eventname, eventkind, eventdatetime,venueaddress, numattendees, colortheme, itemslist]);
     const event_id=result.rows[0].event_id;
-    for(const service in services){
+    for(const service of services){
       const result1=await data.query(query1, [event_id, service])
     }
     res.json({message:'Event Added'})
