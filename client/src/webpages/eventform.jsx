@@ -49,6 +49,8 @@ function Eventform(){
       .filter(([sid, checked]) => checked)
       .map(([sid])=> Number(sid));
 
+    console.log(selectedservices);
+
     const info={
       eventname:eventname,
       eventkind:eventkind,

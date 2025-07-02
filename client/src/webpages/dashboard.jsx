@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './dashboard.css';
 import logo from '../Zintaslogo.png';
 import {useNavigate} from "react-router-dom";
@@ -15,17 +15,20 @@ function Dashboard(){
 
   const [data, setdata]=useState([]);
 
-  async function getinfo(){
-    const response= await fetch('/dashboard',{
-    method:'POST',
-    headers:{
-      'Content-Type':'application/json',
-    },
-    credentials:'include',
-    })
-    const result=await response.json();
-    setdata(result.eventinfo)
-  }
+  useEffect(()=>{
+    async function getinfo(){
+      const response= await fetch('/dashboard',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+      },
+      credentials:'include',
+      })
+      const result=await response.json();
+      setdata(result.eventinfo)
+    }
+    getinfo();
+  }, []);
 
   async function deleteevent(event_id){
     const info={
@@ -57,7 +60,7 @@ function Dashboard(){
   }
 
   const navigate=useNavigate();
-  getinfo();
+  //getinfo();
   return(
     <div style={background}>
       <div className="dashboardpage">
