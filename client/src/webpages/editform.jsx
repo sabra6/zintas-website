@@ -1,8 +1,16 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './editform.css';
 import logo from '../Zintaslogo.png';
 import { useNavigate } from "react-router-dom";
 import {useParams} from 'react-router-dom';
+
+const background={
+    backgroundImage:`url(${logo})`,
+    backgroundRepeat:'no-repeat',
+    backgroundSize:'cover',
+    backgroundPosition:'center'
+  };
+
 
 function Editform(){
   const {event_id}=useParams();
@@ -14,15 +22,37 @@ function Editform(){
   const [numattendees, setnumattendees]=useState('');
   const [colortheme, setcolortheme]=useState('');
   const [itemslist, setitemslist]=useState('');
+  const [sservices, setsservices]=useState({});
+  const [services, setservices]=useState([]);
 
-  const background={
-    backgroundImage:`url(${logo})`,
-    backgroundRepeat:'no-repeat',
-    backgroundSize:'cover',
-    backgroundPosition:'center'
-  };
+
+useEffect(()=>{
+  async function getservices(){
+    const response=await fetch('/getadditional',{
+      method:'GET',
+      headers: {
+        'Content-Type':'application/json'
+      },
+      credentials: 'include'
+    });
+
+    const data=await response.json();
+    setservices(data);
+    const selected={};
+    data.forEach(service=>{
+      selected[service.service_id.toString()]=false;
+    });
+    setsservices(selected);
+  }
+  getservices();
+  }, []);
+
 
   async function editevents(){
+
+    const selectedservices=Object.entries(sservices)
+      .filter(([sid, checked]) => checked)
+      .map(([sid])=> Number(sid));
 
     const info={
       event_id:event_id, 
@@ -32,7 +62,8 @@ function Editform(){
       venueaddress:venueaddress,
       numattendees:numattendees,
       colortheme:colortheme,
-      itemslist:itemslist
+      itemslist:itemslist,
+      services:selectedservices,
     }
     const response=await fetch('/editform', {
       method:'POST',
@@ -44,7 +75,7 @@ function Editform(){
     });
     const result= await response.json();
     alert(result.message)
-    navigate('/dashboard')
+    navigate('/dashboard');
   }
 
   return(
@@ -60,30 +91,17 @@ function Editform(){
         <input className="textbox" type="text" placeholder="Number of Attendees" onChange={(e)=>setnumattendees(e.target.value)}></input>
         <input className="textbox" type="text" placeholder="Color Theme" onChange={(e)=>setcolortheme(e.target.value)}></input>
         <input className="textbox" type="text" placeholder="List of Items Needed" onChange={(e)=>setitemslist(e.target.value)}></input>
-        <label>
-          <input type="checkbox"></input>
-          DJ
-        </label>
-        <label>
-          <input type="checkbox"></input>
-          Live Food Stall
-        </label>
-        <label>
-          <input type="checkbox"></input>
-          Professional Photography
-        </label>
-        <label>
-          <input type="checkbox"></input>
-          Chenda Melam
-        </label>
-        <label>
-          <input type="checkbox"></input>
-          Table Rentals
-        </label>
-        <label>
-          <input type="checkbox"></input>
-          Chair Rentals
-        </label>
+        <ul>
+          {services.map(service=>(
+          <div key={service.service_id}>
+          <label>
+            <input type="checkbox" name={service.service_id} checked={sservices[service.service_id] || false} onChange={(e)=>setsservices(prev=>({...prev, [e.target.name]:e.target.checked,}))}>
+            </input>
+             {service.service_name}
+          </label>
+          </div>
+        ))}
+        </ul>
         <button onClick={editevents} className="button"> Make Edits </button>
         </div>
       </div>
