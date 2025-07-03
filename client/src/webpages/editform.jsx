@@ -60,11 +60,16 @@ useEffect(()=>{
     const data=await response.json();
     seteventname(data.name);
     seteventkind(data.kind);
-    seteventdatetime(data.eventdatetime);
+    //seteventdatetime(data.eventdatetime);
     setvenueaddress(data.address);
     setnumattendees(data.number_of_attendees);
     setcolortheme(data.color_theme);
     setitemslist(data.items_list);
+    if(data.eventdatetime){
+      const date=new Date(data.eventdatetime).toISOString().slice(0,16);
+      seteventdatetime(date);
+    }
+    console.log(eventdatetime);
   }
 
   async function getservicedata(){
