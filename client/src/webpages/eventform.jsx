@@ -83,7 +83,7 @@ function Eventform(){
         <h1>Fill in the following information</h1>
         <input className="textbox" type="text" placeholder="Event Name" onChange={(e)=>seteventname(e.target.value)}></input>
         <input className="textbox" type="text" placeholder="Kind of Event" onChange={(e)=>seteventkind(e.target.value)}></input>
-        <input className="textbox" type="text" placeholder="Date and Time of Event" onChange={(e)=>seteventdatetime(e.target.value)}></input>
+        <input className="textbox" type="datetime-local" placeholder="Date and Time of Event" onChange={(e)=>seteventdatetime(e.target.value)}></input>
         <input className="textbox" type="text" placeholder="Venue Address" onChange={(e)=>setvenueaddress(e.target.value)}></input>
         <input className="textbox" type="text" placeholder="Number of Attendees" onChange={(e)=>setnumattendees(e.target.value)}></input>
         <input className="textbox" type="text" placeholder="Color Theme" onChange={(e)=>setcolortheme(e.target.value)}></input>

@@ -58,18 +58,23 @@ useEffect(()=>{
       body: JSON.stringify(info)
     })
     const data=await response.json();
+    
+    if(data.eventdatetime){
+      const date = new Date(data.eventdatetime);
+      const formatted = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+        .toISOString()
+        .slice(0, 16);
+      seteventdatetime(formatted);
+    } else{
+      seteventdatetime('');
+    }
+
     seteventname(data.name);
     seteventkind(data.kind);
-    //seteventdatetime(data.eventdatetime);
     setvenueaddress(data.address);
     setnumattendees(data.number_of_attendees);
     setcolortheme(data.color_theme);
     setitemslist(data.items_list);
-    if(data.eventdatetime){
-      const date=new Date(data.eventdatetime).toISOString().slice(0,16);
-      seteventdatetime(date);
-    }
-    console.log(eventdatetime);
   }
 
   async function getservicedata(){
@@ -129,13 +134,13 @@ useEffect(()=>{
         <div className="inputbox">
        <button className="button" onClick={()=>navigate('/dashboard')}> Cancel </button>
         <h1>Fill in the following information</h1>
-        <input className="textbox" type="text" placeholder={eventname} onChange={(e)=>seteventname(e.target.value)}></input>
-        <input className="textbox" type="text" placeholder={eventkind} onChange={(e)=>seteventkind(e.target.value)}></input>
-        <input className="textbox" type="text" placeholder={eventdatetime} onChange={(e)=>seteventdatetime(e.target.value)}></input>
-        <input className="textbox" type="text" placeholder={venueaddress} onChange={(e)=>setvenueaddress(e.target.value)}></input>
-        <input className="textbox" type="text" placeholder={numattendees} onChange={(e)=>setnumattendees(e.target.value)}></input>
-        <input className="textbox" type="text" placeholder={colortheme} onChange={(e)=>setcolortheme(e.target.value)}></input>
-        <input className="textbox" type="text" placeholder={itemslist} onChange={(e)=>setitemslist(e.target.value)}></input>
+        <input className="textbox" type="text" value={eventname} onChange={(e)=>seteventname(e.target.value)}></input>
+        <input className="textbox" type="text" value={eventkind} onChange={(e)=>seteventkind(e.target.value)}></input>
+        <input className="textbox" type="datetime-local" value={eventdatetime || ''} onChange={(e)=>seteventdatetime(e.target.value)}></input>
+        <input className="textbox" type="text" value={venueaddress} onChange={(e)=>setvenueaddress(e.target.value)}></input>
+        <input className="textbox" type="text" value={numattendees} onChange={(e)=>setnumattendees(e.target.value)}></input>
+        <input className="textbox" type="text" value={colortheme} onChange={(e)=>setcolortheme(e.target.value)}></input>
+        <input className="textbox" type="text" value={itemslist} onChange={(e)=>setitemslist(e.target.value)}></input>
         <ul>
           {services.map(service=>(
           <div key={service.service_id}>
