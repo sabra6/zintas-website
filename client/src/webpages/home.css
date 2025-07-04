@@ -29,15 +29,6 @@
   margin-bottom: auto;
 }
 
-.picturecontainer{ /*The area where the pictures will be*/
-  display:flex;
-  justify-content: center;
-  align-items: flex-start;
-  background-color: gray;
-  height:60vh;
-  width: auto;
-}
-
 .informationbox{ /* box which contains the information about the business*/
   display:flex;
   justify-content: center;

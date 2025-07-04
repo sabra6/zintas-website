@@ -7,6 +7,36 @@ import slogo from "../facebooklogo.png";
 import inlogo from "../instagramlogo.png";
 import elogo from "../emaillogo.jpg";
 import plogo from "../phoneicon.png";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import pic1 from "../pic1decor.jpg";
+import pic2 from "../pic2decor.jpg";
+import pic3 from "../pic3decor.jpg";
+import pic4 from "../pic4decor.jpg";
+import pic5 from "../pic5decor.jpg";
+import pic6 from "../pic6decor.jpg";
+
+function Imageslides(){
+  const imageslist=[pic1, pic2, pic3, pic4, pic5, pic6];
+  const settings={
+    arrows:true, 
+    dots:true,
+    slidesToShow:2,
+    autoplay:false,
+  }
+  return(
+    <div style={{width:"70%", margin:"auto", position: "relative"}}>
+      <Slider {...settings}>
+          {imageslist.map((image, index)=>(
+            <div key={index}>
+              <img src={image} alt={`Slide ${index}`} style={{height: "100%", width:"100%", borderRadius:"10px", objectFit: "cover"}}></img>
+            </div>
+          ))}
+      </Slider>
+    </div>
+  )
+}
 
 function Home(){
   const navigate=useNavigate();
@@ -18,9 +48,7 @@ function Home(){
         <button className="managerbutton">Log in as Manager</button>
       </div>
       
-      <div className="picturecontainer">
-        <h1>Pictures</h1>
-      </div>
+      <Imageslides/>
 
       <div className="informationbox">
         <p> We are professional event organizers, serving the Dallas Area, committed to helping you create a great and extraordinary event decor! <br /> <br /> <br />Sign up and book your event now! <br /> <br /> <br /> Contact Brayen Mathai and Sintu Brayen if you have any questions!
