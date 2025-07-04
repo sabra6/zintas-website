@@ -36,11 +36,26 @@ useEffect(()=>{
       credentials: 'include'
     });
 
+    const info={
+      event_id:event_id,
+    }
+    const response1=await fetch('/getservicedata', {
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json'
+      },
+      credentials:'include',
+      body: JSON.stringify(info)
+    })
     const data=await response.json();
+
+    const data1=await response1.json();
     setservices(data);
+    console.log("selected services", data1);
     const selected={};
+    const selectedservices=data1.map(element=>element.service_id);
     data.forEach(service=>{
-      selected[service.service_id.toString()]=false;
+      selected[service.service_id.toString()]=selectedservices.includes(service.service_id);
     });
     setsservices(selected);
   }
@@ -77,24 +92,8 @@ useEffect(()=>{
     setitemslist(data.items_list);
   }
 
-  async function getservicedata(){
-    const info={
-      event_id:event_id,
-    }
-    const response=await fetch('/getservicedata', {
-      method: 'POST',
-      headers: {
-        'Content-Type':'application/json'
-      },
-      credentials:'include',
-      body: JSON.stringify(info)
-    })
-    const data=await response.json();
-  }
-
   getservices();
   geteventdata();
-  getservicedata();
   }, []);
 
 
@@ -145,7 +144,7 @@ useEffect(()=>{
           {services.map(service=>(
           <div key={service.service_id}>
           <label>
-            <input type="checkbox" name={service.service_id} checked={sservices[service.service_id] || false} onChange={(e)=>setsservices(prev=>({...prev, [e.target.name]:e.target.checked,}))}>
+            <input type="checkbox" name={service.service_id.toString()} checked={sservices[service.service_id.toString()] || false} onChange={(e)=>setsservices(prev=>({...prev, [e.target.name]:e.target.checked,}))}>
             </input>
              {service.service_name}
           </label>
