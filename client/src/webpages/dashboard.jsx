@@ -69,7 +69,12 @@ function Dashboard(){
           <h1> Dashboard </h1>
           <button onClick={()=> navigate('/eventform')} className="button"> Book an Event </button>
         </div>
-        <ul className="letterbox">
+        <div className="letterbox">
+          <p> Our Team is so excited to be part of your memorable experience!</p>
+          <p> To book an event, click "Book an Event".</p>
+          <p> To make edits to your event, click "Edit". To delete your event, click "Delete".</p>
+        </div>
+        <ul>
           {data.map((event, index)=>(
             <li className="event" key={index}>{event.name}
               <div className="dbuttonbox">

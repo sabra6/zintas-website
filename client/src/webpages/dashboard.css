@@ -7,7 +7,7 @@
 
 .topbuttonbox{
   display: flex;
-  height:40vh;
+  height:10vh;
   width:100vh;
   flex-direction: row;
   justify-content: center;
@@ -17,10 +17,11 @@
 
 .letterbox{
   display:flex;
-  height:30vh;
+  height:20vh;
   flex-direction:column;
   margin-left:auto;
   margin-right:auto;
+  font-weight: bold;
   gap:20px;
 }
 
@@ -35,6 +36,9 @@
   height:10vh;
   width:100vh;
   flex-direction: row;
+  color: darkgreen;
+  margin-right:auto;
+  margin-left:auto;
 }
 
 .dbuttonbox{

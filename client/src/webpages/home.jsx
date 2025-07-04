@@ -19,11 +19,13 @@ import pic6 from "../pic6decor.jpg";
 
 function Imageslides(){
   const imageslist=[pic1, pic2, pic3, pic4, pic5, pic6];
-  const settings={
-    arrows:true, 
+  const settings={ 
     dots:true,
     slidesToShow:2,
-    autoplay:false,
+    autoplay:true,
+    infinite:true,
+    speed:1000,
+    autoplaySpeed:2000
   }
   return(
     <div style={{width:"70%", margin:"auto", position: "relative"}}>
