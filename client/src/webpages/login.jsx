@@ -61,9 +61,9 @@ function Login(){
        <h1>Login</h1>
        <div className="loginsection">
         <p>Email</p>
-        <input className="textbox" type="text" onChange={(e)=>setemail(e.target.value)}/>
+        <input className="logintextbox" type="text" onChange={(e)=>setemail(e.target.value)}/>
         <p>Password</p>
-        <input className="textbox" type="text" onChange={(e)=>setpassword(e.target.value)}/>
+        <input className="logintextbox" type="text" onChange={(e)=>setpassword(e.target.value)}/>
         <button onClick={ismatch} className="button"> Login </button>
        </div>
     </div>
