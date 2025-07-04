@@ -74,8 +74,8 @@ useEffect(()=>{
     })
     const data=await response.json();
     
-    if(data.eventdatetime){
-      const date = new Date(data.eventdatetime);
+    if(data.event_datetime){
+      const date = new Date(data.event_datetime);
       const formatted = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
         .toISOString()
         .slice(0, 16);
