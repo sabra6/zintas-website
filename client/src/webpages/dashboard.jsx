@@ -15,18 +15,19 @@ function Dashboard(){
 
   const [data, setdata]=useState([]);
 
+  async function getinfo(){
+    const response= await fetch('/dashboard',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+    },
+    credentials:'include',
+    })
+    const result=await response.json();
+    setdata(result.eventinfo)
+  }
+
   useEffect(()=>{
-    async function getinfo(){
-      const response= await fetch('/dashboard',{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-      },
-      credentials:'include',
-      })
-      const result=await response.json();
-      setdata(result.eventinfo)
-    }
     getinfo();
   }, []);
 
@@ -44,6 +45,7 @@ function Dashboard(){
     });
 
     const result=await response.json();
+    getinfo();
   }
 
   async function logout(){
