@@ -134,7 +134,16 @@ useEffect(()=>{
        <button className="editbutton" onClick={()=>navigate('/dashboard')}> Cancel </button>
         <h1>Fill in the following information</h1>
         <input className="edittextbox" type="text" value={eventname} onChange={(e)=>seteventname(e.target.value)}></input>
-        <input className="edittextbox" type="text" value={eventkind} onChange={(e)=>seteventkind(e.target.value)}></input>
+        <select className="eventtextbox" onChange={(e)=>seteventkind(e.target.value)} value={eventkind}>
+          <option value= "Birthday">Birthday</option>
+          <option value= "Baptism">Baptism</option>
+          <option value= "Bridal Shower">Bridal Shower</option>
+          <option value= "Baby Shower">Baby Shower</option>
+          <option value= "Housewarming">Housewarming</option>
+          <option value= "Holy Communion">Holy Communion</option>
+          <option value= "Gender Reveal">Gender Reveal</option>
+          <option value= "Wedding">Wedding</option>
+        </select>         
         <input className="edittextbox" type="datetime-local" value={eventdatetime || ''} onChange={(e)=>seteventdatetime(e.target.value)}></input>
         <input className="edittextbox" type="text" value={venueaddress} onChange={(e)=>setvenueaddress(e.target.value)}></input>
         <input className="edittextbox" type="text" value={numattendees} onChange={(e)=>setnumattendees(e.target.value)}></input>

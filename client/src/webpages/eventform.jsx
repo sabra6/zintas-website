@@ -81,9 +81,16 @@ function Eventform(){
        <button className="eventbutton" onClick={()=>navigate('/dashboard')}>Back</button>
         <h1>Fill in the following information</h1>
         <input className="eventtextbox" type="text" placeholder="Event Name" onChange={(e)=>seteventname(e.target.value)}></input>
-        <select className="eventtextbox">
-          <option value= "Birthday"></option>
-          <option value= "Baby Shower"></option>
+        <select className="eventtextbox" onChange={(e)=>seteventkind(e.target.value)}>
+          <option value= "">Kind</option>
+          <option value= "Birthday">Birthday</option>
+          <option value= "Baptism">Baptism</option>
+          <option value= "Bridal Shower">Bridal Shower</option>
+          <option value= "Baby Shower">Baby Shower</option>
+          <option value= "Housewarming">Housewarming</option>
+          <option value= "Holy Communion">Holy Communion</option>
+          <option value= "Gender Reveal">Gender Reveal</option>
+          <option value= "Wedding">Wedding</option>
         </select>        
         <input className="eventtextbox" type="datetime-local" placeholder="Date and Time of Event" onChange={(e)=>seteventdatetime(e.target.value)}></input>
         <input className="eventtextbox" type="text" placeholder="Venue Address" onChange={(e)=>setvenueaddress(e.target.value)}></input>
