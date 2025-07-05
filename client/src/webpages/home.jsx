@@ -25,7 +25,7 @@ function Imageslides(){
     autoplay:true,
     infinite:true,
     speed:2000,
-    autoplaySpeed:1500
+    autoplaySpeed:1200
   }
   return(
     <div style={{width:"70%", margin:"auto", position: "relative"}}>
