@@ -67,9 +67,9 @@ function Dashboard(){
     <div style={background}>
       <div className="dashboardpage">
         <div className="topbuttonbox">
-          <button onClick={logout} className="button"> Log Out </button>
+          <button onClick={logout} className="dashbutton"> Log Out </button>
           <h1> Dashboard </h1>
-          <button onClick={()=> navigate('/eventform')} className="button"> Book an Event </button>
+          <button onClick={()=> navigate('/eventform')} className="dashbutton"> Book an Event </button>
         </div>
         <div className="letterbox">
           <p> Our Team is so excited to be part of your memorable experience!</p>
@@ -80,8 +80,8 @@ function Dashboard(){
           {data.map((event, index)=>(
             <li className="event" key={index}>{event.name}
               <div className="dbuttonbox">
-                <button className="button"onClick={()=>deleteevent(event.event_id)}> Delete </button>
-                <button className="button" onClick={()=>navigate(`/editform/${event.event_id}`)}> Edit </button>
+                <button className="dbutton"onClick={()=>deleteevent(event.event_id)}> Delete </button>
+                <button className="dbutton" onClick={()=>navigate(`/editform/${event.event_id}`)}> Edit </button>
               </div>
             </li>
           ))}

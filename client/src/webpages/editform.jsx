@@ -129,17 +129,17 @@ useEffect(()=>{
 
   return(
     <div style={background}>
-      <div className="eventformpage">
-        <div className="inputbox">
-       <button className="button" onClick={()=>navigate('/dashboard')}> Cancel </button>
+      <div className="editformpage">
+        <div className="editinputbox">
+       <button className="editbutton" onClick={()=>navigate('/dashboard')}> Cancel </button>
         <h1>Fill in the following information</h1>
-        <input className="textbox" type="text" value={eventname} onChange={(e)=>seteventname(e.target.value)}></input>
-        <input className="textbox" type="text" value={eventkind} onChange={(e)=>seteventkind(e.target.value)}></input>
-        <input className="textbox" type="datetime-local" value={eventdatetime || ''} onChange={(e)=>seteventdatetime(e.target.value)}></input>
-        <input className="textbox" type="text" value={venueaddress} onChange={(e)=>setvenueaddress(e.target.value)}></input>
-        <input className="textbox" type="text" value={numattendees} onChange={(e)=>setnumattendees(e.target.value)}></input>
-        <input className="textbox" type="text" value={colortheme} onChange={(e)=>setcolortheme(e.target.value)}></input>
-        <input className="textbox" type="text" value={itemslist} onChange={(e)=>setitemslist(e.target.value)}></input>
+        <input className="edittextbox" type="text" value={eventname} onChange={(e)=>seteventname(e.target.value)}></input>
+        <input className="edittextbox" type="text" value={eventkind} onChange={(e)=>seteventkind(e.target.value)}></input>
+        <input className="edittextbox" type="datetime-local" value={eventdatetime || ''} onChange={(e)=>seteventdatetime(e.target.value)}></input>
+        <input className="edittextbox" type="text" value={venueaddress} onChange={(e)=>setvenueaddress(e.target.value)}></input>
+        <input className="edittextbox" type="text" value={numattendees} onChange={(e)=>setnumattendees(e.target.value)}></input>
+        <input className="edittextbox" type="text" value={colortheme} onChange={(e)=>setcolortheme(e.target.value)}></input>
+        <input className="edittextbox" type="text" value={itemslist} onChange={(e)=>setitemslist(e.target.value)}></input>
         <ul>
           {services.map(service=>(
           <div key={service.service_id}>
@@ -151,7 +151,7 @@ useEffect(()=>{
           </div>
         ))}
         </ul>
-        <button onClick={editevents} className="button"> Make Edits </button>
+        <button onClick={editevents} className="editbutton"> Make Edits </button>
         </div>
       </div>
     </div>

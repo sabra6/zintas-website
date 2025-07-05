@@ -21,7 +21,6 @@ function Eventform(){
   const [itemslist, setitemslist]=useState('');
   const [sservices, setsservices]=useState({});
   const [services, setservices]=useState([]);
-
   useEffect(()=>{
   async function getservices(){
     const response=await fetch('/getadditional',{
@@ -78,16 +77,19 @@ function Eventform(){
   return(
     <div style={background}>
       <div className="eventformpage">
-        <div className="inputbox">
-       <button className="button" onClick={()=>navigate('/dashboard')}>Back</button>
+        <div className="eventinputbox">
+       <button className="eventbutton" onClick={()=>navigate('/dashboard')}>Back</button>
         <h1>Fill in the following information</h1>
-        <input className="textbox" type="text" placeholder="Event Name" onChange={(e)=>seteventname(e.target.value)}></input>
-        <input className="textbox" type="text" placeholder="Kind of Event" onChange={(e)=>seteventkind(e.target.value)}></input>
-        <input className="textbox" type="datetime-local" placeholder="Date and Time of Event" onChange={(e)=>seteventdatetime(e.target.value)}></input>
-        <input className="textbox" type="text" placeholder="Venue Address" onChange={(e)=>setvenueaddress(e.target.value)}></input>
-        <input className="textbox" type="text" placeholder="Number of Attendees" onChange={(e)=>setnumattendees(e.target.value)}></input>
-        <input className="textbox" type="text" placeholder="Color Theme" onChange={(e)=>setcolortheme(e.target.value)}></input>
-        <input className="textbox" type="text" placeholder="List of Items Needed" onChange={(e)=>setitemslist(e.target.value)}></input>
+        <input className="eventtextbox" type="text" placeholder="Event Name" onChange={(e)=>seteventname(e.target.value)}></input>
+        <select className="eventtextbox">
+          <option value= "Birthday"></option>
+          <option value= "Baby Shower"></option>
+        </select>        
+        <input className="eventtextbox" type="datetime-local" placeholder="Date and Time of Event" onChange={(e)=>seteventdatetime(e.target.value)}></input>
+        <input className="eventtextbox" type="text" placeholder="Venue Address" onChange={(e)=>setvenueaddress(e.target.value)}></input>
+        <input className="eventtextbox" type="number" placeholder="Number of Attendees" onChange={(e)=>setnumattendees(e.target.value)}></input>
+        <input className="eventtextbox" type="text" placeholder="Color Theme" onChange={(e)=>setcolortheme(e.target.value)}></input>
+        <input className="eventtextbox" type="text" placeholder="List of Items Needed" onChange={(e)=>setitemslist(e.target.value)}></input>
         <ul>
           {services.map(service=>(
           <div key={service.service_id}>
@@ -99,7 +101,7 @@ function Eventform(){
           </div>
         ))}
         </ul>
-        <button className="button" onClick={sendinfo}>Book Event</button>
+        <button className="eventbutton" onClick={sendinfo}>Book Event</button>
         </div>
       </div>
     </div>

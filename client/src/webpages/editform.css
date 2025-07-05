@@ -1,22 +1,23 @@
-.eventformpage{
+.editformpage{
   width: auto;
   height: 100vh;
 }
 
-.inputbox{
+.editinputbox{
   display: flex;
   flex-direction: column;
   gap:20px;
+  margin:20px;
 }
 
-.button{
+.editbutton{
   background-color: #C5FAA8;
   color: #02542D;
   height: 5vh;
   width: 20vh;
 }
 
-.textbox{
-  width: 20vh;
+.edittextbox{
+  width: 30vh;
   height: 10vh;
 }

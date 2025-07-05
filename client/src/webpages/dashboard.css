@@ -9,6 +9,7 @@
   display: flex;
   height:10vh;
   width:100vh;
+  gap:50px;
   flex-direction: row;
   justify-content: center;
   margin-left: auto;
@@ -25,9 +26,12 @@
   gap:20px;
 }
 
-.button{
+.dashbutton{
   background-color: #C5FAA8;
   color: darkgreen;
+  height: 5vh;
+  width: 20vh;
+  margin-top: 20px;
 }
 
 .event{
@@ -39,6 +43,8 @@
   color: darkgreen;
   margin-right:auto;
   margin-left:auto;
+  align-items: center;
+  gap: 250px;
 }
 
 .dbuttonbox{
@@ -47,7 +53,9 @@
   gap:20px;
 }
 
-.button{
-  background-color: #C5FAA8;
+.dbutton{
+  background-color: #AFF6B6;
   color: darkgreen;
+  height: 5vh;
+  width: 20vh;
 }
