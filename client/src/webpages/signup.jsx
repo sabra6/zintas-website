@@ -47,14 +47,14 @@ function Signup(){
   return(
     <div style={background}>
     <div className="signupbackground">
-      <button onClick={()=>navigate('/')}className="button"> Back </button>
+      <button onClick={()=>navigate('/')}className="signupbutton"> Back </button>
       <h1 className="title">Create your Account</h1>
       <input className="question" type="text" placeholder="First name" onChange={(e)=>setfirstname(e.target.value)}/>
       <input className="question" type="text" placeholder="Last name" onChange={(e)=>setlastname(e.target.value)}/>
       <input className="question" type="text" placeholder="Email" onChange={(e)=>setemail(e.target.value)}/>
       <input className="question" type="text" placeholder="Password" onChange={(e)=>setpassword(e.target.value)}/>
       <input className="question" type="text" placeholder="Phone Number" onChange={(e)=>setphonenumber(e.target.value)}/>
-      <button onClick={sendinfo} className="button"> Sign Up </button>
+      <button onClick={sendinfo} className="signupbutton"> Sign Up </button>
     </div>
 
     </div>

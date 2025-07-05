@@ -5,11 +5,11 @@
   margin: 40px;
 }
 
-.button{
+.signupbutton{
   background-color: #C5FAA8;
   color: #02542D;
   height: 5vh;
-  width: 20vh;
+  width: 30vh;
   align-self: flex-start;
   margin: 20px;
 }
@@ -19,8 +19,9 @@
 }
 
 .question{
-  height: 3vh;
-  width: 20vh;
+  height: 5vh;
+  width: 40vh;
   margin:20px;
+  font-size: 15px;
   border-color: black;
 }

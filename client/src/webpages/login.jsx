@@ -57,14 +57,14 @@ function Login(){
  return (
   <div style={background}>
     <div className="loginbackground">
-       <button onClick={()=>navigate('/')}className="button">Back</button>
+       <button onClick={()=>navigate('/')}className="loginbutton">Back</button>
        <h1>Login</h1>
        <div className="loginsection">
         <p>Email</p>
         <input className="logintextbox" type="text" onChange={(e)=>setemail(e.target.value)}/>
         <p>Password</p>
         <input className="logintextbox" type="text" onChange={(e)=>setpassword(e.target.value)}/>
-        <button onClick={ismatch} className="button"> Login </button>
+        <button onClick={ismatch} className="loginbutton"> Login </button>
        </div>
     </div>
   </div>

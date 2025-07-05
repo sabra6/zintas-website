@@ -79,9 +79,9 @@ function Home(){
         </div>
 
       </div>
-      <div className="buttonbox">
-            <button onClick={() => navigate('/signup')} className="button">Sign up</button>
-            <button onClick={()=>navigate('/login')} className="button">Log in</button>
+      <div className="homebuttonbox">
+            <button onClick={() => navigate('/signup')} className="homebutton">Sign up</button>
+            <button onClick={()=>navigate('/login')} className="homebutton">Log in</button>
         </div>
 
     </div>
