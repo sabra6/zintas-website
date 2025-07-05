@@ -144,10 +144,16 @@ app.post('/getservicedata', async(req,res)=>{
 
 app.post('/editform', async(req, res)=>{
   const user_id=req.cookies.user_id;
-  const {event_id, eventname, eventkind, eventdatetime, venueaddress, numattendees, colortheme, itemslist}=req.body;
+  const {event_id, eventname, eventkind, eventdatetime, venueaddress, numattendees, colortheme, itemslist, services}=req.body;
   const query='UPDATE events SET name=$1, kind=$2, event_datetime=$3, address=$4, number_of_attendees=$5, color_theme=$6, items_list=$7 WHERE event_id=$8'
+  const query1='DELETE FROM eventservice WHERE event_id=$1'
+  const query2='INSERT INTO eventservice(event_id, service_id) VALUES ($1, $2)'
   try{
     const result=await data.query(query, [eventname, eventkind, eventdatetime, venueaddress, numattendees,colortheme,itemslist,event_id])
+    const result1=await data.query(query1, [event_id])
+    for(const service of services){
+      const result2=await data.query(query2, [event_id, service])
+    }
     res.json({message:'Event Edited'})
   } catch(err){
     res.json({error:'Database Error'})
