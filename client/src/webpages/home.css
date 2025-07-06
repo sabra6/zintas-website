@@ -22,13 +22,6 @@
   margin-bottom:auto;
 }
 
-.managerbutton{ /*the manager login button*/
-  background-color: darkgreen;
-  color: white;
-  margin-left:auto;
-  margin-bottom: auto;
-}
-
 .informationbox{ /* box which contains the information about the business*/
   display:flex;
   justify-content: center;

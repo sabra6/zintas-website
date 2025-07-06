@@ -6,7 +6,6 @@ import Login from './webpages/login';
 import Dashboard from "./webpages/dashboard";
 import Eventform from "./webpages/eventform";
 import Editform from "./webpages/editform";
-import Mlogin from "./webpages/mlogin";
 
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
@@ -21,7 +20,6 @@ function App() {
           <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/eventform" element={<Eventform/>}/>
           <Route path="/editform/:event_id" element={<Editform/>}/>
-          <Route path="/mlogin" element={<Mlogin/>}/>
         </Routes>
       </Router>
   );

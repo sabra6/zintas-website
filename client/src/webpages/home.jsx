@@ -47,7 +47,6 @@ function Home(){
 
       <div className="topcontainer">
         <img src={logo} className="companylogo"></img>
-        <button onClick={()=>navigate('/mlogin')} className="managerbutton" >Log in as Manager</button>
       </div>
       
       <Imageslides/>
