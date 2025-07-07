@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import './dashboard.css';
+import './mdashboard.css';
 import logo from '../Zintaslogo.png';
 import {useNavigate} from "react-router-dom";
 
@@ -28,10 +28,17 @@ function Mdashboard(){
 
   return(
     <div style={background}>
-      <div className="dashboardpage">
+      <div className="mdashboardpage">
+        <button onClick={logout} className="logoutbutton"> Log Out </button>
         <div className="topbuttonbox">
-          <button onClick={logout} className="dashbutton"> Log Out </button>
           <h1> Dashboard </h1>
+        </div>
+        <div className="optionboxes">
+          <p className="options">Notifications</p>
+        </div>
+        <div className="optionboxes">
+            <p className="options"> Users </p>
+            <p className="options"> Upcoming Events </p>
         </div>
       </div>
     </div>
