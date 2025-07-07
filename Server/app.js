@@ -46,7 +46,12 @@ app.post('/login', async (req, res)=>{
         httpOnly:true,
         secure:false,
       });
-      return res.json({message: 'success'})
+      if(email==="Zintasevents@gmail.com"){
+        return res.json({message: 'manager'})
+      }
+      else{
+        return res.json({message: 'success'})
+      }
     }
 
   } catch(err){

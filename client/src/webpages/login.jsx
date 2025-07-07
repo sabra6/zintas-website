@@ -36,7 +36,9 @@ function Login(){
 
       if(data.message==="success"){
         navigate('/dashboard');
-      } else{
+      } else if(data.message==="manager"){
+        navigate('/mdashboard');
+      }else{
         alert(data.message)
       }
       
