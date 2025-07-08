@@ -15,13 +15,26 @@ function Userlist(){
   const navigate=useNavigate();
 
   async function getusers(){
+    const response=await fetch('/getusers', {
+      method: 'GET',
+      headers: {
+        'Content-Type':'application/json'
+      },
+      credentials: 'include'
+    })
 
+    const data=await response.json();
   }
+
+  useEffect(
+    getusers()
+
+  );
 
   return(
     <div style={background}>
     <div className="userlistpage">
-      <button onClick={navigate('/mdashboard')} className="backbutton"> Back </button>
+      <button onClick={()=>navigate('/mdashboard')} className="backbutton"> Back </button>
       <div className="mutopbuttonbox">
         <h1> Dashboard </h1>
       </div>

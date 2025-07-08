@@ -3,6 +3,7 @@
   height:100vh;
   width:auto;
   flex-direction: column;
+  gap: 40px;
 }
 
 .mutopbuttonbox{

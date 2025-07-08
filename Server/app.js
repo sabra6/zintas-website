@@ -165,6 +165,16 @@ app.post('/editform', async(req, res)=>{
   }
 })
 
+app.get('/getusers', async(req, res)=>{
+  const query='SELECT first_name, last_name FROM users;'
+  try{
+    const result=await data.query(query);
+    res.json(result.rows)
+  } catch(err){
+    res.json({error: 'Database Error'})
+  }
+})
+
 app.get('/', (req, res)=>{
   console.log('Recieved GET /');
   res.send("Hi. Welcome to our Zintas website");

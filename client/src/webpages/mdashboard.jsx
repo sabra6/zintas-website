@@ -37,7 +37,7 @@ function Mdashboard(){
           <p className="options">Notifications</p>
         </div>
         <div className="optionboxes">
-            <p className="options" onClick={navigate('/userlist')}> Users </p>
+            <p className="options" onClick={()=>navigate('/userlist')}> Users </p>
             <p className="options"> Upcoming Events </p>
         </div>
       </div>
