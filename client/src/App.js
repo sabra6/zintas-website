@@ -8,6 +8,7 @@ import Eventform from "./webpages/eventform";
 import Editform from "./webpages/editform";
 import Mdashboard from "./webpages/mdashboard";
 import Userlist from "./webpages/userlist";
+import Upcomingevents from "./webpages/upevents";
 
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/editform/:event_id" element={<Editform/>}/>
           <Route path="/mdashboard" element={<Mdashboard/>}/>
           <Route path="/userlist" element={<Userlist/>}/>
+          <Route path="/upevents" element={<Upcomingevents/>}/>
         </Routes>
       </Router>
   );

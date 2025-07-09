@@ -17,19 +17,11 @@
   margin-right: auto;
 }
 
-.userbackbutton{
-  background-color: #C5FAA8;
-  color: darkgreen;
-  height: 20vh;
-  width: 20vh;
-  margin-top: 20px;
-  position:left;
-}
 
-.mdashbutton{
+.userbutton{
   background-color: #C5FAA8;
   color: darkgreen;
-  height: 5vh;
+  height: 10vh;
   width: 20vh;
   margin-top: 20px;
 }

@@ -34,10 +34,8 @@ function Userlist(){
   return(
     <div style={background}>
     <div className="userlistpage">
-      <button onClick={()=>navigate('/mdashboard')} className="userbackbutton"> Back </button>
-      <div className="mutopbuttonbox">
+      <button onClick={()=>navigate('/mdashboard')} className="userbutton"> Back </button>
         <h1> Users </h1>
-      </div>
       <ul>
         {data.map((user, index)=>(
           <li className="user" key={index}> {user.first_name} {user.last_name}
