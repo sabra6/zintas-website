@@ -169,8 +169,8 @@ app.get('/getusers', async(req, res)=>{
   const query='SELECT first_name, last_name FROM users;'
   try{
     const result=await data.query(query);
-    res.json(result.rows[0])
-    console.log(result.rows[0])
+    res.json(result.rows)
+    console.log(result.rows)
   } catch(err){
     res.json({error: 'Database Error'})
   }
