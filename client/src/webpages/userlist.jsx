@@ -23,13 +23,13 @@ function Userlist(){
       credentials: 'include'
     })
 
-    const data=await response.json();
+    const result=await response.json();
+    setdata(result);
   }
 
-  useEffect(
-    getusers()
-
-  );
+  useEffect(()=>{
+    getusers();
+  }, []);
 
   return(
     <div style={background}>
@@ -38,13 +38,13 @@ function Userlist(){
       <div className="mutopbuttonbox">
         <h1> Dashboard </h1>
       </div>
-      <div className="userlist">
-        <p className="user">User1</p>
-      </div>
-      <div className="userlist">
-          <p className="user"> User2 </p>
-          <p className="user"> User3 </p>
-      </div>
+      <ul>
+        {[data].map((user, index)=>(
+          <li key={index}>
+            <p key={index}>{user.first_name} {user.last_name} </p>
+          </li>
+        ))}
+      </ul>
     </div>
   </div>
   )
