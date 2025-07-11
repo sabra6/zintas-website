@@ -14,6 +14,7 @@ app.use(express.json());
 app.post('/signup', async (req, res) => {
   const{firstname, lastname, email, password, phonenumber}=req.body;
   const query='INSERT INTO users(first_name, last_name, email, password, phone_number) VALUES ($1,$2,$3,$4,$5)'
+  const query1='INSERT INTO notifications(content) VALUES ($1)'
   try{
     const result=await data.query(query, [firstname, lastname, email, password, phonenumber]);
     const result1=await data.query('SELECT user_id FROM users WHERE email=$1', [email]);
@@ -22,6 +23,7 @@ app.post('/signup', async (req, res) => {
         httpOnly:true,
         secure:false,
     });
+    const result2=await data.query(query1, [`${firstname} ${lastname} joined`]);
     res.json({message: 'User Added'})
   } catch (err){
     console.error('Database Error', err);
