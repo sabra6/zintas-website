@@ -14,8 +14,9 @@ app.use(express.json());
 app.post('/signup', async (req, res) => {
   const{firstname, lastname, email, password, phonenumber}=req.body;
   const query='INSERT INTO users(first_name, last_name, email, password, phone_number) VALUES ($1,$2,$3,$4,$5)'
-  const query1='INSERT INTO notifications(content) VALUES ($1)'
+  const query1='INSERT INTO notifications(date, content) VALUES ($1, $2)'
   try{
+    const currentdate=new Date();
     const result=await data.query(query, [firstname, lastname, email, password, phonenumber]);
     const result1=await data.query('SELECT user_id FROM users WHERE email=$1', [email]);
     const {user_id}=result1.rows[0];
@@ -23,7 +24,7 @@ app.post('/signup', async (req, res) => {
         httpOnly:true,
         secure:false,
     });
-    const result2=await data.query(query1, [`${firstname} ${lastname} joined`]);
+    const result2=await data.query(query1, [currentdate, `${firstname} ${lastname} joined`]);
     res.json({message: 'User Added'})
   } catch (err){
     console.error('Database Error', err);
@@ -76,8 +77,10 @@ app.post('/deleteevent', async(req, res)=>{
   const user_id=req.cookies.user_id;
   const {event_id}=req.body;
   try{
+    const currentdate=new Date();
     const result=await data.query('DELETE FROM events WHERE user_id=$1 AND event_id=$2', [user_id, event_id]);
     const result1=await data.query('DELETE FROM eventservice WHERE event_id=$1', [event_id]);
+    const result3=await data.query('INSERT INTO notifications(date, content) VALUES ($1, $2)', [currentdate, `${user_id} deleted ${event_id}`])
     res.json({message:'Event Deleted'})
   } catch(err){
     res.json({error:"Database Error"});
@@ -98,11 +101,13 @@ app.post('/eventform', async(req, res)=>{
   const query='INSERT INTO events(user_id, name, kind, event_datetime, address, number_of_attendees, color_theme, items_list) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING event_id'
   const query1='INSERT INTO eventservice(event_id, service_id) VALUES ($1,$2)'
   try{
+    const currentdate=new Date();
     const result=await data.query(query, [user_id, eventname, eventkind, eventdatetime,venueaddress, numattendees, colortheme, itemslist]);
     const event_id=result.rows[0].event_id;
     for(const service of services){
       const result1=await data.query(query1, [event_id, service])
     }
+    const result2=await data.query('INSERT INTO notifications(date, content) VALUES ($1, $2)', [currentdate, `${user_id} added an Event`])
     res.json({message:'Event Added'})
   } catch(err){
     res.json({message:'Error'})
@@ -156,11 +161,13 @@ app.post('/editform', async(req, res)=>{
   const query1='DELETE FROM eventservice WHERE event_id=$1'
   const query2='INSERT INTO eventservice(event_id, service_id) VALUES ($1, $2)'
   try{
+    const currentdate=new Date();
     const result=await data.query(query, [eventname, eventkind, eventdatetime, venueaddress, numattendees,colortheme,itemslist,event_id])
     const result1=await data.query(query1, [event_id])
     for(const service of services){
       const result2=await data.query(query2, [event_id, service])
     }
+    const result3=await data.query('INSERT INTO notifications(date, content) VALUES ($1, $2)', [currentdate, `${user_id} edited ${event_id}`])
     res.json({message:'Event Edited'})
   } catch(err){
     res.json({error:'Database Error'})
@@ -185,6 +192,16 @@ app.get('/getevents', async(req, res)=>{
     res.json(result.rows);
   } catch(err){
     res.json({Error: 'Database Error'});
+  }
+})
+
+app.get('/notifications', async(req, res)=>{
+  const query='SELECT date, content FROM notifications;'
+  try{
+    const result=await data.query(query);
+    res.json(result.rows);
+  } catch(err){
+    res.json({error: 'Database Error'});
   }
 })
 
