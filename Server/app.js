@@ -183,7 +183,7 @@ app.post('/editform', async(req, res)=>{
 })
 
 app.get('/getusers', async(req, res)=>{
-  const query='SELECT first_name, last_name FROM users;'
+  const query='SELECT user_id, first_name, last_name FROM users;'
   try{
     const result=await data.query(query);
     res.json(result.rows)
@@ -208,6 +208,17 @@ app.get('/notifications', async(req, res)=>{
   try{
     const result=await data.query(query);
     res.json(result.rows);
+  } catch(err){
+    res.json({error: 'Database Error'});
+  }
+})
+
+app.post('/getuserinfo', async(req, res)=>{
+  const {userid}=req.body;
+  const query='SELECT first_name, last_name, email, phone_number FROM users WHERE user_id=$1;'
+  try{
+    const result=await data.query(query, [userid]);
+    res.json(result.rows[0]);
   } catch(err){
     res.json({error: 'Database Error'});
   }
