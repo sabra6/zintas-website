@@ -194,7 +194,7 @@ app.get('/getusers', async(req, res)=>{
 })
 
 app.get('/getevents', async(req, res)=>{
-  const query='SELECT name FROM events;'
+  const query='SELECT event_id, name FROM events;'
   try{
     const result=await data.query(query);
     res.json(result.rows);
@@ -221,6 +221,19 @@ app.post('/getuserinfo', async(req, res)=>{
     res.json(result.rows[0]);
   } catch(err){
     res.json({error: 'Database Error'});
+  }
+})
+
+app.post('/geteventinfo', async(req, res)=>{
+  const {eventid}=req.body;
+  console.log(eventid);
+  const query='SELECT user_id, name, kind, event_datetime, address, number_of_attendees, color_theme, items_list FROM events WHERE event_id=$1;'
+  try{
+    const result=await data.query(query, [eventid]);
+    console.log(result.rows);
+    res.json(result.rows[0]);
+  } catch(err){
+    res.json({error: 'Database Error'})
   }
 })
 
