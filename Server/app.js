@@ -159,7 +159,6 @@ app.post('/getservicedata', async(req,res)=>{
 })
 
 
-
 app.post('/editform', async(req, res)=>{
   const user_id=req.cookies.user_id;
   const {event_id, eventname, eventkind, eventdatetime, venueaddress, numattendees, colortheme, itemslist, services}=req.body;
@@ -236,6 +235,31 @@ app.post('/geteventinfo', async(req, res)=>{
     res.json({error: 'Database Error'})
   }
 })
+
+app.post('/getservicenames', async(req, res)=>{
+  const {eventid}=req.body;
+  const query='SELECT * FROM services;'
+  const query1='SELECT service_id FROM eventservice WHERE event_id=$1'
+  try{
+    const result=await data.query(query);
+    const result1=await data.query(query1, [eventid]);
+    const services=result.rows;
+    const selectedservices=result1.rows;
+    const serviceslist=[];
+    for(const service in services){
+      for(const service1 in selectedservices){
+        if(service.service_id===service1){
+          console.log('Putting in the array')
+          serviceslist.push(service.service_name);
+        }
+      }
+    }
+    res.json(serviceslist);
+  } catch(err){
+    res.json({error: 'Database Error'})
+  }
+})
+
 
 app.get('/', (req, res)=>{
   console.log('Recieved GET /');

@@ -15,6 +15,7 @@ function Upcomingevents(){
   const [data, setdata]=useState([]);
   const [selected, setselected]=useState(false);
   const [eventinfo, seteventinfo]=useState([]);
+  const [services, setservices]=useState([]);
 
   const popup={
     position:'fixed',
@@ -57,12 +58,33 @@ function Upcomingevents(){
     seteventinfo(result);
   }
 
+  async function getservicedata(eventid){
+    const info={
+      eventid:eventid
+    }
+    const response=await fetch('/getservicenames', {
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify(info)
+    })
+
+    const result=await response.json();
+    console.log(result);
+    
+  }
+
+
+
   useEffect(()=>{
     getevents();
   }, []);
 
   function afterclick(eventid){
     geteventinfo(eventid);
+    getservicedata(eventid);
     setselected(true);
   }
 
