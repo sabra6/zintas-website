@@ -193,7 +193,7 @@ app.get('/getusers', async(req, res)=>{
 })
 
 app.get('/getevents', async(req, res)=>{
-  const query='SELECT event_id, name FROM events;'
+  const query='SELECT user_id, event_id, name FROM events;'
   try{
     const result=await data.query(query);
     res.json(result.rows);
@@ -246,9 +246,9 @@ app.post('/getservicenames', async(req, res)=>{
     const services=result.rows;
     const selectedservices=result1.rows;
     const serviceslist=[];
-    for(const service in services){
-      for(const service1 in selectedservices){
-        if(service.service_id===service1){
+    for(const service of services){
+      for(const service1 of selectedservices){
+        if(service.service_id===service1.service_id){
           console.log('Putting in the array')
           serviceslist.push(service.service_name);
         }

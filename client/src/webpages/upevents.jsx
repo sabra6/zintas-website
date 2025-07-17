@@ -16,13 +16,14 @@ function Upcomingevents(){
   const [selected, setselected]=useState(false);
   const [eventinfo, seteventinfo]=useState([]);
   const [services, setservices]=useState([]);
+  const [userinfo, setuserinfo]=useState([]);
 
   const popup={
     position:'fixed',
     backgroundColor: '#C5FAA8',
-    top: '50%',
+    top: '70%',
     left: '50%',
-    height: '40vh',
+    height: '70vh',
     width: '30vh',
     transform: 'translate(-50%, -90%)'
   }
@@ -58,6 +59,24 @@ function Upcomingevents(){
     seteventinfo(result);
   }
 
+  async function getuserinfo(userid){
+    const info={
+      userid:userid
+    }
+    const response=await fetch('/getuserinfo', {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      credentials:'include',
+      body:JSON.stringify(info)
+    })
+
+    const result=await response.json();
+    console.log(result);
+    setuserinfo(result);
+  }
+
   async function getservicedata(eventid){
     const info={
       eventid:eventid
@@ -73,7 +92,7 @@ function Upcomingevents(){
 
     const result=await response.json();
     console.log(result);
-    
+    setservices(result);
   }
 
 
@@ -82,9 +101,10 @@ function Upcomingevents(){
     getevents();
   }, []);
 
-  function afterclick(eventid){
+  function afterclick(userid, eventid){
     geteventinfo(eventid);
     getservicedata(eventid);
+    getuserinfo(userid);
     setselected(true);
   }
 
@@ -95,13 +115,15 @@ function Upcomingevents(){
         <h1> Upcoming Events </h1>
         <ul>
           {data.map((event, index)=>(
-            <li onClick={()=>afterclick(event.event_id)}className="upevent" key={index}>{event.name}
+            <li onClick={()=>afterclick(event.user_id, event.event_id)}className="upevent" key={index}>{event.name}
             </li>
           ))}
         </ul>
         {selected && (
           <div style={popup}>
             <button className="upbutton" onClick={()=>setselected(false)}> Back </button>
+            <p> First Name: {userinfo.first_name}</p>
+            <p> Last Name: {userinfo.last_name}</p>
             <p> Event Name : {eventinfo.name}</p>
             <p> Event Kind: {eventinfo.kind}</p>
             <p> Event Datetime: {eventinfo.event_datetime}</p>
@@ -109,6 +131,10 @@ function Upcomingevents(){
             <p> Number of Attendees: {eventinfo.number_of_attendees}</p>
             <p> Color Theme: {eventinfo.color_theme}</p>
             <p> List of Items: {eventinfo.items_list}</p>
+            <p> List of services: </p>
+            {services.map((service, index)=>(
+              <li key={index}> {service} </li>
+            ))}
           </div>
         )}
 
