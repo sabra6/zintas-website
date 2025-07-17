@@ -17,6 +17,7 @@ function Upcomingevents(){
   const [eventinfo, seteventinfo]=useState([]);
   const [services, setservices]=useState([]);
   const [userinfo, setuserinfo]=useState([]);
+  const [eventdate, seteventdate]=useState('');
 
   const popup={
     position:'fixed',
@@ -57,6 +58,16 @@ function Upcomingevents(){
     const result=await response.json();
     console.log(result);
     seteventinfo(result);
+    if(result.event_datetime){
+      const date = new Date(result.event_datetime);
+      const formatted = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+        .toISOString()
+        .slice(0, 16);
+      console.log(formatted)
+      seteventdate(formatted);
+    } else{
+      seteventdate('');
+    }
   }
 
   async function getuserinfo(userid){
@@ -126,7 +137,7 @@ function Upcomingevents(){
             <p> Last Name: {userinfo.last_name}</p>
             <p> Event Name : {eventinfo.name}</p>
             <p> Event Kind: {eventinfo.kind}</p>
-            <p> Event Datetime: {eventinfo.event_datetime}</p>
+            <p> Event Datetime: {eventdate}</p>
             <p> Venue Address: {eventinfo.address} </p>
             <p> Number of Attendees: {eventinfo.number_of_attendees}</p>
             <p> Color Theme: {eventinfo.color_theme}</p>
