@@ -60,10 +60,15 @@ function Upcomingevents(){
     seteventinfo(result);
     if(result.event_datetime){
       const date = new Date(result.event_datetime);
-      const formatted = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
-        .toISOString()
-        .slice(0, 16);
-      console.log(formatted)
+      const formatted = date.toLocaleString('en-US',{
+        year:'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      });
+      console.log(formatted);
       seteventdate(formatted);
     } else{
       seteventdate('');
