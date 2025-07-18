@@ -6,17 +6,6 @@
   gap: 40px;
 }
 
-.upeventstopbox{
-  display: flex;
-  height:30vh;
-  width:100vh;
-  gap:100px;
-  flex-direction: row;
-  justify-content: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 
 .notifbutton{
   background-color: #C5FAA8;

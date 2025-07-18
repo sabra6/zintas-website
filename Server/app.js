@@ -203,9 +203,10 @@ app.get('/getevents', async(req, res)=>{
 })
 
 app.get('/notifications', async(req, res)=>{
-  const query='SELECT date, content FROM notifications;'
+  const query='SELECT date, content FROM notifications ORDER BY date DESC;'
   try{
     const result=await data.query(query);
+    console.log(result.rows);
     res.json(result.rows);
   } catch(err){
     res.json({error: 'Database Error'});
