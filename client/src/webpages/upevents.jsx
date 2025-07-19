@@ -24,8 +24,8 @@ function Upcomingevents(){
     backgroundColor: '#C5FAA8',
     top: '70%',
     left: '50%',
-    height: '70vh',
-    width: '30vh',
+    maxheight: '90vh',
+    width: 'fit-content',
     transform: 'translate(-50%, -90%)'
   }
 

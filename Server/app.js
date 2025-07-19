@@ -182,7 +182,7 @@ app.post('/editform', async(req, res)=>{
 })
 
 app.get('/getusers', async(req, res)=>{
-  const query='SELECT user_id, first_name, last_name FROM users;'
+  const query='SELECT user_id, first_name, last_name FROM users ORDER BY last_name ASC;'
   try{
     const result=await data.query(query);
     res.json(result.rows)
@@ -193,7 +193,7 @@ app.get('/getusers', async(req, res)=>{
 })
 
 app.get('/getevents', async(req, res)=>{
-  const query='SELECT user_id, event_id, name FROM events;'
+  const query='SELECT user_id, event_id, name FROM events ORDER BY event_datetime ASC;'
   try{
     const result=await data.query(query);
     res.json(result.rows);

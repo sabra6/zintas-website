@@ -22,8 +22,8 @@ function Userlist(){
     backgroundColor: '#C5FAA8',
     top: '50%',
     left: '50%',
-    height: '30vh',
-    width: '30vh',
+    maxheight: '40vh',
+    width: 'fit-content',
     transform: 'translate(-50%, -90%)'
   }
 
