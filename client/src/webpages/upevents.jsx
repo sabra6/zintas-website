@@ -18,13 +18,13 @@ function Upcomingevents(){
   const [services, setservices]=useState([]);
   const [userinfo, setuserinfo]=useState([]);
   const [eventdate, seteventdate]=useState('');
-
+  //maxheight: '90vh',
   const popup={
     position:'fixed',
     backgroundColor: '#C5FAA8',
-    top: '70%',
+    top: '80%',
     left: '50%',
-    maxheight: '90vh',
+    height: 'fit-content',
     width: 'fit-content',
     transform: 'translate(-50%, -90%)'
   }
@@ -149,7 +149,7 @@ function Upcomingevents(){
             <p> List of Items: {eventinfo.items_list}</p>
             <p> List of services: </p>
             {services.map((service, index)=>(
-              <li key={index}> {service} </li>
+              <p key={index}> - {service} </p>
             ))}
           </div>
         )}
