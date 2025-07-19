@@ -88,7 +88,7 @@ function Userlist(){
             <button className="userbutton" onClick={()=>setselected(false)}>Back</button>
             <p> First Name: {userinfo.first_name}</p>
             <p> Last Name: {userinfo.last_name}</p>
-            <p> email: {userinfo.email}</p>
+            <p> Email: {userinfo.email}</p>
             <p> Phone Number: {userinfo.phone_number}</p>
           </div>
         )}
