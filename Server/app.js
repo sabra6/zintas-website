@@ -7,17 +7,21 @@ console.log("Setting up app.js")
 
 const app=express();
 
+const bcrypt=require('bcrypt');
+
 app.use(cors());
 app.use(cookieparser());
 app.use(express.json());
 
 app.post('/signup', async (req, res) => {
   const{firstname, lastname, email, password, phonenumber}=req.body;
+  const saltrounds=10;
+  const codedpassword= await bcrypt.hash(password, saltrounds);
   const query='INSERT INTO users(first_name, last_name, email, password, phone_number) VALUES ($1,$2,$3,$4,$5)'
   const query1='INSERT INTO notifications(date, content) VALUES ($1, $2)'
   try{
     const currentdate=new Date();
-    const result=await data.query(query, [firstname, lastname, email, password, phonenumber]);
+    const result=await data.query(query, [firstname, lastname, email, codedpassword, phonenumber]);
     const result1=await data.query('SELECT user_id FROM users WHERE email=$1', [email]);
     const {user_id}=result1.rows[0];
     res.cookie('user_id', user_id,{
@@ -42,14 +46,17 @@ app.post('/login', async (req, res)=>{
 
     const{user_id, password}=result.rows[0];
 
-    if(password!==inputpassword){
+    const match= await bcrypt.compare(inputpassword, password);
+    if(match===false){
       return res.status(401).json({message:'Login failed'})
+
     } else{
       res.cookie('user_id', user_id,{
         httpOnly:true,
         secure:false,
       });
-      if(email==="Zintasevents@gmail.com"){
+
+     if(email==="Zintasevents@gmail.com"){
         return res.json({message: 'manager'})
       }
       else{
