@@ -1,51 +1,49 @@
+//files which were imported
 const express=require('express');
 const cors=require('cors');
 const data=require('./db');
 const cookieparser = require('cookie-parser');
-
-console.log("Setting up app.js")
-
 const app=express();
-
 const bcrypt=require('bcrypt');
 
+//the ones this file will use.
 app.use(cors());
 app.use(cookieparser());
 app.use(express.json());
 
-app.post('/signup', async (req, res) => {
+console.log("Setting up app.js"); //testing whether the server is working.
+
+app.post('/signup', async (req, res) => { //for the signup page. 
   const{firstname, lastname, email, password, phonenumber}=req.body;
   const saltrounds=10;
-  const codedpassword= await bcrypt.hash(password, saltrounds);
+  const codedpassword= await bcrypt.hash(password, saltrounds); //hashes the password in order to cover up the password.
   const query='INSERT INTO users(first_name, last_name, email, password, phone_number) VALUES ($1,$2,$3,$4,$5)'
   const query1='INSERT INTO notifications(date, content) VALUES ($1, $2)'
   try{
-    const currentdate=new Date();
-    const result=await data.query(query, [firstname, lastname, email, codedpassword, phonenumber]);
+    const currentdate=new Date(); //generates the current date
+    const result=await data.query(query, [firstname, lastname, email, codedpassword, phonenumber]); //added a user to users database
     const result1=await data.query('SELECT user_id FROM users WHERE email=$1', [email]);
-    const {user_id}=result1.rows[0];
-    res.cookie('user_id', user_id,{
+    const {user_id}=result1.rows[0]; //extracts the user id from the result of query 1.
+    res.cookie('user_id', user_id,{ //sets up a cookie in order to establish a connection between server and browser. 
         httpOnly:true,
-        secure:false,
+        secure:false, //will be set to true when deployed.
     });
-    const result2=await data.query(query1, [currentdate, `${firstname} ${lastname} joined`]);
+    const result2=await data.query(query1, [currentdate, `${firstname} ${lastname} joined`]); //added a notification to notifications database
     res.json({message: 'User Added'})
-  } catch (err){
+  } catch (err){ //if there is an error
     console.error('Database Error', err);
     res.json({error: "Entry failed"})
   }
 });
 
-app.post('/login', async (req, res)=>{
+app.post('/login', async (req, res)=>{ //for the login page
   const {email, password:inputpassword}=req.body;
   try{
-    const result=await data.query('SELECT user_id, password FROM users WHERE email=$1', [email]);
-    if(result.rows.length==0){
+    const result=await data.query('SELECT user_id, password FROM users WHERE email=$1', [email]); //gets user_id and password from database
+    if(result.rows.length==0){ //added an if statement if there are no results.
       return res.status(401).json({message:"Your account doesn't exist"})
     }
-
     const{user_id, password}=result.rows[0];
-
     const match= await bcrypt.compare(inputpassword, password);
     if(match===false){
       return res.status(401).json({message:'Login failed'})
