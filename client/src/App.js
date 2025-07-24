@@ -1,3 +1,4 @@
+//Imported files
 import React from "react";
 import './App.css';
 import Home from './webpages/home';
@@ -10,12 +11,11 @@ import Mdashboard from "./webpages/mdashboard";
 import Userlist from "./webpages/userlist";
 import Upcomingevents from "./webpages/upevents";
 import Notifications from "./webpages/notifications";
-
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-
 
 function App() {
   return (
+    //Establish a route for each web page.
       <Router>
         <Routes>
           <Route path="/" element={<Home/>}/>
@@ -30,8 +30,10 @@ function App() {
           <Route path="/notifications" element={<Notifications/>}/>
         </Routes>
       </Router>
+      
   );
   
 }
 
+//Export App. 
 export default App;
