@@ -1,4 +1,4 @@
-//files which were imported
+//Imported files
 const express=require('express');
 const cors=require('cors');
 const data=require('./db');
@@ -6,32 +6,53 @@ const cookieparser = require('cookie-parser');
 const app=express();
 const bcrypt=require('bcrypt');
 
-//the ones this file will use.
+//Middleware setup.
 app.use(cors());
 app.use(cookieparser());
 app.use(express.json());
 
-console.log("Setting up app.js"); //testing whether the server is working.
+//Prints if the server works properly.
+console.log("Setting up app.js");
 
-app.post('/signup', async (req, res) => { //for the signup page. 
+//Route: Signup. 
+app.post('/signup', async (req, res) => {
+
+  //Extract the following from the body of the request.
   const{firstname, lastname, email, password, phonenumber}=req.body;
+
+  //Hash the password.
   const saltrounds=10;
-  const codedpassword= await bcrypt.hash(password, saltrounds); //hashes the password in order to cover up the password.
+  const codedpassword= await bcrypt.hash(password, saltrounds);
+
   const query='INSERT INTO users(first_name, last_name, email, password, phone_number) VALUES ($1,$2,$3,$4,$5)'
   const query1='INSERT INTO notifications(date, content) VALUES ($1, $2)'
+
   try{
-    const currentdate=new Date(); //generates the current date and time
-    const result=await data.query(query, [firstname, lastname, email, codedpassword, phonenumber]); //added a user to users database
+    //generate the current date and time
+    const currentdate=new Date()
+
+    //Add the user and the corresponding information to the database.
+    const result=await data.query(query, [firstname, lastname, email, codedpassword, phonenumber]);
+
+    //Get user id from the database based on email.
     const result1=await data.query('SELECT user_id FROM users WHERE email=$1', [email]);
-    const {user_id}=result1.rows[0]; //extracts the user id from the result of query 1.
-    res.cookie('user_id', user_id,{ //sets up a cookie in order to establish a connection between server and browser. The cookie stores the user_id.
+    const {user_id}=result1.rows[0];
+
+    //Set up a cookie using the user_id. 
+    res.cookie('user_id', user_id,{ 
         httpOnly:true,
         secure:false, //will be set to true when deployed.
     });
+
+    //Add the notification to the database
     const result2=await data.query(query1, [currentdate, `${firstname} ${lastname} joined`]); //added a notification to notifications database
+    
+    //Sends over the message to the frontend.
     res.json({message: 'User Added'})
-  } catch (err){ //if there is an error
-    console.error('Database Error', err);
+
+  } catch (err){
+    //Sends over the message to the frontend if there are Database Errors.
+    //console.error('Database Error', err);
     res.json({error: "Entry failed"})
   }
 });
