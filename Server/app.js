@@ -30,13 +30,13 @@ app.post('/signup', async (req, res) => {
   const query1='INSERT INTO notifications(date, content) VALUES ($1, $2)'
 
   try{
-    //Generate the current timestamp
+    //Generate the current timestamp for notification.
     const currentdate=new Date()
 
     //Insert user and the corresponding information to the database.
     const result=await data.query(query, [firstname, lastname, email, codedpassword, phonenumber]);
 
-    //Retrieve user id from the database based on email.
+    //Retrieve user id from the database based on email used for creating cookie.
     const result1=await data.query('SELECT user_id FROM users WHERE email=$1', [email]);
     const {user_id}=result1.rows[0];
 
@@ -54,7 +54,6 @@ app.post('/signup', async (req, res) => {
 
   } catch (err){
     //Send over the message to the frontend if there are Database Errors.
-    //console.error('Database Error', err);
     res.json({error: "Entry failed"})
   }
 });
@@ -68,7 +67,7 @@ app.post('/login', async (req, res)=>{
     //Retrieve user id and password from database based on email.
     const result=await data.query('SELECT user_id, password FROM users WHERE email=$1', [email]); //gets user_id and password from database
     
-    //Send this message to the frontennd if there are no results.
+    //Send this message to the frontend if there are no results.
     if(result.rows.length==0){
       return res.status(401).json({message:"Your account doesn't exist"})
     }
@@ -84,7 +83,7 @@ app.post('/login', async (req, res)=>{
       return res.status(401).json({message:'Login failed'})
 
     } else{
-      //Set up a cookie with user_id if the passwords match.
+      //Set up a secure cookie with user_id if the passwords match.
       res.cookie('user_id', user_id,{
         httpOnly:true,
         secure:false, //will be set to true when deployed. 
@@ -101,7 +100,6 @@ app.post('/login', async (req, res)=>{
   } catch(err){
     //Send this message to the frontend if there are any Database errors.
     res.json({error:"Database Error"});
-    //console.error("Database Error", err);
   }
 
 });
@@ -134,7 +132,7 @@ app.post('/deleteevent', async(req, res)=>{
   const {event_id}=req.body;
 
   try{
-    //Generate current Timestamp
+    //Generate current Timestamp for notification.
     const currentdate=new Date(); 
 
     //Retrieve user's full name from Database using user id.
@@ -188,7 +186,7 @@ app.post('/eventform', async(req, res)=>{
   const query1='INSERT INTO eventservice(event_id, service_id) VALUES ($1,$2)'
   
   try{
-    //Generate current Timestamp.
+    //Generate current Timestamp for notification.
     const currentdate=new Date();
 
     //Retrieve user's full name from the Database using user id.
@@ -292,7 +290,7 @@ app.post('/editform', async(req, res)=>{
   const query2='INSERT INTO eventservice(event_id, service_id) VALUES ($1, $2)'
 
   try{
-    //Generate the current Timestamp.
+    //Generate the current Timestamp for notification.
     const currentdate=new Date();
 
     //Retrieve the user's full name from the Database based on user id.
@@ -457,9 +455,9 @@ app.post('/getservicenames', async(req, res)=>{
   }
 })
 
-
+//Route: Home
 app.get('/', (req, res)=>{ 
-  console.log('Recieved GET /');
+  //Send the message to the frontend when the server starts.
   res.send("Hi. Welcome to our Zintas website");
 });
 
