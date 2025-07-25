@@ -89,7 +89,7 @@ function Userlist(){
     <div style={background}> 
     <div className="userlistpage">
 
-      {/* A back button. To go back to the manager dashboard. */}
+      {/* Back button to go back to the manager dashboard. */}
       <button onClick={()=>navigate('/mdashboard')} className="userbutton"> Back </button>
 
         <h1> Users </h1>
@@ -118,5 +118,4 @@ function Userlist(){
   )
 }
 
-//Export the Userlist page.
 export default Userlist;

@@ -1,8 +1,10 @@
+//Imported files
 import React, {useEffect, useState} from "react";
 import './upevents.css';
 import logo from '../Zintaslogo.png';
 import {useNavigate} from "react-router-dom";
 
+//Webpage background settings
 const background={
   backgroundImage:`url(${logo})`,
   backgroundRepeat:'no-repeat',
@@ -18,7 +20,8 @@ function Upcomingevents(){
   const [services, setservices]=useState([]);
   const [userinfo, setuserinfo]=useState([]);
   const [eventdate, seteventdate]=useState('');
-  //maxheight: '90vh',
+
+  //Popup settings
   const popup={
     position:'fixed',
     backgroundColor: '#C5FAA8',
@@ -29,7 +32,10 @@ function Upcomingevents(){
     transform: 'translate(-50%, -90%)'
   }
 
+  //Retrieve the list of events
   async function getevents(){
+
+    //Send a HTTP GET server request to server.
     const response=await fetch('/getevents', {
       method: 'GET',
       headers: {
@@ -37,15 +43,22 @@ function Upcomingevents(){
       },
       credentials:'include'
     })
+
+    //Retrieve the message from server.
     const result=await response.json();
-    console.log(result);
     setdata(result);
+
   }
 
+  //Retrieve the event information
   async function geteventinfo(eventid){
+
+    //Form the body of request
     const info={
       eventid:eventid
     }
+
+    //Send a HTTP POST server request to server.
     const response=await fetch('/geteventinfo', {
       method:'POST',
       headers:{
@@ -55,9 +68,12 @@ function Upcomingevents(){
       body:JSON.stringify(info)
     })
 
+    //Retrieve the result from server.
     const result=await response.json();
-    console.log(result);
     seteventinfo(result);
+
+    //Make the Date and Time format of event readable.
+    //Set the readable version as the event date and time.
     if(result.event_datetime){
       const date = new Date(result.event_datetime);
       const formatted = date.toLocaleString('en-US',{
@@ -68,17 +84,20 @@ function Upcomingevents(){
         minute: '2-digit',
         hour12: true
       });
-      console.log(formatted);
       seteventdate(formatted);
     } else{
       seteventdate('');
     }
   }
 
+  //Retrieve user's information
   async function getuserinfo(userid){
+    //Form the body of request
     const info={
       userid:userid
     }
+
+    //Send HTTP POST server request to server.
     const response=await fetch('/getuserinfo', {
       method:'POST',
       headers:{
@@ -88,15 +107,20 @@ function Upcomingevents(){
       body:JSON.stringify(info)
     })
 
+    //Retrieve message from server.
     const result=await response.json();
-    console.log(result);
     setuserinfo(result);
+
   }
 
+  //Retrieve the event's list of services.
   async function getservicedata(eventid){
+    //Form body of request
     const info={
       eventid:eventid
     }
+
+    //Send HTTP POST server request to server.
     const response=await fetch('/getservicenames', {
       method: 'POST',
       headers: {
@@ -106,17 +130,19 @@ function Upcomingevents(){
       body: JSON.stringify(info)
     })
 
+    //Retrieve message from server.
     const result=await response.json();
-    console.log(result);
     setservices(result);
+
   }
 
-
-
+  //Call function once the manager gets to the webpage.
+  //Do this once.
   useEffect(()=>{
     getevents();
   }, []);
 
+  //Call the following functions after manager clicks on the event. 
   function afterclick(userid, eventid){
     geteventinfo(eventid);
     getservicedata(eventid);
@@ -127,14 +153,18 @@ function Upcomingevents(){
   return(
     <div style={background}>
       <div className="upeventspage">
+        {/* Back button to go back to manager dashboard */}
         <button onClick={()=>navigate('/mdashboard')} className="upbutton"> Back </button>
         <h1> Upcoming Events </h1>
+        {/* Print out the list of events */}
         <ul>
           {data.map((event, index)=>(
             <li onClick={()=>afterclick(event.user_id, event.event_id)}className="upevent" key={index}>{event.name}
             </li>
           ))}
         </ul>
+
+        {/* Popup after the manager clicks on the event name */}
         {selected && (
           <div style={popup}>
             <button className="upbutton" onClick={()=>setselected(false)}> Back </button>
