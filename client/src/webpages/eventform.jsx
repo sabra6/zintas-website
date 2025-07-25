@@ -54,41 +54,45 @@ function Eventform(){
 
   //Send event information to the backend.
   async function sendinfo(){
+    //Check whether the user filled all the information.
+    if(eventname.trim()===''|| eventkind.trim()===''|| eventdatetime.trim()===''|| venueaddress.trim()===''|| numattendees.trim()===''||colortheme.trim()===''||itemslist.trim()===''){
+      alert("Make sure to fill all the information")
+    } else{
+      //Form the list of services the user selected.
+      const selectedservices=Object.entries(sservices)
+        .filter(([sid, checked]) => checked)
+        .map(([sid])=> Number(sid));
 
-    //Form the list of services the user selected.
-    const selectedservices=Object.entries(sservices)
-      .filter(([sid, checked]) => checked)
-      .map(([sid])=> Number(sid));
+      //Form the body of the request.
+      const info={
+        eventname:eventname,
+        eventkind:eventkind,
+        eventdatetime:eventdatetime,
+        venueaddress:venueaddress,
+        numattendees:numattendees,
+        colortheme:colortheme,
+        itemslist:itemslist,
+        services:selectedservices,
+      };
 
-    //Form the body of the request.
-    const info={
-      eventname:eventname,
-      eventkind:eventkind,
-      eventdatetime:eventdatetime,
-      venueaddress:venueaddress,
-      numattendees:numattendees,
-      colortheme:colortheme,
-      itemslist:itemslist,
-      services:selectedservices,
-    };
-
-    //Send HTTP POST server request to backend.
-    const response=await fetch('/eventform',{
-      method: 'POST',
-      headers: {
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify(info)
-    });
+      //Send HTTP POST server request to backend.
+      const response=await fetch('/eventform',{
+        method: 'POST',
+        headers: {
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify(info)
+      });
     
-    //Retrieve the message from backend.
-    const data=await response.json();
+      //Retrieve the message from backend.
+      const data=await response.json();
 
-    //Print out the message sent by backend.
-    alert(data.message);
+      //Print out the message sent by backend.
+      alert(data.message);
 
     //Go back to Dashboard.
-    navigate('/dashboard');
+      navigate('/dashboard');
+    }
 
   }
 

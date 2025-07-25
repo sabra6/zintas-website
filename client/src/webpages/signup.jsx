@@ -22,31 +22,37 @@ function Signup(){
 
   //Send user's entered information to backend.
   async function sendinfo(){
-    //Form the body of request
-    const info={
-      firstname:firstname,
-      lastname:lastname,
-      email:email,
-      password:password,
-      phonenumber:phonenumber,
-    };
+    //Check whether the user filled all the information.
+    if(firstname.trim()==='' || lastname.trim()==='' || email.trim()==='' || password.trim()==='' || phonenumber.trim()===''){
+      alert("Make sure to fill all the information.");
+    } else{
+      //Form the body of request
+      const info={
+        firstname:firstname,
+        lastname:lastname,
+        email:email,
+        password:password,
+        phonenumber:phonenumber,
+      };
 
-    //Send HTTP POST server request to backend.
-    const response=await fetch('/signup', {
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      credentials:'include',
-      body:JSON.stringify(info)
-    });
+      //Send HTTP POST server request to backend.
+      const response=await fetch('/signup', {
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        credentials:'include',
+        body:JSON.stringify(info)
+      });
 
-    //Retrieve message from server.
-    const result=await response.json();
+      //Retrieve message from server.
+      const result=await response.json();
 
-    //Go to Dashboard after signing up.
-    navigate('/dashboard');
+      //Go to Dashboard after signing up.
+      navigate('/dashboard');
 
+    }
+    
   }
 
   

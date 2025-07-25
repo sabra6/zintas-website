@@ -116,43 +116,47 @@ useEffect(()=>{
 
   //Edit event info
   async function editevents(){
+    //Check whether the user filled all the information
+    if(eventname.trim()===''|| eventkind.trim()===''|| eventdatetime.trim()===''|| venueaddress.trim()===''|| numattendees===''||colortheme.trim()===''||itemslist.trim()===''){
+      alert("Make sure to fill all the information")
+    } else{
+      //Form the list of services the user selected for the event.
+      const selectedservices=Object.entries(sservices)
+        .filter(([sid, checked]) => checked)
+        .map(([sid])=> Number(sid));
 
-    //Form the list of services the user selected for the event.
-    const selectedservices=Object.entries(sservices)
-      .filter(([sid, checked]) => checked)
-      .map(([sid])=> Number(sid));
+      //Form the body of the request.
+      const info={
+        event_id:event_id, 
+        eventname:eventname,
+        eventkind:eventkind,
+        eventdatetime:eventdatetime,
+        venueaddress:venueaddress,
+        numattendees:numattendees,
+        colortheme:colortheme,
+        itemslist:itemslist,
+        services:selectedservices,
+      }
 
-    //Form the body of the request.
-    const info={
-      event_id:event_id, 
-      eventname:eventname,
-      eventkind:eventkind,
-      eventdatetime:eventdatetime,
-      venueaddress:venueaddress,
-      numattendees:numattendees,
-      colortheme:colortheme,
-      itemslist:itemslist,
-      services:selectedservices,
+      //Send HTTP POST server request to backend.
+      const response=await fetch('/editform', {
+        method:'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials:'include',
+        body: JSON.stringify(info)
+      });
+
+      //Retrieve the message from backend.
+      const result= await response.json();
+
+      //Print out the message from backend.
+      alert(result.message)
+
+      //Go to Dashboard.
+      navigate('/dashboard');
     }
-
-    //Send HTTP POST server request to backend.
-    const response=await fetch('/editform', {
-      method:'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      credentials:'include',
-      body: JSON.stringify(info)
-    });
-
-    //Retrieve the message from backend.
-    const result= await response.json();
-
-    //Print out the message from backend.
-    alert(result.message)
-
-    //Go to Dashboard.
-    navigate('/dashboard');
 
   }
 
