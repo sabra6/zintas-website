@@ -56,7 +56,7 @@ function Eventform(){
   async function sendinfo(){
     //Check whether the user filled all the information.
     if(eventname.trim()===''|| eventkind.trim()===''|| eventdatetime.trim()===''|| venueaddress.trim()===''|| numattendees.trim()===''||colortheme.trim()===''||itemslist.trim()===''){
-      alert("Make sure to fill all the information")
+      alert("Make sure to fill in all the information")
     } else{
       //Form the list of services the user selected.
       const selectedservices=Object.entries(sservices)

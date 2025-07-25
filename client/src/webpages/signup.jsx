@@ -24,7 +24,7 @@ function Signup(){
   async function sendinfo(){
     //Check whether the user filled all the information.
     if(firstname.trim()==='' || lastname.trim()==='' || email.trim()==='' || password.trim()==='' || phonenumber.trim()===''){
-      alert("Make sure to fill all the information.");
+      alert("Make sure to fill in all the information.");
     } else{
       //Form the body of request
       const info={
