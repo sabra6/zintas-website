@@ -1,3 +1,4 @@
+//Imported files
 import React from "react";
 import './home.css';
 import {useNavigate} from "react-router-dom";
@@ -17,6 +18,7 @@ import pic4 from "../pic4decor.jpg";
 import pic5 from "../pic5decor.jpg";
 import pic6 from "../pic6decor.jpg";
 
+//Image slides settings and formatting
 function Imageslides(){
   const imageslist=[pic1, pic2, pic3, pic4, pic5, pic6];
   const settings={ 
@@ -49,39 +51,45 @@ function Home(){
         <img src={logo} className="companylogo"></img>
       </div>
       
+      {/* Display Images Slide */}
       <Imageslides/>
 
+      {/* Displaying info about company */}
       <div className="informationbox">
         <p> We are professional event organizers, serving the Dallas Area, committed to helping you create a great and extraordinary event decor! <br /> <br /> <br />Sign up and book your event now! <br /> <br /> <br /> Contact Brayen Mathai and Sintu Brayen if you have any questions!
         </p>
         <img src={picture} className="imagestyle"></img>
 
+        {/* Displaying contact info and social media info about company */}
         <div className="firstrow">
-        <div className="socialmedia">
-        <img src={slogo} className="otherlogos"></img>
-        <p className="socialinfotext">Zintas Events and Rentals</p>
+          <div className="socialmedia">
+            <img src={slogo} className="otherlogos"></img>
+            <p className="socialinfotext">Zintas Events and Rentals</p>
         </div>
         <div className="socialmedia">
-        <img src={elogo} className="otherlogos"></img>
-        <p className="socialinfotext">Zintasevents@gmail.com</p>
+          <img src={elogo} className="otherlogos"></img>
+          <p className="socialinfotext">Zintasevents@gmail.com</p>
         </div>
         </div>
         <div className="secondrow">
-        <div className="socialmedia">
-        <img src={inlogo} className="otherlogos"></img>
-        <p className="socialinfotext">zintasevents</p>
+          <div className="socialmedia">
+            <img src={inlogo} className="otherlogos"></img>
+            <p className="socialinfotext">zintasevents</p>
+          </div>
+          <div className="socialmedia">
+            <img src={plogo} className="otherlogos"></img>
+          <p className="socialinfotext">214-940-0358</p>
+          </div>
         </div>
-        <div className="socialmedia">
-        <img src={plogo} className="otherlogos"></img>
-        <p className="socialinfotext">214-940-0358</p>
-        </div>
-        </div>
-
       </div>
+
       <div className="homebuttonbox">
+            {/* Sign up button to go to sign up page */}
             <button onClick={() => navigate('/signup')} className="homebutton">Sign up</button>
+            
+            {/* Log in button to go Login page */}
             <button onClick={()=>navigate('/login')} className="homebutton">Log in</button>
-        </div>
+      </div>
 
     </div>
   )
