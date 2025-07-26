@@ -1,10 +1,10 @@
 //Imported files
-import React, {useState} from "react";
+import {useState} from "react";
 import './signup.css';
 import logo from '../Zintaslogo.png';
 import {useNavigate} from "react-router-dom";
 
-//Website background settings
+//Signup background settings
 const background={
   backgroundImage:`url(${logo})`,
   backgroundRepeat:'no-repeat',
@@ -14,19 +14,29 @@ const background={
 
 function Signup(){
   const navigate=useNavigate();
+
+  //State to store user's first name
   const [firstname, setfirstname]=useState('');
+
+  //State to store user's last name
   const [lastname, setlastname]=useState('');
+
+  //State to store user's email
   const [email, setemail]=useState('');
+
+  //State to store user's password
   const [password, setpassword]=useState('');
+  
+  //State to store user's phone number
   const [phonenumber, setphonenumber]=useState('');
 
-  //Send user's entered information to backend.
+  //Send user's entered information to backend
   async function sendinfo(){
     //Check whether the user filled all the information.
     if(firstname.trim()==='' || lastname.trim()==='' || email.trim()==='' || password.trim()==='' || phonenumber.trim()===''){
       alert("Make sure to fill in all the information.");
     } else{
-      //Form the body of request
+      //Create the body of request
       const info={
         firstname:firstname,
         lastname:lastname,
@@ -35,7 +45,7 @@ function Signup(){
         phonenumber:phonenumber,
       };
 
-      //Send HTTP POST server request to backend.
+      //Send a POST request to backend to add the user and corresponding info to database.
       const response=await fetch('/signup', {
         method:'POST',
         headers:{
@@ -48,7 +58,7 @@ function Signup(){
       //Retrieve message from server.
       const result=await response.json();
 
-      //Go to Dashboard after signing up.
+      //Navigate to Dashboard.
       navigate('/dashboard');
 
     }
@@ -60,7 +70,7 @@ function Signup(){
     <div style={background}>
       <div className="signupbackground">
 
-        {/* Back button for going back to home page. */}
+        {/* Back button to navigate to home page. */}
         <button onClick={()=>navigate('/')}className="signupbutton"> Back </button>
         <h1 className="title">Create your Account</h1>
 

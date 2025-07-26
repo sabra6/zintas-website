@@ -1,5 +1,4 @@
 //Imported files
-import React from "react";
 import './home.css';
 import {useNavigate} from "react-router-dom";
 import logo from "../Zintaslogo.png";
@@ -54,13 +53,13 @@ function Home(){
       {/* Display Images Slide */}
       <Imageslides/>
 
-      {/* Displaying info about company */}
+      {/* Display info about company */}
       <div className="informationbox">
         <p> We are professional event organizers, serving the Dallas Area, committed to helping you create a great and extraordinary event decor! <br /> <br /> <br />Sign up and book your event now! <br /> <br /> <br /> Contact Brayen Mathai and Sintu Brayen if you have any questions!
         </p>
         <img src={picture} className="imagestyle"></img>
 
-        {/* Displaying contact info and social media info about company */}
+        {/* Display social media info and contact info about company */}
         <div className="firstrow">
           <div className="socialmedia">
             <img src={slogo} className="otherlogos"></img>
@@ -84,10 +83,10 @@ function Home(){
       </div>
 
       <div className="homebuttonbox">
-            {/* Sign up button to go to sign up page */}
+            {/* Sign up button to navigate to sign up page */}
             <button onClick={() => navigate('/signup')} className="homebutton">Sign up</button>
             
-            {/* Log in button to go Login page */}
+            {/* Log in button to navigate to login page */}
             <button onClick={()=>navigate('/login')} className="homebutton">Log in</button>
       </div>
 

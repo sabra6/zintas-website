@@ -1,10 +1,10 @@
 //Imported files
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import './eventform.css';
 import logo from '../Zintaslogo.png';
 import { useNavigate } from "react-router-dom";
 
-//Webpage background settings
+//Eventform background settings
 const background={
   backgroundImage:`url(${logo})`,
   backgroundRepeat:'no-repeat',
@@ -14,21 +14,39 @@ const background={
 
 function Eventform(){
   const navigate=useNavigate();
+
+  //State to store the eventname
   const [eventname, seteventname]=useState('');
+
+  //State to store the kind of event
   const [eventkind, seteventkind]=useState('');
+
+  //State to store the date and time of event
   const [eventdatetime, seteventdatetime]=useState('');
+
+  //State to store the address of event
   const [venueaddress, setvenueaddress]=useState('');
+
+  //State to store the number of attendees
   const [numattendees, setnumattendees]=useState('');
+
+  //State to store the color theme
   const [colortheme, setcolortheme]=useState('');
+
+  //State to store the list of items
   const [itemslist, setitemslist]=useState('');
+
+  //State to store the list of services.
   const [sservices, setsservices]=useState({});
+
+  //State to store the list of services the user chose for the event.
   const [services, setservices]=useState([]);
 
   //Call getservices function when the user gets to this webpage.
   useEffect(()=>{
-  //Retrieve the list of services.
+  //Retrieve the list of services from the backend.
   async function getservices(){
-    //Send HTTP GET server request to backend.
+    //Send GET server request to backend to retrieve the list of services.
     const response=await fetch('/getadditional',{
       method:'GET',
       headers: {
@@ -37,7 +55,7 @@ function Eventform(){
       credentials: 'include'
     });
 
-    //Retrieve message from backend.
+    //Retrieve the list of services from backend and update the state.
     const data=await response.json();
     setservices(data);
 
@@ -63,7 +81,7 @@ function Eventform(){
         .filter(([sid, checked]) => checked)
         .map(([sid])=> Number(sid));
 
-      //Form the body of the request.
+      //Create the body of the request.
       const info={
         eventname:eventname,
         eventkind:eventkind,
@@ -75,7 +93,7 @@ function Eventform(){
         services:selectedservices,
       };
 
-      //Send HTTP POST server request to backend.
+      //Send a POST request to backend to add event and the corresponding info to database.
       const response=await fetch('/eventform',{
         method: 'POST',
         headers: {
@@ -90,7 +108,7 @@ function Eventform(){
       //Print out the message sent by backend.
       alert(data.message);
 
-    //Go back to Dashboard.
+      //Navigate to Dashboard.
       navigate('/dashboard');
     }
 

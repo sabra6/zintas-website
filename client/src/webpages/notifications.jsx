@@ -1,10 +1,10 @@
 //Imported files
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import './notifications.css';
 import logo from '../Zintaslogo.png';
 import {useNavigate} from "react-router-dom";
 
-//Webpage background settings
+//Notifications background settings
 const background={
   backgroundImage:`url(${logo})`,
   backgroundRepeat:'no-repeat',
@@ -18,7 +18,7 @@ function Notifications(){
 
     //Retrieve the list of notifications
     async function getnotifications(){
-        //Send HTTP GET server request to backend
+        //Send a GET server request to backend to retrieve notifications from database.
         const response=await fetch('/notifications', {
             method: 'GET',
             headers: {
@@ -27,7 +27,7 @@ function Notifications(){
             credentials: 'include'
         })
 
-        //Retrieve the message from backend.
+        //Retrieve the list of notifications from backend and update the state.
         const result=await response.json();
         setdata(result);
 
@@ -42,7 +42,7 @@ function Notifications(){
         <div style={background}>
             <div className="notificationspage">
 
-                {/* Back button to go back to manager dashboard */}
+                {/* Back button to navigate to manager dashboard */}
                 <button className="notifbutton" onClick={()=>navigate('/mdashboard')}>Back</button>
 
                 <h1> Notifications </h1>

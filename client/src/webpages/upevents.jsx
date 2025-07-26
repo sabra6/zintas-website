@@ -1,10 +1,10 @@
 //Imported files
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import './upevents.css';
 import logo from '../Zintaslogo.png';
 import {useNavigate} from "react-router-dom";
 
-//Webpage background settings
+//Upevents background settings
 const background={
   backgroundImage:`url(${logo})`,
   backgroundRepeat:'no-repeat',
@@ -14,11 +14,23 @@ const background={
 
 function Upcomingevents(){
   const navigate=useNavigate();
+
+  //State to store list of events
   const [data, setdata]=useState([]);
+
+  //State to store the state of whether the user clicked on the event or not
   const [selected, setselected]=useState(false);
+
+  //State to store event information
   const [eventinfo, seteventinfo]=useState([]);
+
+  //State to store the list of services
   const [services, setservices]=useState([]);
+
+  //State to store user information
   const [userinfo, setuserinfo]=useState([]);
+
+  //State to store the event date and time
   const [eventdate, seteventdate]=useState('');
 
   //Popup settings
@@ -32,10 +44,10 @@ function Upcomingevents(){
     transform: 'translate(-50%, -90%)'
   }
 
-  //Retrieve the list of events
+  //Retrieve the list of events from backend
   async function getevents(){
 
-    //Send a HTTP GET server request to server.
+    //Send a GET request to backend to retrieve the list of events.
     const response=await fetch('/getevents', {
       method: 'GET',
       headers: {
@@ -44,21 +56,21 @@ function Upcomingevents(){
       credentials:'include'
     })
 
-    //Retrieve the message from server.
+    //Retrieve the list of events from backend and update the state.
     const result=await response.json();
     setdata(result);
 
   }
 
-  //Retrieve the event information
+  //Retrieve the event information from backend.
   async function geteventinfo(eventid){
 
-    //Form the body of request
+    //Create the body of request
     const info={
       eventid:eventid
     }
 
-    //Send a HTTP POST server request to server.
+    //Send a POST request to backend to retrieve corresponding event information.
     const response=await fetch('/geteventinfo', {
       method:'POST',
       headers:{
@@ -68,12 +80,11 @@ function Upcomingevents(){
       body:JSON.stringify(info)
     })
 
-    //Retrieve the result from server.
+    //Retrieve the event information from backend and update state.
     const result=await response.json();
     seteventinfo(result);
 
-    //Make the Date and Time format of event readable.
-    //Set the readable version as the event date and time.
+    //Make the Date and Time format of event readable and update state.
     if(result.event_datetime){
       const date = new Date(result.event_datetime);
       const formatted = date.toLocaleString('en-US',{
@@ -90,14 +101,14 @@ function Upcomingevents(){
     }
   }
 
-  //Retrieve user's information
+  //Retrieve user's information from backend
   async function getuserinfo(userid){
-    //Form the body of request
+    //Create the body of request
     const info={
       userid:userid
     }
 
-    //Send HTTP POST server request to server.
+    //Send POST request from backend to retrieve user information
     const response=await fetch('/getuserinfo', {
       method:'POST',
       headers:{
@@ -107,20 +118,20 @@ function Upcomingevents(){
       body:JSON.stringify(info)
     })
 
-    //Retrieve message from server.
+    //Retrieve user information from backend and update state
     const result=await response.json();
     setuserinfo(result);
 
   }
 
-  //Retrieve the event's list of services.
+  //Retrieve the event's list of services from backend.
   async function getservicedata(eventid){
-    //Form body of request
+    //Create body of request
     const info={
       eventid:eventid
     }
 
-    //Send HTTP POST server request to server.
+    //Send a POST request to backend to retrieve the list of services selected for this event.
     const response=await fetch('/getservicenames', {
       method: 'POST',
       headers: {
@@ -130,7 +141,7 @@ function Upcomingevents(){
       body: JSON.stringify(info)
     })
 
-    //Retrieve message from server.
+    //Retrieve list of services selected for event and update state.
     const result=await response.json();
     setservices(result);
 
@@ -153,10 +164,10 @@ function Upcomingevents(){
   return(
     <div style={background}>
       <div className="upeventspage">
-        {/* Back button to go back to manager dashboard */}
+        {/* Back button to navigate to manager dashboard */}
         <button onClick={()=>navigate('/mdashboard')} className="upbutton"> Back </button>
         <h1> Upcoming Events </h1>
-        {/* Print out the list of events */}
+        {/* Display the list of events */}
         <ul>
           {data.map((event, index)=>(
             <li onClick={()=>afterclick(event.user_id, event.event_id)}className="upevent" key={index}>{event.name}

@@ -1,10 +1,10 @@
 //Imported files
-import React, {useState} from "react";
+import {useState} from "react";
 import './login.css';
 import logo from '../Zintaslogo.png';
 import {useNavigate} from "react-router-dom";
 
-//Webpage background settings
+//Login background settings
 const background={
   backgroundImage:`url(${logo})`,
   backgroundRepeat:'no-repeat',
@@ -14,22 +14,26 @@ const background={
 
 function Login(){
  const navigate=useNavigate();
+
+ //State to store the email
  const [email, setemail]=useState('');
+ 
+ //State to store the password
  const [password, setpassword]=useState('');
  
- //Send the entered login info to backend to determine if there is a match with database.
+ //Send the entered login info to backend to determine accuracy.
  async function ismatch(){
     //Make sure the user doesn't leave blanks.
     if(email.trim()==='' || password.trim()===''){
       alert('Make sure to fill in all the information');
     } else{
-      //Form the body of request.
+      //Create the body of request.
       const info={
         email:email,
         password:password,
       }
 
-      //Send the HTTP POST server request to backend.
+      //Send a POST request to backend to determine login information accuracy.
       const result= await fetch(`/login`,{
         method:'POST',
         headers:{
@@ -39,7 +43,7 @@ function Login(){
         body: JSON.stringify(info)
       });
 
-      //Retrieve the message from backend.
+      //Retrieve the message from the backend.
       const data=await result.json()
 
       //Depending on the message from the backend, the user will either go to dashboard, go to manager dashboard, or recieve an alert.

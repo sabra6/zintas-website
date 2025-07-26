@@ -1,5 +1,5 @@
 //Imported files
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import './dashboard.css';
 import logo from '../Zintaslogo.png';
 import {useNavigate} from "react-router-dom";
@@ -28,7 +28,7 @@ function Dashboard(){
     credentials:'include',
     })
 
-    //Extract the list of events from backend and update data with list.
+    //Extract the list of events from backend and update state with list.
     const result=await response.json();
     setdata(result.eventinfo);
 
@@ -39,14 +39,14 @@ function Dashboard(){
     getinfo();
   }, []);
 
-  //Delete event
+  //Delete an event
   async function deleteevent(event_id){
-    //Form body of request
+    //Create body of request
     const info={
       event_id:event_id
     }
 
-    //Send HTTP POST request to backend.
+    //Send POST request to backend to delete event from database.
     const response=await fetch('/deleteevent', {
       method: 'POST',
       headers:{
@@ -56,7 +56,7 @@ function Dashboard(){
       body:JSON.stringify(info)
     });
 
-    //Retrieve the message from backend.
+    //Extract the message from backend.
     const result=await response.json();
 
     //Call getinfo function
@@ -66,7 +66,6 @@ function Dashboard(){
 
   //Logout the user
   async function logout(){
-
     //Send the HTTP POST server request to backend.
     const response=await fetch('/logout', {
       method:'POST', 
