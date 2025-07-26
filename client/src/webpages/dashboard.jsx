@@ -4,7 +4,7 @@ import './dashboard.css';
 import logo from '../Zintaslogo.png';
 import {useNavigate} from "react-router-dom";
 
-//Webpage background settings
+//Dashboard background settings
 const background={
   backgroundImage:`url(${logo})`,
   backgroundRepeat:'no-repeat',
@@ -14,13 +14,12 @@ const background={
 
 
 function Dashboard(){
-
+  //State to store the list of events the user booked
   const [data, setdata]=useState([]);
 
-  //Retrieve the list of events the user booked.
+  //Retrieve the list of events the user booked from the backend
   async function getinfo(){
-
-    //Send HTTP POST server request to backend.
+    //Send POST server request to backend to retrieve the list of events
     const response= await fetch('/dashboard',{
     method:'POST',
     headers:{
@@ -29,7 +28,7 @@ function Dashboard(){
     credentials:'include',
     })
 
-    //Retrieve the message from backend.
+    //Extract the list of events from backend and update data with list.
     const result=await response.json();
     setdata(result.eventinfo);
 
@@ -94,11 +93,11 @@ function Dashboard(){
       <div className="dashboardpage">
         <div className="topbuttonbox">
 
-          {/* Log Out button to call logout functions */}
+          {/* Log Out button to call logout function */}
           <button onClick={logout} className="dashbutton"> Log Out </button>
           <h1> Dashboard </h1>
 
-          {/* Book an Event button to go eventform page. */}
+          {/* Book an Event button to navigate to eventform page. */}
           <button onClick={()=> navigate('/eventform')} className="dashbutton"> Book an Event </button>
 
         </div>
@@ -109,7 +108,7 @@ function Dashboard(){
           <p> To make edits to your event, click "Edit". To delete your event, click "Delete".</p>
         </div>
 
-        {/* Print out the list of events the user booked. */}
+        {/* Display the list of events the user booked. */}
         <ul>
           {data.map((event, index)=>(
             <li className="event" key={index}>{event.name}
@@ -118,7 +117,7 @@ function Dashboard(){
                 {/* Delete button to delete the event */}
                 <button className="dbutton"onClick={()=>deleteevent(event.event_id)}> Delete </button>
 
-                {/* Edit button to edit the event details */}
+                {/* Edit button to navigate to editform page */}
                 <button className="dbutton" onClick={()=>navigate(`/editform/${event.event_id}`)}> Edit </button>
                 
               </div>
