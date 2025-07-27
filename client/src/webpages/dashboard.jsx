@@ -12,14 +12,13 @@ const background={
   backgroundPosition:'center'
 };
 
-
 function Dashboard(){
   //State to store the list of events the user booked
   const [data, setdata]=useState([]);
 
   //Retrieve the list of events the user booked from the backend
   async function getinfo(){
-    //Send POST server request to backend to retrieve the list of events
+    //Send a POST request to backend to retrieve the list of events
     const response= await fetch('/dashboard',{
     method:'POST',
     headers:{
@@ -28,25 +27,25 @@ function Dashboard(){
     credentials:'include',
     })
 
-    //Extract the list of events from backend and update state with list.
+    //Retrieve the list of events from backend and update state
     const result=await response.json();
     setdata(result.eventinfo);
 
   }
 
-  //Call getinfo function when the user gets to this webpage.
+  //Call getinfo function when the user gets to this webpage
   useEffect(()=>{
     getinfo();
   }, []);
 
   //Delete an event
   async function deleteevent(event_id){
-    //Create body of request
+    //Create the body of request
     const info={
       event_id:event_id
     }
 
-    //Send POST request to backend to delete event from database.
+    //Send a POST request to backend to delete event from database
     const response=await fetch('/deleteevent', {
       method: 'POST',
       headers:{
@@ -56,17 +55,17 @@ function Dashboard(){
       body:JSON.stringify(info)
     });
 
-    //Extract the message from backend.
+    //Retrieve the message from backend
     const result=await response.json();
 
-    //Call getinfo function
+    //Call getinfo function to update Dashboard
     getinfo();
 
   }
 
   //Logout the user
   async function logout(){
-    //Send the HTTP POST server request to backend.
+    //Send a POST request to backend to delete cookie
     const response=await fetch('/logout', {
       method:'POST', 
       headers:{
@@ -75,18 +74,20 @@ function Dashboard(){
       credentials:'include',
     })
 
-    //Retrieve the message from backend.
+    //Retrieve the message from backend
     const result=await response.json();
 
-    //Print the message from backend.
+    //Print the message from backend
     alert(result.message);
 
-    //Go to homepage.
+    //Navigate to homepage
     navigate('/');
 
   }
 
+  //Hook to navigate to a different webpage
   const navigate=useNavigate();
+
   return(
     <div style={background}>
       <div className="dashboardpage">
@@ -113,7 +114,7 @@ function Dashboard(){
             <li className="event" key={index}>{event.name}
               <div className="dbuttonbox">
 
-                {/* Delete button to delete the event */}
+                {/* Delete button to call deleteevent function */}
                 <button className="dbutton"onClick={()=>deleteevent(event.event_id)}> Delete </button>
 
                 {/* Edit button to navigate to editform page */}

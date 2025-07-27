@@ -11,11 +11,13 @@ const background={
     backgroundRepeat:'no-repeat',
     backgroundSize:'cover',
     backgroundPosition:'center'
-  };
+};
 
 function Editform(){
-  //Extract event id from the parameter
+  //Extract the event id from the route parameter
   const {event_id}=useParams();
+
+  //Hook to navigate to a different webpage
   const navigate=useNavigate();
 
   //State to store the eventname
@@ -39,17 +41,17 @@ function Editform(){
   //State to store the list of items
   const [itemslist, setitemslist]=useState('');
 
-  //State to store the list of services.
+  //State to store the list of services the user chose for the event
   const [sservices, setsservices]=useState({});
 
-  //State to store the list of services the user chose for the event.
+  //State to store the list of services
   const [services, setservices]=useState([]);
 
-  //Call getservices and geteventdata functions when the user gets to this webpage.
+  //Call getservices and geteventdata functions when the user gets to this webpage
   useEffect(()=>{
-    //Retrieve the list of services and selectedservices(which the user chose for the event) from the backend
+    //Retrieve the list of services and selectedservices (which the user chose for the event) from the backend
     async function getservices(){
-      //Send GET server request to backend to retrieve the list of services.
+      //Send a GET request to backend to retrieve the list of services
       const response=await fetch('/getadditional',{
         method:'GET',
         headers: {
@@ -58,12 +60,12 @@ function Editform(){
         credentials: 'include'
       });
 
-      //Form body of request.
+      //Create the body of request
       const info={
         event_id:event_id,
       }
 
-      //Send POST request to backend to retrieve the list of services the user chose.
+      //Send a POST request to backend to retrieve the list of services the user chose
       const response1=await fetch('/getservicedata', {
         method: 'POST',
         headers: {
@@ -73,13 +75,16 @@ function Editform(){
         body: JSON.stringify(info)
       })
 
-      //Retrieve the list of services from backend. Then store the list in a State services.
+      //Retrieve the list of services from backend
       const data=await response.json();
-      //Retrieve the list of services(selected by user) from backend.
+
+      //Retrieve the list of services (selected by user) from backend
       const data1=await response1.json();
+
+      //Update the state
       setservices(data);
 
-      //Set up the list of services the user selected and store the list in sservices
+      //Set up the list of services the user selected and update state
       const selected={};
       const selectedservices=data1.map(element=>element.service_id);
       data.forEach(service=>{
@@ -91,12 +96,12 @@ function Editform(){
 
     //Retrieve event data
     async function geteventdata(){
-      //Form body of request.
+      //Create the body of request
       const info={
         event_id:event_id,
       }
 
-      //Send a POST request to backend to retrieve event info.
+      //Send a POST request to backend to retrieve event information
       const response=await fetch('/geteventdata', {
         method: 'POST',
         headers: {
@@ -106,10 +111,10 @@ function Editform(){
         body: JSON.stringify(info)
       })
 
-      //Extract event information from backend.
+      //Retrieve event information from backend
       const data=await response.json();
     
-      //Make the date more readable.
+      //Make the date more readable and update state
       if(data.event_datetime){
         const date = new Date(data.event_datetime);
         const formatted = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
@@ -120,7 +125,7 @@ function Editform(){
         seteventdatetime('');
       }
 
-      //Extract each part of the extracted event info and update the corresponding states.
+      //Update the states
       seteventname(data.name);
       seteventkind(data.kind);
       setvenueaddress(data.address);
@@ -146,7 +151,7 @@ function Editform(){
         .filter(([sid, checked]) => checked)
         .map(([sid])=> Number(sid));
 
-      //Create the body of the request.
+      //Create the body of request
       const info={
         event_id:event_id, 
         eventname:eventname,
@@ -159,7 +164,7 @@ function Editform(){
         services:selectedservices,
       }
 
-      //Send a POST server request to backend to send changes to event information.
+      //Send a POST request to backend to send changes to event information
       const response=await fetch('/editform', {
         method:'POST',
         headers: {
@@ -169,13 +174,13 @@ function Editform(){
         body: JSON.stringify(info)
       });
 
-      //Retrieve the message from backend.
+      //Retrieve the message from backend
       const result= await response.json();
 
-      //Print out the message from backend.
+      //Print out the message from backend
       alert(result.message)
 
-      //Navigate to Dashboard.
+      //Navigate to Dashboard
       navigate('/dashboard');
     }
 
@@ -185,11 +190,11 @@ function Editform(){
     <div style={background}>
       <div className="editformpage">
         <div className="editinputbox">
-          {/* Cancel button to go back to Dashboard. */}
+          {/* Cancel button to navigate to Dashboard */}
           <button className="editbutton" onClick={()=>navigate('/dashboard')}> Cancel </button>
           <h1>Fill in the following information</h1>
 
-          {/* Getting user input */}
+          {/* Display previous input and get user input */}
           <input className="edittextbox" type="text" value={eventname} onChange={(e)=>seteventname(e.target.value)}></input>
           <select className="eventtextbox" onChange={(e)=>seteventkind(e.target.value)} value={eventkind}>
             <option value= "Birthday">Birthday</option>
@@ -207,20 +212,20 @@ function Editform(){
           <input className="edittextbox" type="text" value={colortheme} onChange={(e)=>setcolortheme(e.target.value)}></input>
           <input className="edittextbox" type="text" value={itemslist} onChange={(e)=>setitemslist(e.target.value)}></input>
 
-          {/* Print out the list of services (set whether they're checked for not) and get user input */}
+          {/* Display the list of services (will be displayed checked or unchecked) and get user input */}
           <ul>
             {services.map(service=>(
             <div key={service.service_id}>
-            <label>
-              <input type="checkbox" name={service.service_id.toString()} checked={sservices[service.service_id.toString()] || false} onChange={(e)=>setsservices(prev=>({...prev, [e.target.name]:e.target.checked,}))}>
-              </input>
-              {service.service_name}
-            </label>
+              <label>
+                <input type="checkbox" name={service.service_id.toString()} checked={sservices[service.service_id.toString()] || false} onChange={(e)=>setsservices(prev=>({...prev, [e.target.name]:e.target.checked,}))}>
+                </input>
+                {service.service_name}
+              </label>
             </div>
-          ))}
+            ))}
           </ul>
 
-          {/* Make Edits button for calling editevents function. */}
+          {/* Make Edits button for calling editevents function */}
           <button onClick={editevents} className="editbutton"> Make Edits </button>
         
         </div>  
