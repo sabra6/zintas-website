@@ -49,7 +49,7 @@ function Editform(){
 
   //Call getservices and geteventdata functions when the user gets to this webpage
   useEffect(()=>{
-    //Retrieve the list of services and selectedservices (which the user chose for the event) from the backend
+    //Retrieve the list of services and selected services (which the user chose for the event) from the backend
     async function getservices(){
       //Send a GET request to backend to retrieve the list of services
       const response=await fetch('/getadditional',{
@@ -101,7 +101,7 @@ function Editform(){
         event_id:event_id,
       }
 
-      //Send a POST request to backend to retrieve event information
+      //Send a POST request to backend to retrieve event information from backend
       const response=await fetch('/geteventdata', {
         method: 'POST',
         headers: {
@@ -177,7 +177,7 @@ function Editform(){
       //Retrieve the message from backend
       const result= await response.json();
 
-      //Print out the message from backend
+      //Display the message from backend
       alert(result.message)
 
       //Navigate to Dashboard

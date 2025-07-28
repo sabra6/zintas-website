@@ -42,6 +42,7 @@ function Imageslides(){
 }
 
 function Home(){
+  //Hook to navigate to a different webpage
   const navigate=useNavigate();
   return(
     <div className="background">

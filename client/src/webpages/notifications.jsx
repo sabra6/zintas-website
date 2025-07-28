@@ -13,12 +13,15 @@ const background={
 };
 
 function Notifications(){
+    //Hook to navigate to a different webpage
     const navigate=useNavigate();
+
+    //State to store the list of notifications
     const [data, setdata]=useState([]);
 
     //Retrieve the list of notifications
     async function getnotifications(){
-        //Send a GET server request to backend to retrieve notifications from database.
+        //Send a GET request to backend to retrieve notifications from backend
         const response=await fetch('/notifications', {
             method: 'GET',
             headers: {
@@ -27,13 +30,13 @@ function Notifications(){
             credentials: 'include'
         })
 
-        //Retrieve the list of notifications from backend and update the state.
+        //Retrieve the list of notifications from backend and update the state
         const result=await response.json();
         setdata(result);
 
     }
 
-    //Call function when the manager gets to this webpage.
+    //Call function when the manager gets to this webpage
     useEffect(()=>{
         getnotifications();
     }, [])
@@ -47,10 +50,10 @@ function Notifications(){
 
                 <h1> Notifications </h1>
 
-                {/* Print out the list of notifications */}
+                {/* Display the list of notifications */}
                 <ul>
                     {data.map((notification, index)=>{
-                        {/* Making the date readable. */}
+                        {/* Making the date readable */}
                         const date1 = new Date(notification.date);
                         const formatted = date1.toLocaleString('en-US',{
                         year:'numeric',

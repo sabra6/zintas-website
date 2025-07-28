@@ -20,11 +20,11 @@ function Dashboard(){
   async function getinfo(){
     //Send a POST request to backend to retrieve the list of events
     const response= await fetch('/dashboard',{
-    method:'POST',
-    headers:{
-      'Content-Type':'application/json',
-    },
-    credentials:'include',
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+      },
+      credentials:'include',
     })
 
     //Retrieve the list of events from backend and update state
@@ -77,7 +77,7 @@ function Dashboard(){
     //Retrieve the message from backend
     const result=await response.json();
 
-    //Print the message from backend
+    //Display the message from backend
     alert(result.message);
 
     //Navigate to homepage

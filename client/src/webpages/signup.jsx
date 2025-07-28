@@ -13,6 +13,7 @@ const background={
 };
 
 function Signup(){
+  //Hook to navigate to a different webpage
   const navigate=useNavigate();
 
   //State to store user's first name
@@ -32,7 +33,7 @@ function Signup(){
 
   //Send user's entered information to backend
   async function sendinfo(){
-    //Check whether the user filled all the information.
+    //Check whether the user filled all the information
     if(firstname.trim()==='' || lastname.trim()==='' || email.trim()==='' || password.trim()==='' || phonenumber.trim()===''){
       alert("Make sure to fill in all the information.");
     } else{
@@ -45,7 +46,7 @@ function Signup(){
         phonenumber:phonenumber,
       };
 
-      //Send a POST request to backend to add the user and corresponding info to database.
+      //Send a POST request to backend to add the user and corresponding info to database
       const response=await fetch('/signup', {
         method:'POST',
         headers:{
@@ -55,10 +56,10 @@ function Signup(){
         body:JSON.stringify(info)
       });
 
-      //Retrieve message from server.
+      //Retrieve message from server
       const result=await response.json();
 
-      //Navigate to Dashboard.
+      //Navigate to Dashboard
       navigate('/dashboard');
 
     }
@@ -70,11 +71,11 @@ function Signup(){
     <div style={background}>
       <div className="signupbackground">
 
-        {/* Back button to navigate to home page. */}
+        {/* Back button to navigate to home page */}
         <button onClick={()=>navigate('/')}className="signupbutton"> Back </button>
         <h1 className="title">Create your Account</h1>
 
-        {/* Taking user's information */}
+        {/* Get user's input */}
         <input className="question" type="text" placeholder="First name" onChange={(e)=>setfirstname(e.target.value)}/>
         <input className="question" type="text" placeholder="Last name" onChange={(e)=>setlastname(e.target.value)}/>
         <input className="question" type="text" placeholder="Email" onChange={(e)=>setemail(e.target.value)}/>

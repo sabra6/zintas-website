@@ -44,10 +44,10 @@ function Upcomingevents(){
     transform: 'translate(-50%, -90%)'
   }
 
-  //Retrieve the list of events from backend
+  //Retrieve the list of events
   async function getevents(){
 
-    //Send a GET request to backend to retrieve the list of events.
+    //Send a GET request to backend to retrieve the list of events from backend
     const response=await fetch('/getevents', {
       method: 'GET',
       headers: {
@@ -56,13 +56,13 @@ function Upcomingevents(){
       credentials:'include'
     })
 
-    //Retrieve the list of events from backend and update the state.
+    //Retrieve the list of events from backend and update the state
     const result=await response.json();
     setdata(result);
 
   }
 
-  //Retrieve the event information from backend.
+  //Retrieve the event information from backend
   async function geteventinfo(eventid){
 
     //Create the body of request
@@ -70,7 +70,7 @@ function Upcomingevents(){
       eventid:eventid
     }
 
-    //Send a POST request to backend to retrieve corresponding event information.
+    //Send a POST request to backend to retrieve corresponding event information
     const response=await fetch('/geteventinfo', {
       method:'POST',
       headers:{
@@ -80,11 +80,11 @@ function Upcomingevents(){
       body:JSON.stringify(info)
     })
 
-    //Retrieve the event information from backend and update state.
+    //Retrieve the event information from backend and update state
     const result=await response.json();
     seteventinfo(result);
 
-    //Make the Date and Time format of event readable and update state.
+    //Make the Date and Time format of event readable and update state
     if(result.event_datetime){
       const date = new Date(result.event_datetime);
       const formatted = date.toLocaleString('en-US',{
@@ -124,14 +124,14 @@ function Upcomingevents(){
 
   }
 
-  //Retrieve the event's list of services from backend.
+  //Retrieve the event's list of services from backend
   async function getservicedata(eventid){
     //Create body of request
     const info={
       eventid:eventid
     }
 
-    //Send a POST request to backend to retrieve the list of services selected for this event.
+    //Send a POST request to backend to retrieve the list of services selected for this event
     const response=await fetch('/getservicenames', {
       method: 'POST',
       headers: {
@@ -141,19 +141,19 @@ function Upcomingevents(){
       body: JSON.stringify(info)
     })
 
-    //Retrieve list of services selected for event and update state.
+    //Retrieve list of services selected for event and update state
     const result=await response.json();
     setservices(result);
 
   }
 
-  //Call function once the manager gets to the webpage.
-  //Do this once.
+  //Call function once the manager gets to the webpage
+  //Do this once
   useEffect(()=>{
     getevents();
   }, []);
 
-  //Call the following functions after manager clicks on the event. 
+  //Call the following functions after manager clicks on the event
   function afterclick(userid, eventid){
     geteventinfo(eventid);
     getservicedata(eventid);
