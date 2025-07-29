@@ -19,11 +19,10 @@ function Userlist(){
   //State to store the state of whether the user is selected
   const [selected, setselected]=useState(false);
 
-  //State to store what user was selected.
-  const [suser, setsuser]=useState([]);
-
-  //State to store user information.
+  //State to store user's information
   const [userinfo, setuserinfo]=useState([]);
+
+  //Hook to navigate to a different webpage
   const navigate=useNavigate();
 
   //Popup settings
@@ -37,10 +36,10 @@ function Userlist(){
     transform: 'translate(-50%, -90%)'
   }
 
-  //Retrieve the list of users from backend.
+  //Retrieve the list of users from backend
   async function getusers(){
 
-    //Send a GET request to backend to retrieve the list of users. 
+    //Send a GET request to backend to retrieve the list of users
     const response=await fetch('/getusers', {
       method: 'GET',
       headers: {
@@ -49,20 +48,20 @@ function Userlist(){
       credentials: 'include'
     })
 
-    //Retrieve the list of users from backend and update state.
+    //Retrieve the list of users from backend and update state
     const result=await response.json();
     setdata(result);
 
   }
 
-  //Retrieve the corresponding info of user from backend.
+  //Retrieve user's information from backend
   async function getuserinfo(userid){
-    //Create body of request.
+    //Create the body of request
     const info={
       userid:userid
     }
 
-    //Send a POST request to backend to retrieve corresponding user information.
+    //Send a POST request to backend to retrieve user's information
     const response=await fetch('/getuserinfo', {
       method: 'POST',
       headers:{
@@ -72,43 +71,41 @@ function Userlist(){
       body: JSON.stringify(info)
     })
 
-    //Retrieve the corresponding user information from backend and update state
+    //Retrieve user's information from backend and update state
     const result=await response.json();
     setuserinfo(result);
 
   }
 
-  //Call getusers function when the user gets to this webpage.
-  //Do this one time.
+  //Call getusers function when the user gets to this webpage
   useEffect(()=>{
     getusers();
   }, []);
 
-  //Set variables and call function.
+  //Update state and call getuserinfo function
   function todothings(user){
-    setsuser(user);
     setselected(true);
     getuserinfo(user.user_id);
   }
 
   return(
     <div style={background}> 
-    <div className="userlistpage">
+      <div className="userlistpage">
 
-      {/* Back button to navigate to manager dashboard. */}
-      <button onClick={()=>navigate('/mdashboard')} className="userbutton"> Back </button>
+        {/* Back button to navigate to manager dashboard */}
+        <button onClick={()=>navigate('/mdashboard')} className="userbutton"> Back </button>
 
-        <h1> Users </h1>
+          <h1> Users </h1>
 
-      {/* Display the list of users */}
-      <ul>
-        {data.map((user, index)=>(
-          <li className="user" key={index} onClick={()=>todothings(user)}> {user.first_name} {user.last_name}
-          </li>
-        ))}
-      </ul>
+        {/* Display the list of users */}
+        <ul>
+          {data.map((user, index)=>(
+            <li className="user" key={index} onClick={()=>todothings(user)}> {user.first_name} {user.last_name}
+            </li>
+          ))}
+        </ul>
       
-        {/* The popup if customer's name was clicked */}
+        {/* The popup if user's name was clicked */}
         {selected && (
           <div style={popup}>
             <button className="userbutton" onClick={()=>setselected(false)}>Back</button>
@@ -119,8 +116,8 @@ function Userlist(){
           </div>
         )}
 
+      </div>
     </div>
-  </div>
   )
 }
 

@@ -46,7 +46,7 @@ function Signup(){
         phonenumber:phonenumber,
       };
 
-      //Send a POST request to backend to add the user and corresponding info to database
+      //Send a POST request to backend to add the user and corresponding info
       const response=await fetch('/signup', {
         method:'POST',
         headers:{

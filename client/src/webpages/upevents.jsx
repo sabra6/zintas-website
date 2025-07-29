@@ -13,6 +13,7 @@ const background={
 };
 
 function Upcomingevents(){
+  //Hook to navigate to a different webpage
   const navigate=useNavigate();
 
   //State to store list of events
@@ -44,10 +45,10 @@ function Upcomingevents(){
     transform: 'translate(-50%, -90%)'
   }
 
-  //Retrieve the list of events
+  //Retrieve the list of events from backend
   async function getevents(){
 
-    //Send a GET request to backend to retrieve the list of events from backend
+    //Send a GET request to backend to retrieve the list of events
     const response=await fetch('/getevents', {
       method: 'GET',
       headers: {
@@ -70,7 +71,7 @@ function Upcomingevents(){
       eventid:eventid
     }
 
-    //Send a POST request to backend to retrieve corresponding event information
+    //Send a POST request to backend to retrieve event information
     const response=await fetch('/geteventinfo', {
       method:'POST',
       headers:{
@@ -148,7 +149,6 @@ function Upcomingevents(){
   }
 
   //Call function once the manager gets to the webpage
-  //Do this once
   useEffect(()=>{
     getevents();
   }, []);

@@ -21,7 +21,7 @@ function Notifications(){
 
     //Retrieve the list of notifications
     async function getnotifications(){
-        //Send a GET request to backend to retrieve notifications from backend
+        //Send a GET request to backend to retrieve the list of notifications
         const response=await fetch('/notifications', {
             method: 'GET',
             headers: {
@@ -36,7 +36,7 @@ function Notifications(){
 
     }
 
-    //Call function when the manager gets to this webpage
+    //Call getnotifications function when the manager gets to this webpage
     useEffect(()=>{
         getnotifications();
     }, [])
@@ -53,7 +53,7 @@ function Notifications(){
                 {/* Display the list of notifications */}
                 <ul>
                     {data.map((notification, index)=>{
-                        {/* Making the date readable */}
+                        {/* Make the date readable */}
                         const date1 = new Date(notification.date);
                         const formatted = date1.toLocaleString('en-US',{
                         year:'numeric',
@@ -64,7 +64,7 @@ function Notifications(){
                         hour12: true
                         });
                     
-                        {/* Format of each notification listed from the list */}
+                        {/* Display format for each notification */}
                         return (
                             <li className="notification" key={index}> {formatted}   |   {notification.content}
                             </li>
