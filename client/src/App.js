@@ -1,5 +1,4 @@
 //Imported files
-import React from "react";
 import './App.css';
 import Home from './webpages/home';
 import Signup from './webpages/signup';
@@ -15,7 +14,7 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 function App() {
   return (
-    //Establish a route for each web page.
+    //Establish a route for each web page
       <Router>
         <Routes>
           <Route path="/" element={<Home/>}/>
@@ -35,5 +34,4 @@ function App() {
   
 }
 
-//Export App. 
 export default App;
