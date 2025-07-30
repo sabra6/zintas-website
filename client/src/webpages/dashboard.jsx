@@ -97,7 +97,7 @@ function Dashboard(){
           <button onClick={logout} className="dashbutton"> Log Out </button>
           <h1> Dashboard </h1>
 
-          {/* Book an Event button to navigate to eventform page. */}
+          {/* Book an Event button to navigate to eventform page */}
           <button onClick={()=> navigate('/eventform')} className="dashbutton"> Book an Event </button>
 
         </div>
@@ -108,7 +108,7 @@ function Dashboard(){
           <p> To make edits to your event, click "Edit". To delete your event, click "Delete".</p>
         </div>
 
-        {/* Display the list of events the user booked. */}
+        {/* Display the list of events the user booked */}
         <ul>
           {data.map((event, index)=>(
             <li className="event" key={index}>{event.name}
