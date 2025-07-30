@@ -47,7 +47,7 @@ function Login(){
       //Retrieve the message from the backend
       const data=await result.json()
 
-      //Depending on the message from the backend, the user will either go to dashboard, go to manager dashboard, or display the message
+      //Depending on the message from the backend, the user will either navigate to dashboard or navigate to manager dashboard, or an alert will be displayed
       if(data.message==="success"){
         navigate('/dashboard');
       } else if(data.message==="manager"){

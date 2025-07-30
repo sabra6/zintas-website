@@ -59,8 +59,12 @@ function Signup(){
       //Retrieve message from server
       const result=await response.json();
 
-      //Navigate to Dashboard
-      navigate('/dashboard');
+      //Depending on the message from the backend, the user will either navigate to dashboard or an alert will be displayed
+      if(result.message==='Exists'){
+        alert('Account already exists');
+      } else{
+        navigate('/dashboard');
+      }
 
     }
     

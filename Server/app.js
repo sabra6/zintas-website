@@ -30,27 +30,36 @@ app.post('/signup', async (req, res) => {
   const query1='INSERT INTO notifications(date, content) VALUES ($1, $2)'
 
   try{
-    //Generate the current timestamp for notification
-    const currentdate=new Date()
 
-    //Insert user and the corresponding information to the database
-    const result=await data.query(query, [firstname, lastname, email, codedpassword, phonenumber]);
+    //Retrieve the user_id from the database to determine whether the account exists
+    const result3=await data.query('SELECT user_id FROM users WHERE email=$1', [email]);
 
-    //Retrieve user id from the database based on email used for creating cookie
-    const result1=await data.query('SELECT user_id FROM users WHERE email=$1', [email]);
-    const {user_id}=result1.rows[0];
+    //If the user_id does exist, send the message over to the frontend. Else, continue with account creation
+    if(result3.rows.length>0){
+      res.json({message: 'Exists'})
+    } else {
+      //Generate the current timestamp for notification
+      const currentdate=new Date()
 
-    //Set up a secure cookie with the user_id
-    res.cookie('user_id', user_id,{ 
-        httpOnly:true,
-        secure:false, //will be set to true when deployed.
-    });
+      //Insert user and the corresponding information to the database
+      const result=await data.query(query, [firstname, lastname, email, codedpassword, phonenumber]);
 
-    //Insert notification to the database
-    const result2=await data.query(query1, [currentdate, `${firstname} ${lastname} joined`]); //added a notification to notifications database
-    
-    //Send over the message to the frontend
-    res.json({message: 'User Added'})
+      //Retrieve user id from the database based on email used for creating cookie
+      const result1=await data.query('SELECT user_id FROM users WHERE email=$1', [email]);
+      const {user_id}=result1.rows[0];
+
+      //Set up a secure cookie with the user_id
+      res.cookie('user_id', user_id,{ 
+          httpOnly:true,
+          secure:false, //will be set to true when deployed.
+      });
+
+      //Insert notification to the database
+      const result2=await data.query(query1, [currentdate, `${firstname} ${lastname} joined`]);
+
+      //Send over the message to the frontend
+      res.json({message: 'User Added'})
+    }
 
   } catch (err){
     //Send over the message to the frontend if there are Database Errors
