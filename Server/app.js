@@ -397,6 +397,7 @@ app.post('/getuserinfo', async(req, res)=>{
 
     //Send the result of the query to the frontend
     res.json(result.rows[0]);
+    
   } catch(err){
     //Send the message to the frontend if there are Database Errors
     res.json({error: 'Database Error'});
@@ -446,7 +447,7 @@ app.post('/getservicenames', async(req, res)=>{
     const selectedservices=result1.rows; 
     const serviceslist=[];
 
-    //Using the nested for loop, add the names of the services that the user selected for the event into the array
+    //Add the names of the services that the user selected for the event into the array
     for(const service of services){ 
       for(const service1 of selectedservices){
         if(service.service_id===service1.service_id){
