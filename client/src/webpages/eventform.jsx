@@ -142,7 +142,7 @@ function Eventform(){
           <input className="eventtextbox" type="text" placeholder="Venue Address" onChange={(e)=>setvenueaddress(e.target.value)}></input>
           <input className="eventtextbox" type="number" placeholder="Number of Attendees" onChange={(e)=>setnumattendees(e.target.value)}></input>
           <input className="eventtextbox" type="text" placeholder="Color Theme" onChange={(e)=>setcolortheme(e.target.value)}></input>
-          <input className="eventtextbox" type="text" placeholder="List of Items Needed" onChange={(e)=>setitemslist(e.target.value)}></input>
+          <input className="eventtextbox" type="text" placeholder="List of Items Needed (Type N/A if nothing is needed)" onChange={(e)=>setitemslist(e.target.value)}></input>
 
           {/* Display the list of services and get user input */}
           <ul>
