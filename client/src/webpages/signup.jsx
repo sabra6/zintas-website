@@ -84,7 +84,7 @@ function Signup(){
         <input className="question" type="text" placeholder="Last name" onChange={(e)=>setlastname(e.target.value)}/>
         <input className="question" type="text" placeholder="Email" onChange={(e)=>setemail(e.target.value)}/>
         <input className="question" type="password" placeholder="Password" onChange={(e)=>setpassword(e.target.value)}/>
-        <input className="question" type="text" placeholder="Phone Number" onChange={(e)=>setphonenumber(e.target.value)}/>
+        <input className="question" type="text" placeholder="Phone Number (XXX-XXX-XXXX)" onChange={(e)=>setphonenumber(e.target.value)}/>
 
         {/* Sign up button for calling function sendinfo */}
         <button onClick={sendinfo} className="signupbutton"> Sign Up </button>
