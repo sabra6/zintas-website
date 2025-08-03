@@ -17,6 +17,12 @@
   margin-right: auto;
 }
 
+.upbuttonbox{
+  display:flex;
+  flex-direction:row;
+  gap:20px;
+}
+
 
 .upbutton{
   background-color: #C5FAA8;
@@ -33,5 +39,6 @@
   height: 10vh;
   width: 100vh;
   justify-content: center;
+  gap:130px;
   margin-top:60px;
 }

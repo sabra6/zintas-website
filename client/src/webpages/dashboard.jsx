@@ -118,12 +118,13 @@ function Dashboard(){
         <div className="topbuttonbox">
 
         <div className="partbuttonbox">
+
+          {/* Log Out button to call logout function */}
+          <button onClick={logout} className="dashbutton"> Log Out </button>
           
           {/* Delete Account button to call deleteaccount*/}
           <button className="deletebutton" onClick={deleteaccount}> Delete Account </button>
 
-          {/* Log Out button to call logout function */}
-          <button onClick={logout} className="dashbutton"> Log Out </button>
 
         </div>
 

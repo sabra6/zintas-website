@@ -125,6 +125,32 @@ function Upcomingevents(){
 
   }
 
+  //Delete event
+  async function deleteevent(event_id, name){
+    //Create body of request
+    const info={
+      event_id:event_id,
+      name:name
+    }
+
+    //Send a POST request to backend to delete the event from database
+    const response=await fetch('/mdeleteevent', {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      credentials:'include',
+      body: JSON.stringify(info)
+    })
+
+    //Retrieve the message from backend
+    const result=await response.json();
+    alert(result.message);
+
+    //Call getevents function to update the displayed list of events
+    getevents();
+  }
+
   //Retrieve the event's list of services from backend
   async function getservicedata(eventid){
     //Create body of request
@@ -170,7 +196,14 @@ function Upcomingevents(){
         {/* Display the list of events */}
         <ul>
           {data.map((event, index)=>(
-            <li onClick={()=>afterclick(event.user_id, event.event_id)}className="upevent" key={index}>{event.name}
+            <li className="upevent" key={index}>{event.name}
+              <div className="upbuttonbox">
+                {/* Delete button to call deleteevent function */}
+                <button className="upbutton"onClick={()=>deleteevent(event.event_id, event.name)}> Delete </button>
+
+                {/* Edit button to navigate to editform page */}
+                <button className="upbutton" onClick={()=>afterclick(event.user_id, event.event_id)}> View </button>
+              </div>
             </li>
           ))}
         </ul>

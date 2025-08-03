@@ -363,8 +363,14 @@ app.post('/deleteaccount', async(req, res)=>{
     //Delete the user from the database
     const result3=await data.query(query2, [user_id])
 
-    //Add notification to database
+    //Insert notification to database
     const result4=await data.query('INSERT INTO notifications(date, content) VALUES ($1,$2)', [currentdate, `${first_name} ${last_name} deleted account`])
+
+    //Delete the cookie
+    res.clearCookie('user_id', {
+      httpOnly:true,
+      secure:false, //will be set to true when working on deployment
+    })
 
     //Send the message over to the frontend
     res.json({message: 'Your Account is Deleted'})
@@ -508,6 +514,39 @@ app.post('/getservicenames', async(req, res)=>{
   } catch(err){
     //Send the message to the frontend if there are Database Errors
     res.json({error: 'Database Error'})
+  }
+})
+
+//Delete event from database under manager's instruction
+app.post('/mdeleteevent', async(req, res)=>{
+  //Retrieve event_id from body of request
+  const {name, event_id}=req.body;
+
+  //SQL query to delete event's services
+  const query="DELETE FROM eventservice WHERE event_id=$1"
+
+  //SQL query to delete events booked by user
+  const query1="DELETE FROM events WHERE event_id=$1"
+
+  try{
+    //Generate the current date and time
+    const currentdate=new Date();
+
+    //Delete event's services from database based on event id
+    const result=await data.query(query, [event_id]);
+
+    //Delete event from database based on event id
+    const result1=await data.query(query1, [event_id]);
+
+    //Insert notification to database
+    const result2=await data.query('INSERT INTO notifications (date, content) VALUES ($1,$2)',[currentdate, `Manager deleted ${name}`])
+
+    //Send the message to frontend
+    res.json({message: 'Event Deleted'})
+
+  } catch (err){
+    //Send over the message if there are any Database Errors
+    res.json({message: 'Database Error'});
   }
 })
 
