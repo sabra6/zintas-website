@@ -329,6 +329,52 @@ app.post('/editform', async(req, res)=>{
   }
 })
 
+//Delete the user's account
+app.post('/deleteaccount', async(req, res)=>{
+  //Retrieve user id from cookie
+  const user_id=req.cookies.user_id;
+
+  //SQL query to delete event's services
+  const query="DELETE FROM eventservice WHERE event_id=$1"
+
+  //SQL query to delete events booked by user
+  const query1="DELETE FROM events WHERE event_id=$1"
+
+  //SQL query to delete user
+  const query2="DELETE FROM users WHERE user_id=$1"
+  try{
+    //Generate the current date and time
+    const currentdate=new Date();
+
+    //Retrieve the list of events (event id) which the user booked
+    const result=await data.query('SELECT event_id FROM events WHERE user_id=$1', [user_id]);
+    const events=result.rows;
+
+    //Retrieve the user's first and last name from database
+    const result5=await data.query('SELECT first_name, last_name FROM users WHERE user_id=$1', [user_id]);
+    const{first_name, last_name}=result5.rows[0];
+
+    //Delete each event and its services (which the user booked) from the database
+    for(const event of events){
+      const result1=await data.query(query, [event.event_id]);
+      const result2=await data.query(query1, [event.event_id]);
+    }
+
+    //Delete the user from the database
+    const result3=await data.query(query2, [user_id])
+
+    //Add notification to database
+    const result4=await data.query('INSERT INTO notifications(date, content) VALUES ($1,$2)', [currentdate, `${first_name} ${last_name} deleted account`])
+
+    //Send the message over to the frontend
+    res.json({message: 'Your Account is Deleted'})
+
+  } catch(err){
+    //Send the message over to the frontend if there are any database errors
+    res.json({message: 'Database Error'})
+  }
+})
+
 //Retrieve the list of users
 app.get('/getusers', async(req, res)=>{
   //SQL query for retrieving the list of users from the Database

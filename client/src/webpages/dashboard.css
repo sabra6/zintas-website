@@ -7,13 +7,20 @@
 
 .topbuttonbox{
   display: flex;
-  height:10vh;
+  height:15vh;
   width:100vh;
   gap:50px;
   flex-direction: row;
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
+}
+
+.partbuttonbox{
+  display: flex;
+  height:10vh;
+  width:20vh;
+  flex-direction: column;
 }
 
 .letterbox{
@@ -29,6 +36,14 @@
 .dashbutton{
   background-color: #C5FAA8;
   color: darkgreen;
+  height: 5vh;
+  width: 20vh;
+  margin-top: 20px;
+}
+
+.deletebutton{
+  background-color: red;
+  color: white;
   height: 5vh;
   width: 20vh;
   margin-top: 20px;

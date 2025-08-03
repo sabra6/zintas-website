@@ -63,6 +63,30 @@ function Dashboard(){
 
   }
 
+  //Delete user's account
+  async function deleteaccount(){
+    //Send a POST request to backend to delete account
+    const response=await fetch('/deleteaccount',{
+      method:'POST',
+      headers: {
+        'Content-Type':'application/json',
+      },
+      credentials:'include',
+    })
+
+    //Retrieve the message from backend
+    const result=await response.json();
+
+    //Display the message
+    alert(result.message);
+
+    //Navigate to homepage
+    if(result.message==='Your Account is Deleted'){
+      navigate('/');
+    }
+
+  }
+
   //Logout the user
   async function logout(){
     //Send a POST request to backend to delete cookie
@@ -93,8 +117,16 @@ function Dashboard(){
       <div className="dashboardpage">
         <div className="topbuttonbox">
 
+        <div className="partbuttonbox">
+          
+          {/* Delete Account button to call deleteaccount*/}
+          <button className="deletebutton" onClick={deleteaccount}> Delete Account </button>
+
           {/* Log Out button to call logout function */}
           <button onClick={logout} className="dashbutton"> Log Out </button>
+
+        </div>
+
           <h1> Dashboard </h1>
 
           {/* Book an Event button to navigate to eventform page */}
