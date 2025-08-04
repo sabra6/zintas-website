@@ -34,7 +34,6 @@ describe('Login as a returning user and then log out', ()=>{
             .post('/login')
             .send({email: 'sabraham@gmail.com', password: 'sdgsdcs'})
         expect(loginresponse.headers['set-cookie']).not.toBeDefined();
-        //cookie=loginresponse.headers['set-cookie'];
     })
 
     it('Should not set cookie due to invalid credentials', async()=>{
@@ -42,7 +41,6 @@ describe('Login as a returning user and then log out', ()=>{
             .post('/login')
             .send({email: 'sabra@gmail.com', password: 'sdgsdcs'})
         expect(loginresponse.headers['set-cookie']).not.toBeDefined();
-        //cookie=loginresponse.headers['set-cookie'];
     })
 
     it('Should set cookie after logging in', async()=>{
@@ -69,7 +67,6 @@ describe('Login as a manager and then log out', ()=>{
             .post('/login')
             .send({email: 'Zintasevents@gmail.com', password: 'sdgsdcs'})
         expect(loginresponse.headers['set-cookie']).not.toBeDefined();
-        //cookie=loginresponse.headers['set-cookie'];
     })
 
     it('Should set cookie after logging in', async()=>{
@@ -122,10 +119,10 @@ describe('Sign up as a first-time user and then delete account', ()=>{
     })
     
     it('Should clear cookie after deleting account', async()=>{
-        const logoutresponse=await request(app)
+        const deleteresponse=await request(app)
             .post('/deleteaccount')
             .set('Cookie', cookie);
         
-        expect(logoutresponse.headers['set-cookie']).toBeDefined();
+        expect(deleteresponse.headers['set-cookie']).toBeDefined();
     })
 })
