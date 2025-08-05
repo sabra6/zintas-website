@@ -58,6 +58,9 @@ function Dashboard(){
     //Retrieve the message from backend
     const result=await response.json();
 
+    //Display the message from backend
+    alert(result.message);
+    
     //Call getinfo function to update Dashboard
     getinfo();
 

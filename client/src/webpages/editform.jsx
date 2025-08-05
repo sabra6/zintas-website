@@ -138,7 +138,7 @@ function Editform(){
     getservices();
     geteventdata();
 
-  }, []);
+  }, [event_id]);
 
   //Edit event info
   async function editevents(){

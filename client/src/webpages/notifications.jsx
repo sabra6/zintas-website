@@ -53,7 +53,7 @@ function Notifications(){
                 {/* Display the list of notifications */}
                 <ul>
                     {data.map((notification, index)=>{
-                        {/* Make the date readable */}
+                        // Make the date readable
                         const date1 = new Date(notification.date);
                         const formatted = date1.toLocaleString('en-US',{
                         year:'numeric',
@@ -64,7 +64,7 @@ function Notifications(){
                         hour12: true
                         });
                     
-                        {/* Display format for each notification */}
+                        // Display format for each notification
                         return (
                             <li className="notification" key={index}> {formatted}   |   {notification.content}
                             </li>
