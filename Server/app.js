@@ -51,7 +51,8 @@ app.post('/signup', async (req, res) => {
       //Set up a secure cookie with the user_id
       res.cookie('user_id', user_id,{ 
           httpOnly:true,
-          secure:false, //will be set to true when deployed.
+          secure:true,
+          sameSite: 'Strict'
       });
 
       //Insert notification to the database
@@ -95,7 +96,8 @@ app.post('/login', async (req, res)=>{
       //Set up a secure cookie with user_id if the passwords match
       res.cookie('user_id', user_id,{
         httpOnly:true,
-        secure:false, //will be set to true when deployed
+        secure:true,
+        sameSite: 'Strict'
       });
 
      //Send either message depending on the email entered by user
@@ -173,7 +175,8 @@ app.post('/logout', async(req, res)=>{
   //Delete the cookie
   res.clearCookie('user_id', {
     httpOnly:true,
-    secure:false, //will be set to true when working on deployment
+    secure:true,
+    sameSite: 'Strict'
   })
   
   //Send this message to the frontend
@@ -369,7 +372,8 @@ app.post('/deleteaccount', async(req, res)=>{
     //Delete the cookie
     res.clearCookie('user_id', {
       httpOnly:true,
-      secure:false, //will be set to true when working on deployment
+      secure:true,
+      sameSite: 'Strict'
     })
 
     //Send the message over to the frontend
