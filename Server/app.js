@@ -120,7 +120,7 @@ app.post('/dashboard', async(req, res)=>{
   
   try{
     //Retrieve event id and event name from database based on user id
-    const result=await data.query('SELECT event_id, name FROM events WHERE user_id=$1', [user_id]);
+    const result=await data.query('SELECT event_id, name FROM events WHERE user_id=$1 ORDER BY event_datetime ASC', [user_id]);
     
     //Send the result of the query to the frontend
     res.json({eventinfo: result.rows});
