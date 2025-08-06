@@ -6,7 +6,6 @@ import {useNavigate} from "react-router-dom";
 
 const serverurl=process.env.REACT_APP_SERVER_URL;
 
-console.log(serverurl);
 //Login background settings
 const background={
   backgroundImage:`url(${logo})`,
