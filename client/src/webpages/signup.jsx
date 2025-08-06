@@ -4,6 +4,8 @@ import './signup.css';
 import logo from '../Zintaslogo.png';
 import {useNavigate} from "react-router-dom";
 
+const serverurl=process.env.REACT_APP_SERVER_URL;
+
 //Signup background settings
 const background={
   backgroundImage:`url(${logo})`,
@@ -47,7 +49,7 @@ function Signup(){
       };
 
       //Send a POST request to backend to add the user and corresponding info
-      const response=await fetch('/signup', {
+      const response=await fetch(`${serverurl}/signup`, {
         method:'POST',
         headers:{
           'Content-Type':'application/json'

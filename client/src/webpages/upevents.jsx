@@ -4,6 +4,8 @@ import './upevents.css';
 import logo from '../Zintaslogo.png';
 import {useNavigate} from "react-router-dom";
 
+const serverurl=process.env.REACT_APP_SERVER_URL;
+
 //Upevents background settings
 const background={
   backgroundImage:`url(${logo})`,
@@ -49,7 +51,7 @@ function Upcomingevents(){
   async function getevents(){
 
     //Send a GET request to backend to retrieve the list of events
-    const response=await fetch('/getevents', {
+    const response=await fetch(`${serverurl}/getevents`, {
       method: 'GET',
       headers: {
         'Content-Type':'application/json'
@@ -72,7 +74,7 @@ function Upcomingevents(){
     }
 
     //Send a POST request to backend to retrieve event information
-    const response=await fetch('/geteventinfo', {
+    const response=await fetch(`${serverurl}/geteventinfo`, {
       method:'POST',
       headers:{
         'Content-Type':'application/json'
@@ -110,7 +112,7 @@ function Upcomingevents(){
     }
 
     //Send POST request from backend to retrieve user information
-    const response=await fetch('/getuserinfo', {
+    const response=await fetch(`${serverurl}/getuserinfo`, {
       method:'POST',
       headers:{
         'Content-Type':'application/json'
@@ -134,7 +136,7 @@ function Upcomingevents(){
     }
 
     //Send a POST request to backend to delete the event from database
-    const response=await fetch('/mdeleteevent', {
+    const response=await fetch(`${serverurl}/mdeleteevent`, {
       method:'POST',
       headers:{
         'Content-Type':'application/json'
@@ -159,7 +161,7 @@ function Upcomingevents(){
     }
 
     //Send a POST request to backend to retrieve the list of services selected for this event
-    const response=await fetch('/getservicenames', {
+    const response=await fetch(`${serverurl}/getservicenames`, {
       method: 'POST',
       headers: {
         'Content-Type':'application/json'

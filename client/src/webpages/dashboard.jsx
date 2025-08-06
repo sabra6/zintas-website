@@ -4,6 +4,8 @@ import './dashboard.css';
 import logo from '../Zintaslogo.png';
 import {useNavigate} from "react-router-dom";
 
+const serverurl=process.env.REACT_APP_SERVER_URL;
+
 //Dashboard background settings
 const background={
   backgroundImage:`url(${logo})`,
@@ -19,7 +21,7 @@ function Dashboard(){
   //Retrieve the list of events the user booked from the backend
   async function getinfo(){
     //Send a POST request to backend to retrieve the list of events
-    const response= await fetch('/dashboard',{
+    const response= await fetch(`${serverurl}/dashboard`,{
       method:'POST',
       headers:{
         'Content-Type':'application/json',
@@ -46,7 +48,7 @@ function Dashboard(){
     }
 
     //Send a POST request to backend to delete event from database
-    const response=await fetch('/deleteevent', {
+    const response=await fetch(`${serverurl}/deleteevent`, {
       method: 'POST',
       headers:{
         'Content-Type':'application/json',
@@ -69,7 +71,7 @@ function Dashboard(){
   //Delete user's account
   async function deleteaccount(){
     //Send a POST request to backend to delete account
-    const response=await fetch('/deleteaccount',{
+    const response=await fetch(`${serverurl}/deleteaccount`,{
       method:'POST',
       headers: {
         'Content-Type':'application/json',
@@ -93,7 +95,7 @@ function Dashboard(){
   //Logout the user
   async function logout(){
     //Send a POST request to backend to delete cookie
-    const response=await fetch('/logout', {
+    const response=await fetch(`${serverurl}/logout`, {
       method:'POST', 
       headers:{
         'Content-Type':'application/json', 

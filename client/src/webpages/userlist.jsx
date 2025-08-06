@@ -4,6 +4,8 @@ import './userlist.css';
 import logo from '../Zintaslogo.png';
 import {useNavigate} from "react-router-dom";
 
+const serverurl=process.env.REACT_APP_SERVER_URL;
+
 //Userlist background settings
 const background={
   backgroundImage:`url(${logo})`,
@@ -40,7 +42,7 @@ function Userlist(){
   async function getusers(){
 
     //Send a GET request to backend to retrieve the list of users
-    const response=await fetch('/getusers', {
+    const response=await fetch(`${serverurl}/getusers`, {
       method: 'GET',
       headers: {
         'Content-Type':'application/json'
@@ -62,7 +64,7 @@ function Userlist(){
     }
 
     //Send a POST request to backend to retrieve user's information
-    const response=await fetch('/getuserinfo', {
+    const response=await fetch(`${serverurl}/getuserinfo`, {
       method: 'POST',
       headers:{
         'Content-Type': 'application/json'

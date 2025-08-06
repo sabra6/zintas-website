@@ -4,6 +4,8 @@ import './notifications.css';
 import logo from '../Zintaslogo.png';
 import {useNavigate} from "react-router-dom";
 
+const serverurl=process.env.REACT_APP_SERVER_URL;
+
 //Notifications background settings
 const background={
   backgroundImage:`url(${logo})`,
@@ -22,7 +24,7 @@ function Notifications(){
     //Retrieve the list of notifications
     async function getnotifications(){
         //Send a GET request to backend to retrieve the list of notifications
-        const response=await fetch('/notifications', {
+        const response=await fetch(`${serverurl}/notifications`, {
             method: 'GET',
             headers: {
                 'Content-Type':'application/json'

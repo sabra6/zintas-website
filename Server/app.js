@@ -7,7 +7,10 @@ const app=express();
 const bcrypt=require('bcrypt');
 
 //Middleware setup
-app.use(cors());
+app.use(cors({
+  origin: 'https://zintas-website-production.up.railway.app',
+  credentials:true
+}));
 app.use(cookieparser());
 app.use(express.json());
 
@@ -203,6 +206,7 @@ app.post('/eventform', async(req, res)=>{
 
     //Retrieve user's full name from the Database using user id
     const result4=await data.query('SELECT first_name, last_name FROM users WHERE user_id=$1', [user_id]); 
+
     const {first_name, last_name}=result4.rows[0]; 
 
     //Insert event and the following information to the Database
@@ -222,7 +226,8 @@ app.post('/eventform', async(req, res)=>{
 
   } catch(err){
     //Send over the message to the frontend if there are Database Errors
-    res.json({message:'Error'})
+    res.json({message:' Database Error:'})
+    console.error(err)
   }
 });
 

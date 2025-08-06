@@ -4,6 +4,8 @@ import './eventform.css';
 import logo from '../Zintaslogo.png';
 import { useNavigate } from "react-router-dom";
 
+const serverurl=process.env.REACT_APP_SERVER_URL;
+
 //Eventform background settings
 const background={
   backgroundImage:`url(${logo})`,
@@ -48,7 +50,7 @@ function Eventform(){
     //Retrieve the list of services from the backend
     async function getservices(){
       //Send a GET request to backend to retrieve the list of services
-      const response=await fetch('/getadditional',{
+      const response=await fetch(`${serverurl}/getadditional`,{
         method:'GET',
         headers: {
           'Content-Type':'application/json'
@@ -95,11 +97,12 @@ function Eventform(){
       };
 
       //Send a POST request to backend to add event and the corresponding info to database
-      const response=await fetch('/eventform',{
+      const response=await fetch(`${serverurl}/eventform`,{
         method: 'POST',
         headers: {
           'Content-Type':'application/json'
         },
+        credentials:'include',
         body:JSON.stringify(info)
       });
     

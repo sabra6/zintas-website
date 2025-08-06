@@ -5,6 +5,8 @@ import logo from '../Zintaslogo.png';
 import { useNavigate } from "react-router-dom";
 import {useParams} from 'react-router-dom';
 
+const serverurl=process.env.REACT_APP_SERVER_URL;
+
 //Editform background settings
 const background={
     backgroundImage:`url(${logo})`,
@@ -52,7 +54,7 @@ function Editform(){
     //Retrieve the list of services and selected services (which the user chose for the event) from the backend
     async function getservices(){
       //Send a GET request to backend to retrieve the list of services
-      const response=await fetch('/getadditional',{
+      const response=await fetch(`${serverurl}/getadditional`,{
         method:'GET',
         headers: {
           'Content-Type':'application/json'
@@ -66,7 +68,7 @@ function Editform(){
       }
 
       //Send a POST request to backend to retrieve the list of services the user chose
-      const response1=await fetch('/getservicedata', {
+      const response1=await fetch(`${serverurl}/getservicedata`, {
         method: 'POST',
         headers: {
           'Content-Type':'application/json'
@@ -102,7 +104,7 @@ function Editform(){
       }
 
       //Send a POST request to backend to retrieve event information from backend
-      const response=await fetch('/geteventdata', {
+      const response=await fetch(`${serverurl}/geteventdata`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -165,7 +167,7 @@ function Editform(){
       }
 
       //Send a POST request to backend to send changes to event information
-      const response=await fetch('/editform', {
+      const response=await fetch(`${serverurl}/editform`, {
         method:'POST',
         headers: {
           'Content-Type': 'application/json'

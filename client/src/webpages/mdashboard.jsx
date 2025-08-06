@@ -3,6 +3,8 @@ import './mdashboard.css';
 import logo from '../Zintaslogo.png';
 import {useNavigate} from "react-router-dom";
 
+const serverurl=process.env.REACT_APP_SERVER_URL;
+
 //Manager Dashboard background settings
 const background={
   backgroundImage:`url(${logo})`,
@@ -19,7 +21,7 @@ function Mdashboard(){
   async function logout(){
 
     //Send a POST request to backend to delete the cookie
-    const response=await fetch('/logout', {
+    const response=await fetch(`${serverurl}/logout`, {
       method:'POST', 
       headers:{
         'Content-Type':'application/json', 
