@@ -118,20 +118,10 @@ function Editform(){
     
       //Make the date more readable and update state
       if(data.event_datetime){
-        // const date = new Date(data.event_datetime);
-        // const formatted = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
-        //   .toISOString()
-        //   .slice(0, 16);
-        // seteventdatetime(formatted);
-        const date1=new Date(data.event_datetime);
-        const formatted=date1.toLocaleString('en-US',{
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-          hour: 'numeric',
-          minute: '2-digit',
-          hour12: true
-        });
+        const date = new Date(data.event_datetime);
+        const formatted = new Date(date.getTime() - date.getTimezoneOffset()*60000)
+          .toISOString()
+          .slice(0, 16);
         seteventdatetime(formatted);
       } else{
         seteventdatetime('');
