@@ -118,11 +118,21 @@ function Editform(){
     
       //Make the date more readable and update state
       if(data.event_datetime){
+        // const date = new Date(data.event_datetime);
+        // const formatted = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+        //   .toISOString()
+        //   .slice(0, 16);
+        // seteventdatetime(formatted);
         const date = new Date(data.event_datetime);
-        const formatted = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
-          .toISOString()
-          .slice(0, 16);
-        seteventdatetime(formatted);
+
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+
+        const formattedLocal = `${year}-${month}-${day}T${hours}:${minutes}`;
+        seteventdatetime(formattedLocal);
       } else{
         seteventdatetime('');
       }
