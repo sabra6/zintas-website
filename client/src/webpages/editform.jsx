@@ -123,16 +123,16 @@ function Editform(){
         //   .toISOString()
         //   .slice(0, 16);
         // seteventdatetime(formatted);
-        const date = new Date(data.event_datetime);
+        // const date = new Date(data.event_datetime);
 
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        const hours = String(date.getHours()).padStart(2, '0');
-        const minutes = String(date.getMinutes()).padStart(2, '0');
+        // const year = date.getFullYear();
+        // const month = String(date.getMonth() + 1).padStart(2, '0');
+        // const day = String(date.getDate()).padStart(2, '0');
+        // const hours = String(date.getHours()).padStart(2, '0');
+        // const minutes = String(date.getMinutes()).padStart(2, '0');
 
-        const formattedLocal = `${year}-${month}-${day}T${hours}:${minutes}`;
-        seteventdatetime(formattedLocal);
+        // const formattedLocal = `${year}-${month}-${day}T${hours}:${minutes}`;
+        seteventdatetime(data.event_datetime);
       } else{
         seteventdatetime('');
       }
