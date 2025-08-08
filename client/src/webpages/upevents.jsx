@@ -90,7 +90,6 @@ function Upcomingevents(){
     //Make the Date and Time format of event readable and update state
     if(result.event_datetime){
       const date = new Date(result.event_datetime);
-      console.log(date);
       const formatted = date.toLocaleString('en-US',{
         timeZone: 'UTC',
         year:'numeric',
@@ -100,7 +99,6 @@ function Upcomingevents(){
         minute: '2-digit',
         hour12: true
       });
-      console.log(formatted);
       seteventdate(formatted);
     } else{
       seteventdate('');
