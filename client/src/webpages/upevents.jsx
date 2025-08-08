@@ -89,7 +89,7 @@ function Upcomingevents(){
 
     //Make the Date and Time format of event readable and update state
     if(result.event_datetime){
-      const date = new Date(result.event_datetime);
+      const date = new Date(result.event_datetime + 'Z');
       const formatted = date.toLocaleString('en-US',{
         timeZone: 'America/Chicago',
         year:'numeric',
