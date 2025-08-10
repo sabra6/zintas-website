@@ -8,7 +8,7 @@ const bcrypt=require('bcrypt');
 
 //Middleware setup
 app.use(cors({
-  origin: 'https://rare-creativity-production-5f4b.up.railway.app',
+  origin: 'https://zintasevents.com',
   credentials:true
 }));
 app.use(cookieparser());
