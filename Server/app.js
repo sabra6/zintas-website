@@ -227,7 +227,6 @@ app.post('/eventform', async(req, res)=>{
   } catch(err){
     //Send over the message to the frontend if there are Database Errors
     res.json({message:' Database Error:'})
-    console.error(err)
   }
 });
 
