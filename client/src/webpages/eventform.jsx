@@ -131,7 +131,7 @@ function Eventform(){
           {/* Get user input */}
           <input className="eventtextbox" type="text" placeholder="Event Name" onChange={(e)=>seteventname(e.target.value)}></input>
           <select className="eventtextbox" onChange={(e)=>seteventkind(e.target.value)}>
-            <option value= "">Kind</option>
+            <option value= "">Select</option>
             <option value= "Birthday">Birthday</option>
             <option value= "Baptism">Baptism</option>
             <option value= "Bridal Shower">Bridal Shower</option>
