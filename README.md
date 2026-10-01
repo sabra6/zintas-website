@@ -1,15 +1,14 @@
-Zintas Events Website
+# Zintas Events Website
 
-Description
+## Description
 
-A full-stack booking website created for Zintas Events and Rentals, a event-decorating business. The website enables customers to book, edit, or delete bookings and enables managers to view notifications, events booked, and the list of users who have an account. 
+A full-stack booking website created for Zintas Events and Rentals, an event-decorating business. The website enables customers to book, edit, or delete bookings and enables managers to view notifications, booked events, and customer information.
 
+## Technologies
 
-Technologies
+Frontend - ReactJS, JavaScript, HTML, CSS
 
-Frontend - ReactJS, HTML, CSS
-
-Backend - NodeJS, SQL
+Backend - NodeJS, JavaScript
 
 Database - PostgreSQL
 
@@ -17,30 +16,28 @@ Testing - Supertest, Manual Testing
 
 Deployment - Railway
 
-Features
+## Features
 
-First thing you see when you get on the website is the home page which has pictures and information about the company.
+- Home page which contains pictures and information about the business.
 
-On the customer side, 
+### Customer Side 
 
-Account Creation and Deletion
+- Account creation and deletion
 
-Booking Event
+- Add booking
 
-     -	Edit Booking
+- Edit booking
 
-     -  	Delete Booking
+- Delete booking
 
-On the manager side, 
-Viewing notifications
+### Manager Side 
 
-Delete Booking
+- View notifications
 	
-View Booking information
+- View booking information
 
-View Customer information
+- View customer information
 
+## Testing
 
-Testing
-
-Manual and integration tests were conducted. Manual Tests were used to ensure website’s proper functionality. Integration tests were used to ensure proper cookie behavior.
+Manual and integration tests were used to ensure the website's proper functionality. Manual Testing was used to ensure the website worked as expected. Integration Testing was used to ensure proper cookie functionality.
