@@ -6,15 +6,15 @@ A full-stack booking website created for Zintas Events and Rentals, an event-dec
 
 ## Technologies
 
-Frontend - ReactJS, JavaScript, HTML, CSS
+- Frontend - ReactJS, JavaScript, HTML, CSS
 
-Backend - NodeJS, JavaScript
+- Backend - NodeJS, JavaScript
 
-Database - PostgreSQL
+- Database - PostgreSQL
 
-Testing - Supertest, Manual Testing
+- Testing - Supertest, Manual Testing
 
-Deployment - Railway
+- Deployment - Railway
 
 ## Features
 
